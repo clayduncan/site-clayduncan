@@ -23,6 +23,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   margin: 0;
 }
@@ -45,12 +47,44 @@ a {
   color: var(--color-blue);
 }
 
+main {
+  flex: 1;
+}
+
+.site-header,
+.site-footer {
+  padding: 1rem clamp(1rem, 5vw, 3rem);
+}
+
+.site-logo {
+  color: var(--color-navy);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer {
+  color: var(--color-navy);
+  font-size: 0.875rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
 .site-shell {
   display: grid;
-  min-height: 100vh;
+  min-height: calc(100vh - 8rem);
   place-items: center;
   padding: 2rem;
   text-align: center;
+}
+
+.site-shell h1 {
+  margin: 0 0 1rem;
+  color: var(--color-black);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .site-shell p {
