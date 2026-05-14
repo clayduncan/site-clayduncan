@@ -46,7 +46,7 @@ export const site = {
   reviewLinks: [
     {
       label: 'Google Business',
-      url: 'https://www.google.com/maps?cid=9332843875946390997',
+      url: 'https://share.google/TEjbQzsixRdRRWT7x',
     },
   ],
 } as const;
