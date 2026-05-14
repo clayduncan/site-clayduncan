@@ -1,0 +1,464 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/self-employed-mortgage-documentation/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const documentItems = [
+  {
+    item: 'Personal tax returns',
+    detail:
+      'Usually two years of signed federal returns with all schedules, especially when business income appears on Schedule C, K-1s, or other attachments.',
+  },
+  {
+    item: 'Business tax returns',
+    detail:
+      'Entity returns may be needed for partnerships, S corporations, C corporations, or other businesses that file separately from the personal return.',
+  },
+  {
+    item: 'Year-to-date profit and loss',
+    detail:
+      'A current P&L helps show whether the business is tracking consistently with the income shown on the most recent tax return.',
+  },
+  {
+    item: 'Balance sheet',
+    detail:
+      'More common for partnerships and corporations, especially when the lender needs to understand assets, liabilities, and business stability.',
+  },
+  {
+    item: 'Business bank statements',
+    detail:
+      'Often used to support current activity, deposits, cash flow, and whether the business is still operating.',
+  },
+  {
+    item: 'Business formation documents',
+    detail:
+      'Business license, articles of organization, operating agreement, partnership agreement, or similar documents may be requested.',
+  },
+  {
+    item: 'CPA or tax-preparer letter',
+    detail:
+      'Sometimes requested to confirm the business is active or to address whether using business funds would affect operations.',
+  },
+  {
+    item: 'K-1s and distribution support',
+    detail:
+      'K-1 income may need entity returns, ownership details, and distribution history to show whether the income is usable and likely to continue.',
+  },
+];
+
+const incomeFactors = [
+  {
+    factor: 'Taxable income is the starting point',
+    explanation:
+      'Self-employed borrowers often think in terms of gross revenue or bank deposits, but full-documentation loans usually start with tax-return income.',
+  },
+  {
+    factor: 'Some expenses may be added back',
+    explanation:
+      'Certain non-cash or non-recurring items, such as depreciation, may be added back when allowed by the loan type and documentation.',
+  },
+  {
+    factor: 'Not every write-off comes back',
+    explanation:
+      'Ordinary business deductions can reduce qualifying income even when the borrower has strong real-world cash flow.',
+  },
+  {
+    factor: 'Declining income changes the math',
+    explanation:
+      'If income is lower in the most recent year, the lender may use the lower figure rather than averaging two stronger years.',
+  },
+  {
+    factor: 'Bank statement programs are different',
+    explanation:
+      'Non-QM bank statement loans may use deposits instead of tax-return net income, usually with different pricing, down payment, and reserve requirements.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What documents do self-employed borrowers need for a mortgage?',
+    answer:
+      'Self-employed borrowers commonly need two years of personal tax returns, business tax returns when applicable, year-to-date profit and loss, business bank statements, business formation documents, and sometimes CPA or tax-preparer letters. The exact list depends on the loan type, business structure, ownership percentage, and income being used.',
+  },
+  {
+    question: 'Do self-employed borrowers need two years of tax returns?',
+    answer:
+      'Often, yes. Two years is the standard baseline for many full-documentation mortgage paths. Some programs may allow less history when the borrower has prior experience in the same line of work or uses a non-QM program, but this is file-specific.',
+  },
+  {
+    question: 'Do tax write-offs hurt mortgage qualification?',
+    answer:
+      'They can. Many full-documentation mortgage paths begin with taxable income, not gross revenue. Some non-cash items may be added back, but ordinary deductions can reduce the income used for qualification.',
+  },
+  {
+    question: 'Can K-1 income be used for a mortgage?',
+    answer:
+      'Yes, but it needs documentation. The lender may review K-1s, entity tax returns, ownership percentage, distribution history, and whether the business supports continued income.',
+  },
+  {
+    question: 'What if my business income declined last year?',
+    answer:
+      'Declining income usually requires more review. The lender may use the lower recent figure or ask for documentation showing whether the decline was temporary, non-recurring, or stabilized.',
+  },
+  {
+    question: 'Is a bank statement mortgage better for self-employed borrowers?',
+    answer:
+      'Not automatically. Bank statement programs can help when tax-return income does not reflect cash flow, but they usually come with different rates, down payment, reserves, and program rules. Compare both paths before deciding.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'Fannie Mae: Self-Employed Borrower Documentation',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.5-01/income-and-employment-documentation-self-employed-borrowers',
+  },
+  {
+    label: 'Fannie Mae: Business Income',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.4-01/analyzing-partnership-returns-partner',
+  },
+  {
+    label: 'Fannie Mae: Verbal Verification of Employment',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.1-04/verbal-verification-employment',
+  },
+  {
+    label: 'HUD Single Family Housing Policy Handbook',
+    url: 'https://www.hud.gov/program_offices/housing/sfh/handbook_4000-1',
+  },
+  {
+    label: "VA Lender's Handbook",
+    url: 'https://benefits.va.gov/warms/pam26_7.asp',
+  },
+  {
+    label: 'CFPB Home Loan Toolkit',
+    url: 'https://www.consumerfinance.gov/owning-a-home/explore/home-loan-toolkit/',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Self-Employed Mortgage Documentation Guidance',
+    description:
+      'Mortgage documentation guidance for self-employed borrowers, business owners, 1099 earners, contractors, and K-1 borrowers in Huntsville and North Alabama.',
+    serviceType: 'Self-employed mortgage documentation guidance',
+    audience: ['self-employed borrowers', 'business owners', '1099 earners', 'contractors', 'K-1 borrowers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Self-Employed Mortgage Documentation',
+    description:
+      'A mortgage guide for self-employed borrowers covering tax returns, business returns, profit and loss statements, K-1 income, bank statements, and income calculation.',
+    about: [
+      { '@type': 'Thing', name: 'self-employed mortgage documentation' },
+      { '@type': 'Thing', name: 'business owner mortgage' },
+      { '@type': 'Thing', name: '1099 mortgage documentation' },
+      { '@type': 'Thing', name: 'K-1 income mortgage' },
+      { '@type': 'Thing', name: 'complex mortgage guidance' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#self-employed-documents`,
+    name: 'Self-employed mortgage documentation checklist',
+    itemListElement: documentItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.item,
+      description: item.detail,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'Complex Mortgage Guidance', path: '/huntsville/complex-mortgage-guidance/' },
+    { name: 'Self-Employed Mortgage Documentation', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Self-Employed Mortgage Documentation | Huntsville Guidance"
+  description="Mortgage documentation checklist for self-employed borrowers, business owners, 1099 earners, contractors, and K-1 borrowers in Huntsville and North Alabama."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Complex Mortgage Resource</p>
+      <h1 id="resource-heading">Self-employed mortgage documentation, explained clearly.</h1>
+      <p class="hero-lede">
+        Self-employed borrowers can qualify for mortgages, but the file usually
+        needs more documentation than a standard W-2 borrower. The goal is to
+        show stable income, business continuity, usable cash flow, and a clear
+        paper trail before a home offer creates pressure.
+      </p>
+      <div class="hero-actions" aria-label="Self-employed mortgage actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your file</a>
+        <a class="button button-secondary" href="/huntsville/complex-mortgage-guidance/">
+          View complex mortgage guidance
+        </a>
+      </div>
+      <div class="hero-path-grid" aria-label="Self-employed mortgage documentation highlights">
+        <a href="#answer-heading">
+          <strong>Documents</strong>
+          <span>Tax returns, P&L, business returns, bank statements, and entity docs</span>
+        </a>
+        <a href="#income-heading">
+          <strong>Income</strong>
+          <span>Qualifying income is not always the same as gross revenue</span>
+        </a>
+        <a href="#faq-heading">
+          <strong>Questions</strong>
+          <span>Write-offs, K-1 income, declines, and bank statement options</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping self-employed borrowers with mortgage documentation"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Self-employed borrower file</span>
+        <strong>Tax returns, P&L, K-1s, business bank statements, cash flow, and documentation</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What documents do self-employed borrowers need for a mortgage?</h2>
+        </div>
+        <p>
+          Self-employed borrowers commonly need personal tax returns, business
+          tax returns when applicable, a year-to-date profit and loss statement,
+          business bank statements, business formation documents, and sometimes
+          CPA or tax-preparer letters. The exact documentation depends on the
+          loan type, business structure, ownership percentage, income trend, and
+          whether the borrower is using full documentation or a non-QM path.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>Tax-return income</h3>
+          <p>
+            Full-documentation loans usually start with tax returns, not gross
+            deposits or total revenue.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Current business activity</h3>
+          <p>
+            A P&L, balance sheet, business bank statements, or CPA letter may
+            help show the business is still operating.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Entity structure matters</h3>
+          <p>
+            Schedule C, partnership, S corporation, C corporation, and K-1 files
+            can all require different supporting documents.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="checklist-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Checklist</p>
+          <h2 id="checklist-heading">Start with the documents that explain the business.</h2>
+        </div>
+        <p>
+          The cleanest self-employed mortgage files do not wait for underwriting
+          to discover missing documents. They start by organizing how the
+          business earns money, files taxes, holds cash, and continues operating.
+        </p>
+      </div>
+      <div class="checklist-grid" role="list" aria-label="Self-employed mortgage documentation checklist">
+        {
+          documentItems.map((item) => (
+            <article class="checklist-card" role="listitem">
+              <span aria-hidden="true">✓</span>
+              <div>
+                <h3>{item.item}</h3>
+                <p>{item.detail}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" id="income-heading" aria-labelledby="income-title">
+    <div>
+      <p class="eyebrow">Income Calculation</p>
+      <h2 id="income-title">The lender’s income number may not match the business owner’s number.</h2>
+      <p>
+        This is the most common disconnect for self-employed borrowers. A
+        business may have strong revenue, but the qualifying income on a
+        full-documentation mortgage usually starts with taxable income and then
+        applies allowable adjustments.
+      </p>
+      <p>
+        Some expenses may be added back when the loan type allows it. Other
+        write-offs reduce qualifying income directly. This is why self-employed
+        borrowers should review the file before making assumptions about buying
+        power.
+      </p>
+    </div>
+    <div class="local-context-panel" aria-label="Self-employed income calculation factors">
+      {
+        incomeFactors.slice(0, 3).map((item) => (
+          <article>
+            <span>Income</span>
+            <strong>{item.factor}</strong>
+            <p>{item.explanation}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="factors-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">Underwriting Factors</p>
+        <h2 id="factors-heading">What can change the self-employed mortgage path.</h2>
+      </div>
+      <div class="timeline-grid">
+        {
+          incomeFactors.map((item, index) => (
+            <article>
+              <span>{`Factor ${index + 1}`}</span>
+              <h3>{item.factor}</h3>
+              <p>{item.explanation}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="strategy-heading">
+    <div>
+      <p class="eyebrow">Planning</p>
+      <h2 id="strategy-heading">Do not wait until you are under contract to find the income issue.</h2>
+      <p>
+        The best time to review self-employed mortgage documentation is before
+        the buyer writes an offer. A proactive review can identify missing tax
+        returns, K-1 issues, declining income, business-funds questions, or
+        whether a bank statement program should be compared.
+      </p>
+      <p>
+        Tax strategy belongs with a CPA. Mortgage qualification belongs with the
+        lender. The useful planning conversation is making sure those two worlds
+        do not collide at the worst possible time.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Review your self-employed file</a>
+        <a class="button button-secondary" href="/resources/job-change-offer-letter-mortgage/">
+          Review job-change guidance
+        </a>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Self-employed mortgage planning fit">
+      <article>
+        <span>Business owner</span>
+        <strong>Review tax returns early</strong>
+        <p>Waiting until contract can turn a preventable documentation issue into a closing problem.</p>
+      </article>
+      <article>
+        <span>1099 earner</span>
+        <strong>History and structure matter</strong>
+        <p>Prior W-2 work in the same field can matter when self-employment history is shorter.</p>
+      </article>
+      <article>
+        <span>K-1 borrower</span>
+        <strong>Distribution history matters</strong>
+        <p>K-1 income usually needs more than the K-1 form by itself.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-heading">Self-employed mortgage documentation questions.</h2>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="sources-heading">
+    <div class="section-inner">
+      <div class="source-panel">
+        <div>
+          <p class="eyebrow">Sources</p>
+          <h2 id="sources-heading">Self-employed income is documentation-driven.</h2>
+          <p>
+            This page uses agency and consumer finance references for general
+            planning context. Final treatment depends on the borrower’s
+            business, loan type, documentation, and underwriting review.
+          </p>
+        </div>
+        <ul>
+          {
+            officialSources.map((source) => (
+              <li>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

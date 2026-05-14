@@ -81,7 +81,7 @@ const schema = [
       <dl class="proof-strip" aria-label="Clay Duncan event highlights">
         <div>
           <dt>{upcomingEvents.length}</dt>
-          <dd>upcoming public event listed</dd>
+          <dd>upcoming AI trainings listed</dd>
         </div>
         <div>
           <dt>{pastEvents.length}</dt>
@@ -107,121 +107,87 @@ const schema = [
     </div>
   </section>
 
-  <section class="section-band section-band-light" aria-labelledby="answer-heading">
-    <div class="section-inner">
-      <div class="answer-panel">
-        <div>
-          <p class="eyebrow">Direct Answer</p>
-          <h2 id="answer-heading">What events does Clay Duncan teach?</h2>
-        </div>
+  <section class="section-band section-band-light upcoming-events-section" aria-labelledby="upcoming-heading">
+    <div class="section-inner upcoming-events-inner">
+      <div>
+        <p class="eyebrow">Upcoming</p>
+        <h2 id="upcoming-heading">REALTOR®-focused AI events.</h2>
         <p>
-          Clay teaches AI training events for REALTORS®, real estate teams,
-          mortgage professionals, and homebuyers. His sessions focus on
-          practical workflows, clearer client communication, responsible AI use,
-          and systems people can use immediately after the class.
+          Clay teaches two types of trainings. The first is an entry-level
+          fundamentals course called The AI Success System. It covers the
+          foundations of getting started with a large language model, including
+          the differences between chats, projects, custom GPTs, and artifacts,
+          plus setting up preferences with custom instructions and rules to
+          begin daily workflows.
+        </p>
+        <p>
+          The second type is the pocket presentation. These are one-topic,
+          one-specific-task presentations built to perform a focused workflow,
+          such as creating a relocation package or preparing a listing
+          presentation.
         </p>
       </div>
-    </div>
-  </section>
-
-  <section class="split-section" aria-labelledby="upcoming-heading">
-    <div>
-      <p class="eyebrow">Upcoming</p>
-      <h2 id="upcoming-heading">The next listed session is online on May 14.</h2>
-      <p>
-        Registration details for the REALTOR® webinar are still being finalized.
-        This page is structured so a registration link, location, or Skool
-        learning-community link can be added cleanly when those details are
-        ready.
-      </p>
-      <div class="signal-list" aria-label="Upcoming event actions">
-        <a href={site.schedulingUrl}>Ask about attending or hosting</a>
-        <a href="/realtor-ai-training/">Review the training focus</a>
-      </div>
-    </div>
-    <div class="event-stack" aria-label="Upcoming events">
-      {
-        upcomingEvents.map((event) => (
-          <article class="event-card event-card-featured" id={event.date}>
-            <p>{event.audience}</p>
-            <h3>{event.title}</h3>
-            <dl>
-              <div>
-                <dt>Date</dt>
-                <dd>{formatDate(event.date)}</dd>
+      <div class="event-stack" aria-label="Upcoming events">
+        {
+          upcomingEvents.map((event) => (
+            <article class="event-card event-card-featured event-card-upcoming" id={event.date}>
+              <div class="event-card-title">
+                <p>{event.audience}</p>
+                <h3>{event.title}</h3>
+                <div class="event-card-action">
+                  {event.registrationUrl ? (
+                    <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+                      Register for webinar
+                    </a>
+                  ) : (
+                    <span class="event-status">
+                      {event.registrationText ?? 'Registration details coming'}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div>
-                <dt>Location</dt>
-                <dd>{event.location}</dd>
+              <dl>
+                <div>
+                  <dt>Date</dt>
+                  <dd>{formatDate(event.date)}</dd>
+                </div>
+                {event.displayTime && (
+                  <div>
+                    <dt>Time</dt>
+                    <dd>{event.displayTime}</dd>
+                  </div>
+                )}
+                <div>
+                  <dt>Location</dt>
+                  <dd>{event.location}</dd>
+                </div>
+              </dl>
+              <div class="event-card-summary">
+                <p>{event.summary}</p>
+                {
+                  event.takeaways && (
+                    <ul class="event-takeaways">
+                      {event.takeaways.map((takeaway) => (
+                        <li>{takeaway}</li>
+                      ))}
+                    </ul>
+                  )
+                }
               </div>
-            </dl>
-            <p>{event.summary}</p>
-            {event.registrationUrl ? (
-              <a href={event.registrationUrl}>Register for this event</a>
-            ) : (
-              <span class="event-status">Registration details coming soon</span>
-            )}
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="section-band section-band-dark" aria-labelledby="training-platform-heading">
-    <div class="section-inner">
-      <div class="section-heading section-heading-row">
-        <div>
-          <p class="eyebrow">Princeton AI Training</p>
-          <h2 id="training-platform-heading">Events are part of a larger training platform.</h2>
-        </div>
-        <p>
-          Princeton Mortgage is building an AI training division centered around
-          Clay’s instruction. As that platform develops, this page can point to
-          future events, completed sessions, and the planned Skool learning
-          community without giving away proprietary workflows.
-        </p>
-      </div>
-      <div class="princeton-role-grid">
-        <article>
-          <span>Live Sessions</span>
-          <h3>Office and team training</h3>
-          <p>
-            Practical sessions for agents, brokerages, and partner groups that
-            want clearer AI adoption.
-          </p>
-        </article>
-        <article>
-          <span>Webinars</span>
-          <h3>Broader access</h3>
-          <p>
-            Online sessions can introduce core ideas while directing people to
-            the right next step.
-          </p>
-        </article>
-        <article>
-          <span>Skool</span>
-          <h3>Training hub coming</h3>
-          <p>
-            The future learning community can house featured classes, updates,
-            and deeper instruction.
-          </p>
-        </article>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <section class="section-band section-band-light" aria-labelledby="past-events-heading">
     <div class="section-inner">
-      <div class="section-heading section-heading-row">
+      <div class="section-heading section-heading-wide">
         <div>
-          <p class="eyebrow">Past Events</p>
-          <h2 id="past-events-heading">Recent training recaps show momentum.</h2>
+          <p class="eyebrow">AI Training Recaps</p>
+          <h2 id="past-events-heading">Recent Training Recaps.</h2>
         </div>
-        <p>
-          These past sessions are pulled from Clay’s existing event history and
-          help visitors understand the kind of audiences, locations, and AI
-          topics already connected to his work.
-        </p>
       </div>
       <div class="event-grid" aria-label="Past AI training events">
         {
@@ -247,7 +213,7 @@ const schema = [
     </div>
   </section>
 
-  <section class="section-band" aria-labelledby="host-heading">
+  <section class="section-band section-band-dark" aria-labelledby="host-heading">
     <div class="section-inner event-host-panel">
       <div>
         <p class="eyebrow">Host a Session</p>
@@ -265,7 +231,10 @@ const schema = [
           <span>Timing</span>
           <span>Format</span>
         </div>
-        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <div class="host-action-row">
+          <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+          <a class="button button-secondary" href={site.phoneHref}>Call Clay</a>
+        </div>
       </aside>
     </div>
   </section>

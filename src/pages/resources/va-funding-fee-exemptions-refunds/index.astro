@@ -1,0 +1,478 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/va-funding-fee-exemptions-refunds/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const fundingFeeRates = [
+  {
+    loanType: 'Purchase or construction',
+    scenario: 'First use, less than 5% down',
+    rate: '2.15%',
+  },
+  {
+    loanType: 'Purchase or construction',
+    scenario: 'After first use, less than 5% down',
+    rate: '3.3%',
+  },
+  {
+    loanType: 'Purchase or construction',
+    scenario: '5% to less than 10% down',
+    rate: '1.5%',
+  },
+  {
+    loanType: 'Purchase or construction',
+    scenario: '10% or more down',
+    rate: '1.25%',
+  },
+  {
+    loanType: 'Cash-out refinance',
+    scenario: 'First use',
+    rate: '2.15%',
+  },
+  {
+    loanType: 'Cash-out refinance',
+    scenario: 'After first use',
+    rate: '3.3%',
+  },
+  {
+    loanType: 'IRRRL',
+    scenario: 'Streamline refinance',
+    rate: '0.5%',
+  },
+  {
+    loanType: 'Loan assumption',
+    scenario: 'Assumption of an existing VA-backed loan',
+    rate: '0.5%',
+  },
+];
+
+const exemptionItems = [
+  'Receiving VA compensation for a service-connected disability',
+  'Eligible to receive VA compensation for a service-connected disability but receiving retirement or active-duty pay instead',
+  'Receiving Dependency and Indemnity Compensation as the surviving spouse of a Veteran',
+  'A service member with a proposed or memorandum rating before closing that says the member is eligible for compensation because of a pre-discharge claim',
+  'An active-duty member of the Armed Forces who provides evidence on or before closing that they received a Purple Heart',
+];
+
+const faqs = [
+  {
+    question: 'What is the VA funding fee?',
+    answer:
+      'The VA funding fee is a one-time payment on most VA-backed or VA direct home loans. VA says the fee helps lower the cost of the program for U.S. taxpayers because the VA home loan program does not require down payments or monthly mortgage insurance.',
+  },
+  {
+    question: 'How much is the VA funding fee for a purchase loan in 2026?',
+    answer:
+      'For VA-backed purchase and construction loans, the current VA chart lists 2.15% for first use with less than 5% down, 3.3% for subsequent use with less than 5% down, 1.5% with 5% to less than 10% down, and 1.25% with 10% or more down. These rates are effective April 7, 2023 according to VA.',
+  },
+  {
+    question: 'Who is exempt from the VA funding fee?',
+    answer:
+      'VA lists several exemption categories, including borrowers receiving VA compensation for a service-connected disability, borrowers eligible for that compensation but receiving retirement or active-duty pay instead, surviving spouses receiving DIC, certain service members with pre-discharge ratings before closing, and active-duty Purple Heart recipients who provide evidence on or before closing.',
+  },
+  {
+    question: 'Can the VA funding fee be financed?',
+    answer:
+      'Yes. VA says the funding fee can be included in the loan and paid over time, or paid in full at closing. On a VA purchase or construction loan, VA says only the funding fee can be financed into the loan amount; other closing costs must be paid at closing.',
+  },
+  {
+    question: 'Can the seller pay the VA funding fee?',
+    answer:
+      'Yes. VA says sellers or builders may offer credits for certain buyer costs, and concessions are limited to no more than 4% of the home’s reasonable value. VA states that concessions include credits for the VA funding fee.',
+  },
+  {
+    question: 'Can I get a VA funding fee refund?',
+    answer:
+      'You may be eligible for a refund if you paid the VA funding fee and were later awarded VA compensation for a service-connected disability with an effective date retroactive to before the loan closing date. VA, not the lender, determines refund eligibility.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'VA funding fee and loan closing costs',
+    url: 'https://www.va.gov/housing-assistance/home-loans/funding-fee-and-closing-costs/',
+  },
+  {
+    label: 'VA home loan entitlement and limits',
+    url: 'https://www.va.gov/housing-assistance/home-loans/loan-limits/',
+  },
+  {
+    label: 'VA home loan eligibility',
+    url: 'https://www.va.gov/housing-assistance/home-loans/eligibility/',
+  },
+  {
+    label: 'VA-backed Veterans home loans',
+    url: 'https://www.va.gov/housing-assistance/home-loans/',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'VA Funding Fee Guidance',
+    description:
+      'VA funding fee, exemption, seller concession, and refund guidance for VA-eligible buyers in Huntsville, Redstone Arsenal, Madison, and North Alabama.',
+    serviceType: 'VA mortgage loan guidance',
+    audience: ['VA-eligible borrowers', 'Veterans', 'service members', 'military homebuyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'VA Funding Fee, Exemptions, and Refunds',
+    description:
+      'A source-backed guide to the VA funding fee, current rates, exemption categories, seller concessions, financing, and refund eligibility.',
+    about: [
+      { '@type': 'Thing', name: 'VA funding fee' },
+      { '@type': 'Thing', name: 'VA funding fee exemptions' },
+      { '@type': 'Thing', name: 'VA funding fee refunds' },
+      { '@type': 'Thing', name: 'VA seller concessions' },
+      { '@type': 'Place', name: 'Redstone Arsenal' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#funding-fee-rates`,
+    name: 'Current VA funding fee rates',
+    itemListElement: fundingFeeRates.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: `${item.loanType}: ${item.scenario} - ${item.rate}`,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'VA Loans in Huntsville', path: '/huntsville/va-loans/' },
+    { name: 'VA Funding Fee', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="VA Funding Fee 2026 | Exemptions, Refunds & Seller Credits"
+  description="Understand the VA funding fee, current VA rates, exemptions, refunds, seller credits, and cash-to-close planning for Huntsville and Redstone Arsenal-area VA buyers."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">VA Loan Resource</p>
+      <h1 id="resource-heading">VA funding fee, exemptions, and refunds.</h1>
+      <p class="hero-lede">
+        The VA funding fee can affect cash to close, loan amount, seller credit
+        strategy, and long-term cost. For Redstone Arsenal-area buyers, it
+        should be reviewed before the offer, not after the contract is signed.
+      </p>
+      <div class="hero-actions" aria-label="VA funding fee actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your VA plan</a>
+        <a class="button button-secondary" href="/huntsville/va-loans/">View VA loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="VA funding fee highlights">
+        <a href="#rates">
+          <strong>2.15%</strong>
+          <span>First use purchase, less than 5% down</span>
+        </a>
+        <a href="#exemptions">
+          <strong>Exempt</strong>
+          <span>Some VA borrowers do not pay the fee</span>
+        </a>
+        <a href="#refunds">
+          <strong>Refund</strong>
+          <span>Possible when VA later confirms exemption</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping VA buyers understand the VA funding fee"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>VA cost planning</span>
+        <strong>Rates, exemptions, refunds, seller credits, and cash to close</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What is the VA funding fee?</h2>
+        </div>
+        <p>
+          The VA funding fee is a one-time payment on most VA-backed or VA
+          direct home loans. VA says the fee helps lower the cost of the program
+          for taxpayers because the VA home loan program does not require down
+          payments or monthly mortgage insurance. Some borrowers are exempt, and
+          some borrowers may be eligible for a refund if VA later determines
+          they were exempt as of a date before closing.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>It is based on loan amount</h3>
+          <p>
+            VA calculates the funding fee as a percentage of the loan amount.
+            For purchase loans, the percentage can change based on down payment
+            and whether this is first use or subsequent use.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>It can be financed</h3>
+          <p>
+            VA says the funding fee can be included in the loan and paid over
+            time. Financing the fee increases the loan balance and should be
+            part of the payment conversation.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>It may be avoidable</h3>
+          <p>
+            Borrowers with qualifying disability, DIC, Purple Heart, or pending
+            pre-discharge rating circumstances may be exempt based on VA rules
+            and documentation.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band va-topic-band" aria-labelledby="rates">
+    <div class="section-inner">
+      <div class="section-heading section-heading-wide">
+        <p class="eyebrow">Current VA Rate Chart</p>
+        <h2 id="rates">VA funding fee rates currently shown by VA.</h2>
+        <p>
+          VA lists these funding fee rates as effective April 7, 2023. Always
+          confirm current VA guidance before quoting numbers in a live
+          transaction.
+        </p>
+      </div>
+      <div class="data-table-wrap" role="region" aria-labelledby="rates" tabindex="0">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Loan type</th>
+              <th scope="col">Scenario</th>
+              <th scope="col">Funding fee</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              fundingFeeRates.map((item) => (
+                <tr>
+                  <td>{item.loanType}</td>
+                  <td>{item.scenario}</td>
+                  <td>{item.rate}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="payment-heading">
+    <div>
+      <p class="eyebrow">Cash To Close</p>
+      <h2 id="payment-heading">How the funding fee can be paid.</h2>
+      <p>
+        VA says the funding fee is paid at closing. It can be financed into the
+        loan amount or paid in full at closing. Sellers or builders may also
+        offer credits for certain buyer costs, but VA limits seller concessions
+        to no more than 4% of the home’s reasonable value.
+      </p>
+      <div class="signal-list" aria-label="VA funding fee payment methods">
+        <span>Finance into the loan</span>
+        <span>Pay at closing</span>
+        <span>Seller concession</span>
+        <span>Check exemption status</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="VA funding fee planning sequence">
+      <article>
+        <span>Before shopping</span>
+        <strong>Know the fee status</strong>
+        <p>Review whether the COE already reflects an exemption or whether more documentation is needed.</p>
+      </article>
+      <article>
+        <span>Before offering</span>
+        <strong>Plan seller credits</strong>
+        <p>Seller-paid funding fee amounts count as concessions, so the offer strategy should be clear early.</p>
+      </article>
+      <article>
+        <span>Before closing</span>
+        <strong>Verify final numbers</strong>
+        <p>The Loan Estimate and Closing Disclosure should show how the funding fee is handled.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="exemptions">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Exemptions</p>
+          <h2 id="exemptions">Who may be exempt from the VA funding fee?</h2>
+        </div>
+        <p>
+          Exemption status is determined under VA rules and should be verified
+          with the COE, VA documentation, and lender review. The lender should
+          not guess.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        {
+          exemptionItems.slice(0, 4).map((item, index) => (
+            <article>
+              <span>{`Category ${index + 1}`}</span>
+              <h3>{item.split(' ').slice(0, 4).join(' ')}</h3>
+              <p>{item}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="dark-note">
+        <p>
+          Additional VA-listed exemption category: {exemptionItems[4]}. Evidence
+          must be provided on or before the loan closing date.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="refunds">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Refunds</p>
+          <h2 id="refunds">When can a VA funding fee be refunded?</h2>
+        </div>
+        <p>
+          VA says a borrower may be eligible for a refund if they paid the
+          funding fee and were later awarded VA compensation for a
+          service-connected disability with an effective date retroactive to
+          before the loan closing date. If a proposed or memorandum rating is
+          received after closing, VA says the borrower still needed to pay the
+          funding fee and will not be eligible for a refund based on that rating.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>Refund path</span>
+          <h3>Effective date matters</h3>
+          <p>
+            The disability compensation effective date must be before the loan
+            closing date for refund eligibility to be considered.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>Documentation</span>
+          <h3>Keep the paper trail</h3>
+          <p>
+            Rating information, COE status, closing documents, and lender/VA
+            communication can matter when refund questions arise.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>Decision maker</span>
+          <h3>VA determines refunds</h3>
+          <p>
+            A lender can help identify the question, but VA determines whether a
+            funding fee refund applies.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">VA Funding Fee FAQ</p>
+          <h2 id="faq-heading">Questions buyers ask before closing.</h2>
+        </div>
+        <p>
+          These answers are written directly for VA-eligible buyers, military
+          families, REALTORS®, search systems, and answer engines.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Official Sources</p>
+      <ul>
+        <li>
+          This page uses VA consumer guidance for funding fee rates, exemptions,
+          refunds, closing costs, and seller concessions.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Review the funding fee before you write the offer.</h2>
+      <p>
+        For VA buyers near Redstone Arsenal, funding fee status can affect cash
+        to close, seller credit strategy, monthly payment, and how the contract
+        is structured.
+      </p>
+      <div class="hero-actions" aria-label="VA funding fee next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/resources/va-loan-checklist-redstone-arsenal/">
+          View VA checklist
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

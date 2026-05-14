@@ -1,0 +1,459 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/jumbo-loan-reserves-asset-documentation/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const reserveFactors = [
+  {
+    factor: 'Loan amount',
+    impact:
+      'Larger jumbo loan amounts commonly require a stronger post-closing reserve cushion.',
+  },
+  {
+    factor: 'Occupancy',
+    impact:
+      'Primary residences usually have lower reserve expectations than second homes or investment properties.',
+  },
+  {
+    factor: 'Number of financed properties',
+    impact:
+      'Additional financed properties can add reserve requirements because the borrower carries more total housing risk.',
+  },
+  {
+    factor: 'Income type',
+    impact:
+      'Self-employed income, bonus, commission, RSU, retirement, or variable income may require deeper documentation.',
+  },
+  {
+    factor: 'Asset type',
+    impact:
+      'Cash, brokerage, retirement, business accounts, gifts, and relocation proceeds are not all treated the same.',
+  },
+];
+
+const documentationItems = [
+  {
+    category: 'Cash and bank accounts',
+    documents:
+      'Recent full statements with all pages, clear ownership, available balance, and source documentation for large or unusual deposits.',
+  },
+  {
+    category: 'Brokerage accounts',
+    documents:
+      'Recent statements showing holdings and account ownership. Investors may discount non-cash positions when counting them toward reserves.',
+  },
+  {
+    category: 'Retirement accounts',
+    documents:
+      'Statements showing vested balances and account access. Many investors count only a percentage of vested retirement assets for reserves.',
+  },
+  {
+    category: 'Gift funds',
+    documents:
+      'Gift letter, donor source documentation, transfer evidence, receipt evidence, and any required borrower-own-funds contribution.',
+  },
+  {
+    category: 'Business accounts',
+    documents:
+      'Business statements and confirmation that using the funds will not damage business operations or liquidity.',
+  },
+  {
+    category: 'RSUs and stock compensation',
+    documents:
+      'Vesting history, vesting schedule, brokerage activity, W-2 support, and employer compensation details when RSU income or assets matter.',
+  },
+  {
+    category: 'Relocation or sale proceeds',
+    documents:
+      'Settlement statements, account receipt, bridge or HELOC documentation when used, and timing proof for funds that have not yet arrived.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What are reserves on a jumbo loan?',
+    answer:
+      'Reserves are funds the borrower has available after the down payment and closing costs are paid. Jumbo investors commonly measure reserves in months of PITIA, meaning principal, interest, taxes, insurance, and association dues when applicable.',
+  },
+  {
+    question: 'How many months of reserves do jumbo loans usually require?',
+    answer:
+      'Typical jumbo reserve expectations often fall in the 6 to 12 month range for many primary residence files, with larger loan amounts, second homes, investment properties, or multiple financed properties sometimes requiring more. The exact requirement varies by lender, investor, loan amount, occupancy, and borrower profile.',
+  },
+  {
+    question: 'Do retirement accounts count as jumbo loan reserves?',
+    answer:
+      'Vested retirement accounts may count toward reserves, but many investors count only a percentage of the balance. Whether to liquidate retirement assets is a tax and financial planning question that should be reviewed with a CPA or financial advisor.',
+  },
+  {
+    question: 'Can gift funds be used on a jumbo loan?',
+    answer:
+      'Gift funds may be allowed on some jumbo programs, but documentation is typically stricter than a borrower expects. A gift letter, donor account documentation, transfer proof, receipt proof, and borrower-own-funds requirements may apply.',
+  },
+  {
+    question: 'Can business funds be used for a jumbo mortgage?',
+    answer:
+      'Business funds may be usable in some situations, but the lender usually needs documentation showing ownership, access, and that removing the funds will not harm business operations. Treatment varies by investor and borrower profile.',
+  },
+  {
+    question: 'Why should jumbo buyers organize assets before making an offer?',
+    answer:
+      'Jumbo buyers should organize assets before making an offer because cash to close and post-closing reserves are separate planning questions. Late asset documentation issues can affect underwriting, timing, and the strength of the offer.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'Fannie Mae: Restricted stock units and employment income',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.3-07/restricted-stock-units-and-restricted-stock-employment-income',
+  },
+  {
+    label: 'Fannie Mae: Loan limits',
+    url: 'https://singlefamily.fanniemae.com/originating-underwriting/loan-limits',
+  },
+  {
+    label: 'PennyMac jumbo home loans',
+    url: 'https://www.pennymac.com/jumbo-home-loans',
+  },
+  {
+    label: 'Chase: How to qualify for a jumbo mortgage loan',
+    url: 'https://www.chase.com/personal/mortgage/education/financing-a-home/how-to-qualify-for-jumbo-mortgage-loan',
+  },
+  {
+    label: 'IRS Publication 525',
+    url: 'https://www.irs.gov/forms-pubs/about-publication-525',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Jumbo Loan Reserve and Asset Documentation Guidance',
+    description:
+      'Jumbo loan reserve and asset documentation guidance for Huntsville, Madison, and North Alabama buyers preparing for higher-priced home financing.',
+    serviceType: 'Jumbo mortgage guidance',
+    audience: ['jumbo buyers', 'higher-priced homebuyers', 'relocation buyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Jumbo Loan Reserves and Asset Documentation',
+    description:
+      'A practical guide to jumbo loan reserves, asset documentation, gift funds, retirement accounts, business funds, RSUs, and relocation proceeds for Huntsville and North Alabama buyers.',
+    about: [
+      { '@type': 'Thing', name: 'jumbo loan reserves' },
+      { '@type': 'Thing', name: 'asset documentation' },
+      { '@type': 'Thing', name: 'cash to close' },
+      { '@type': 'Thing', name: 'gift funds' },
+      { '@type': 'Thing', name: 'retirement accounts' },
+      { '@type': 'Thing', name: 'RSU income' },
+      { '@type': 'Thing', name: 'business assets' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#documentation-checklist`,
+    name: 'Jumbo loan asset documentation checklist',
+    itemListElement: documentationItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.category,
+      description: item.documents,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'Jumbo Loans in Huntsville', path: '/huntsville/jumbo-loans/' },
+    { name: 'Jumbo Reserves and Documentation', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Jumbo Loan Reserves & Asset Documentation | Huntsville Buyers"
+  description="Understand jumbo loan reserves, cash to close, asset documentation, gift funds, retirement accounts, business funds, RSUs, and relocation proceeds."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Jumbo Loan Resource</p>
+      <h1 id="resource-heading">Jumbo loan reserves and asset documentation.</h1>
+      <p class="hero-lede">
+        Higher-priced home financing is not just about the down payment. Jumbo
+        buyers also need a clear plan for cash to close, post-closing reserves,
+        and the documentation that proves where the money is coming from.
+      </p>
+      <div class="hero-actions" aria-label="Jumbo reserves actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your asset plan</a>
+        <a class="button button-secondary" href="/huntsville/jumbo-loans/">View jumbo loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="Jumbo reserves highlights">
+        <a href="#answer-heading">
+          <strong>Reserves</strong>
+          <span>Funds available after down payment and closing costs</span>
+        </a>
+        <a href="#documents">
+          <strong>Documents</strong>
+          <span>Statements, source records, gift proof, RSU and business details</span>
+        </a>
+        <a href="#timing">
+          <strong>Timing</strong>
+          <span>Organize assets before the offer, not during underwriting</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping jumbo buyers plan reserves and asset documentation"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Jumbo file planning</span>
+        <strong>Cash to close, reserves, gifts, RSUs, business funds, retirement accounts, and relocation proceeds</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What are reserves on a jumbo loan?</h2>
+        </div>
+        <p>
+          Jumbo loan reserves are funds available after the down payment and
+          closing costs are paid. They are commonly measured in months of PITIA,
+          meaning principal, interest, taxes, insurance, and association dues
+          when applicable. Reserve requirements vary by lender, investor, loan
+          amount, occupancy, number of financed properties, credit profile, and
+          income type.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>Cash to close is not the same as reserves</h3>
+          <p>
+            Cash to close covers down payment and closing costs. Reserves are
+            what remains available after closing, and jumbo files commonly
+            review both numbers separately.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Not every asset is counted the same way</h3>
+          <p>
+            Cash, brokerage funds, retirement accounts, gift funds, business
+            accounts, and RSUs may all receive different treatment depending on
+            the investor and file.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Documentation needs to be clean</h3>
+          <p>
+            Jumbo underwriting can ask for full statements, source records, all
+            pages, large-deposit explanations, ownership proof, and transfer
+            evidence.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band va-topic-band" aria-labelledby="documents">
+    <div class="section-inner">
+      <div class="section-heading section-heading-wide">
+        <p class="eyebrow">Documentation</p>
+        <h2 id="documents">What asset documents should a jumbo buyer organize?</h2>
+        <p>
+          The exact documentation depends on the program and investor. The
+          practical goal is to show ownership, access, source of funds, transfer
+          history, and enough liquidity after closing to satisfy the file.
+        </p>
+      </div>
+      <div class="data-table-wrap" role="region" aria-labelledby="documents" tabindex="0">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Asset category</th>
+              <th scope="col">Common documentation issue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              documentationItems.map((item) => (
+                <tr>
+                  <td>{item.category}</td>
+                  <td>{item.documents}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="reserve-factors">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Reserve Factors</p>
+          <h2 id="reserve-factors">Why reserve requirements vary from file to file.</h2>
+        </div>
+        <p>
+          Jumbo loans do not have one universal rulebook. Two strong borrowers
+          can receive different reserve treatment because the loan amount,
+          property, occupancy, investor, and documentation path are different.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        {
+          reserveFactors.map((item) => (
+            <article>
+              <span>{item.factor}</span>
+              <h3>{item.factor}</h3>
+              <p>{item.impact}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="dark-note">
+        <p>
+          This page explains common jumbo planning concepts. It does not tell a
+          buyer which assets to liquidate or how to manage tax consequences.
+          Those questions should be reviewed with a CPA or financial advisor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="timing">
+    <div>
+      <p class="eyebrow">Offer Timing</p>
+      <h2 id="timing">Asset planning should happen before the offer.</h2>
+      <p>
+        Higher-priced Huntsville and Madison purchases can move quickly once the
+        right property appears. If the asset plan is still unclear, the buyer may
+        be trying to solve cash-to-close, reserves, gift funds, liquidation
+        timing, and documentation questions while the contract clock is already
+        running.
+      </p>
+      <div class="signal-list" aria-label="Jumbo asset planning signals">
+        <span>Cash to close</span>
+        <span>Post-closing reserves</span>
+        <span>Large deposits</span>
+        <span>Asset source</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Jumbo asset planning timeline">
+      <article>
+        <span>Before shopping</span>
+        <strong>Identify the reserve target</strong>
+        <p>Know how much liquidity may be needed after closing before choosing the price range.</p>
+      </article>
+      <article>
+        <span>Before offering</span>
+        <strong>Separate cash from reserves</strong>
+        <p>Make sure the down payment plan does not unintentionally consume assets needed for reserves.</p>
+      </article>
+      <article>
+        <span>Before underwriting</span>
+        <strong>Clean up document gaps</strong>
+        <p>Gather full statements, source records, transfer proof, and explanations before conditions pile up.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Jumbo Reserves FAQ</p>
+          <h2 id="faq">Questions buyers ask before the file review.</h2>
+        </div>
+        <p>
+          These answers are written for higher-priced buyers who need practical,
+          source-backed guidance without turning the page into tax or investment
+          advice.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Sources and Guardrails</p>
+      <ul>
+        <li>
+          This page uses public jumbo, loan limit, RSU, and tax-source materials
+          for general education. Jumbo reserve and asset rules vary by lender
+          and investor.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Get the asset plan clear before contract pressure.</h2>
+      <p>
+        If your jumbo file depends on brokerage funds, RSUs, gift funds,
+        business accounts, retirement assets, or relocation proceeds, review the
+        documentation path before writing the offer.
+      </p>
+      <div class="hero-actions" aria-label="Jumbo reserves next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/resources/jumbo-vs-conforming-loans-huntsville-madison/">
+          Review jumbo vs. conforming
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

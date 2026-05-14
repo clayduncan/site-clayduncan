@@ -1,0 +1,434 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/va-appraisal-minimum-property-requirements/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const mprItems = [
+  {
+    title: 'Water and sewage',
+    text: 'Safe, sanitary water and acceptable sewage disposal matter. Wells, septic systems, and rural properties may need extra documentation.',
+  },
+  {
+    title: 'Roof condition',
+    text: 'The roof should be serviceable and free from active leaks or visible deterioration that affects reasonable future utility.',
+  },
+  {
+    title: 'Heat and electrical',
+    text: 'The home needs adequate permanent heat and safe electrical systems without exposed, frayed, or visibly unsafe wiring.',
+  },
+  {
+    title: 'Lead-based paint',
+    text: 'For homes built before 1978, peeling, chipping, or cracking paint can trigger required repair before closing.',
+  },
+  {
+    title: 'Termites and WDO',
+    text: 'Alabama VA transactions commonly require wood-destroying organism review. Active infestation or visible damage must be addressed.',
+  },
+  {
+    title: 'Access and drainage',
+    text: 'Year-round access, crawl-space condition, ventilation, and drainage away from the foundation can all matter under VA review.',
+  },
+];
+
+const valueSteps = [
+  {
+    step: 'Tidewater',
+    title: 'Evidence before the value is final',
+    text: 'If the VA appraiser believes the value may come in below contract price, Tidewater gives the lender, agent, or borrower a short window to submit comparable sales and market data.',
+  },
+  {
+    step: 'NOV',
+    title: 'Notice of Value',
+    text: 'The Notice of Value is the VA appraisal result used by the lender. It can support the contract, come in below contract, or include repair conditions.',
+  },
+  {
+    step: 'ROV',
+    title: 'Reconsideration of Value',
+    text: 'After a low Notice of Value, the borrower may request a Reconsideration of Value through the lender with better comparables or factual corrections.',
+  },
+  {
+    step: 'Contract',
+    title: 'Renegotiate or use the escape clause',
+    text: 'A low VA value can lead to renegotiation, cash gap planning, or use of the federal VA escape clause if the buyer chooses not to proceed.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What does a VA appraiser look for?',
+    answer:
+      'A VA appraiser establishes the home’s reasonable market value using comparable sales and checks that the property meets VA Minimum Property Requirements for safety, structural soundness, and sanitation. MPRs can include working utilities, a serviceable roof, safe electrical systems, no peeling lead-based paint on pre-1978 homes, no active termite infestation, safe access, and other property condition items.',
+  },
+  {
+    question: 'What is the difference between a VA appraisal and a home inspection?',
+    answer:
+      'A VA appraisal is required for the loan and confirms reasonable value plus minimum habitability standards. A home inspection is a more detailed condition review performed for the buyer. The VA appraisal does not replace a home inspection.',
+  },
+  {
+    question: 'What is the VA Tidewater Initiative?',
+    answer:
+      'The VA Tidewater Initiative is a procedure used when a VA appraiser believes the appraisal may come in below the contract price. Before issuing the Notice of Value, the appraiser notifies the requester and allows a short period for additional comparable sales or market data to be submitted.',
+  },
+  {
+    question: 'What can I do if my VA appraisal comes in low?',
+    answer:
+      'Possible paths include submitting additional comparable sales during Tidewater, requesting a formal Reconsideration of Value after the Notice of Value is issued, renegotiating the purchase price, bringing additional cash if appropriate, or using the federal VA escape clause if the buyer does not want to proceed.',
+  },
+  {
+    question: 'What is the VA escape clause?',
+    answer:
+      'The VA escape clause is a required provision in VA purchase contracts that protects the buyer from being penalized if the contract price exceeds the VA’s reasonable value for the property. It helps protect earnest money when the VA appraisal comes in below the contract price.',
+  },
+  {
+    question: 'Can I waive an appraisal contingency on a VA loan?',
+    answer:
+      'A buyer may choose to waive a separate contractual appraisal contingency, but the federal VA escape clause is still required and cannot be waived. That strategy should be reviewed carefully with the real estate agent and lender before the offer is written.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'VA-backed Veterans home loans',
+    url: 'https://www.va.gov/housing-assistance/home-loans/',
+  },
+  {
+    label: 'VA appraisal fee schedule and timeliness',
+    url: 'https://www.benefits.va.gov/HOMELOANS/appraiser_fee_schedule.asp',
+  },
+  {
+    label: 'VA Pamphlet 26-7 Chapter 12: Minimum Property Requirements',
+    url: 'https://www.benefits.va.gov/WARMS/docs/admin26/m26-07/Ch12_Minimum_Property_Requirement_NEW.pdf',
+  },
+  {
+    label: '38 CFR 36.4303: VA escape clause regulation',
+    url: 'https://www.law.cornell.edu/cfr/text/38/36.4303',
+  },
+  {
+    label: 'VA Home Loan Circulars',
+    url: 'https://www.benefits.va.gov/homeloans/resources_circulars.asp',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'VA Appraisal and Minimum Property Requirements Guidance',
+    description:
+      'VA appraisal, Minimum Property Requirements, Tidewater, Reconsideration of Value, and escape clause guidance for VA buyers in Huntsville, Redstone Arsenal, Madison, and North Alabama.',
+    serviceType: 'VA mortgage loan guidance',
+    audience: ['VA-eligible borrowers', 'Veterans', 'service members', 'military homebuyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'VA Appraisal and Minimum Property Requirements',
+    description:
+      'A source-backed guide to VA appraisals, Minimum Property Requirements, Tidewater, Reconsideration of Value, and the VA escape clause.',
+    about: [
+      { '@type': 'Thing', name: 'VA appraisal' },
+      { '@type': 'Thing', name: 'VA Minimum Property Requirements' },
+      { '@type': 'Thing', name: 'VA Tidewater Initiative' },
+      { '@type': 'Thing', name: 'VA Reconsideration of Value' },
+      { '@type': 'Thing', name: 'VA escape clause' },
+      { '@type': 'Place', name: 'Redstone Arsenal' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#mpr-items`,
+    name: 'Common VA Minimum Property Requirement topics',
+    itemListElement: mprItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.title,
+      description: item.text,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'VA Loans in Huntsville', path: '/huntsville/va-loans/' },
+    { name: 'VA Appraisal and MPRs', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="VA Appraisal & Minimum Property Requirements | Huntsville VA Buyers"
+  description="Understand VA appraisals, Minimum Property Requirements, Tidewater, Reconsideration of Value, and the VA escape clause for Huntsville and Redstone Arsenal-area VA buyers."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">VA Loan Resource</p>
+      <h1 id="resource-heading">VA appraisal and minimum property requirements.</h1>
+      <p class="hero-lede">
+        The VA appraisal is one of the most misunderstood parts of a VA purchase.
+        For Huntsville, Madison, and Redstone Arsenal-area buyers, value,
+        property condition, repairs, and offer strategy should be discussed
+        before the contract is written.
+      </p>
+      <div class="hero-actions" aria-label="VA appraisal actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your VA offer</a>
+        <a class="button button-secondary" href="/huntsville/va-loans/">View VA loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="VA appraisal highlights">
+        <a href="#value">
+          <strong>Value</strong>
+          <span>Comparable sales and Notice of Value</span>
+        </a>
+        <a href="#mprs">
+          <strong>MPRs</strong>
+          <span>Safety, soundness, and sanitation</span>
+        </a>
+        <a href="#low-value">
+          <strong>ROV</strong>
+          <span>Tidewater, reconsideration, and contract options</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping VA buyers understand VA appraisals"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>VA appraisal planning</span>
+        <strong>Value, MPRs, Tidewater, ROV, and earnest money protection</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What does the VA appraisal do?</h2>
+        </div>
+        <p>
+          A VA appraisal does two things: it establishes the home’s reasonable
+          market value using comparable sales, and it checks whether the
+          property meets VA Minimum Property Requirements. Those requirements
+          focus on safety, structural soundness, and sanitation. A VA appraisal
+          is required for the loan, but it does not replace a buyer’s home
+          inspection.
+        </p>
+      </div>
+      <div class="feature-grid" id="value">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>Reasonable value</h3>
+          <p>
+            The appraiser reviews comparable sales and property facts to support
+            a VA reasonable value. The value may be at, above, or below the
+            contract price.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Property standards</h3>
+          <p>
+            VA Minimum Property Requirements are not a perfection standard. They
+            are a habitability standard focused on safety, soundness, and
+            sanitation.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Notice of Value</h3>
+          <p>
+            The Notice of Value is the appraisal result used by the lender. It
+            may also include repair conditions that must be addressed before
+            closing.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band va-topic-band" aria-labelledby="mprs">
+    <div class="section-inner">
+      <div class="section-heading section-heading-wide">
+        <p class="eyebrow">VA Property Standards</p>
+        <h2 id="mprs">What VA Minimum Property Requirements usually focus on.</h2>
+        <p>
+          VA MPRs can matter more on older homes, rural properties, homes with
+          deferred maintenance, or listings marketed “as-is.” In North Alabama,
+          termite/WDO review, roof condition, pre-1978 paint, septic, well
+          water, crawl space, and drainage questions can become deal issues if
+          they are not discussed early.
+        </p>
+      </div>
+      <div class="feature-grid">
+        {
+          mprItems.map((item, index) => (
+            <article class="feature-card">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="low-value">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Low Value Or Repairs</p>
+          <h2 id="low-value">What happens if value or MPR repairs become an issue?</h2>
+        </div>
+        <p>
+          A VA appraisal issue does not automatically kill a transaction. It
+          does mean the buyer, agent, lender, and seller need a clear plan and a
+          clean paper trail.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        {
+          valueSteps.map((item) => (
+            <article>
+              <span>{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="dark-note">
+        <p>
+          Tidewater and Reconsideration of Value are evidence processes. They
+          should be supported with closed comparable sales, accurate property
+          facts, and documented corrections, not pressure toward a target value.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="inspection-heading">
+    <div>
+      <p class="eyebrow">Inspection</p>
+      <h2 id="inspection-heading">The VA appraisal is not your home inspection.</h2>
+      <p>
+        The VA appraisal protects the loan program by reviewing reasonable value
+        and minimum property standards. A home inspection protects the buyer’s
+        decision by reviewing the property condition in more detail. Systems,
+        appliances, drainage, attic conditions, crawl spaces, and longer-term
+        maintenance questions can matter even when they do not become VA MPR
+        repairs.
+      </p>
+      <div class="signal-list" aria-label="VA appraisal and inspection topics">
+        <span>Appraisal value</span>
+        <span>MPR repairs</span>
+        <span>Home inspection</span>
+        <span>Offer strategy</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="VA appraisal versus home inspection">
+      <article>
+        <span>Required for loan</span>
+        <strong>VA appraisal</strong>
+        <p>Value, MPRs, and Notice of Value are part of the VA loan process.</p>
+      </article>
+      <article>
+        <span>Buyer decision tool</span>
+        <strong>Home inspection</strong>
+        <p>A separate inspection helps the buyer understand condition, risk, and repair priorities.</p>
+      </article>
+      <article>
+        <span>Best timing</span>
+        <strong>Before the offer</strong>
+        <p>Discuss appraisal, repair, and contingency strategy before the property is under pressure.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">VA Appraisal FAQ</p>
+          <h2 id="faq-heading">Questions VA buyers ask before writing an offer.</h2>
+        </div>
+        <p>
+          These answers are written for VA-eligible buyers, military families,
+          REALTORS®, search systems, and answer engines.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Official Sources</p>
+      <ul>
+        <li>
+          This page uses VA consumer guidance, VA appraisal resources, VA
+          Pamphlet 26-7 Minimum Property Requirements, and the federal VA escape
+          clause regulation.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Talk through the appraisal strategy before the offer.</h2>
+      <p>
+        For VA buyers near Redstone Arsenal, the cleanest purchase plan is built
+        before the contract: value expectations, MPR risk, inspection timing,
+        seller repair posture, and earnest-money protection.
+      </p>
+      <div class="hero-actions" aria-label="VA appraisal next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/resources/va-loan-checklist-redstone-arsenal/">
+          View VA checklist
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

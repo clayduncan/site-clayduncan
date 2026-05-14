@@ -1,0 +1,427 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/jumbo-vs-conforming-loans-huntsville-madison/';
+const pageUrl = new URL(pagePath, site.url).href;
+const conformingLimit2026 = '$832,750';
+const highCostCeiling2026 = '$1,249,125';
+
+const limitRows = [
+  {
+    location: 'Madison County, Alabama',
+    oneUnitLimit: conformingLimit2026,
+    marketNote: 'Baseline FHFA county; not designated high-cost.',
+  },
+  {
+    location: 'Limestone County, Alabama',
+    oneUnitLimit: conformingLimit2026,
+    marketNote: 'Baseline FHFA county; same one-unit threshold as Madison County.',
+  },
+  {
+    location: 'Morgan County, Alabama',
+    oneUnitLimit: conformingLimit2026,
+    marketNote: 'Baseline FHFA county; relevant for Decatur-area buyers.',
+  },
+  {
+    location: 'Most U.S. counties',
+    oneUnitLimit: conformingLimit2026,
+    marketNote: 'The national baseline for one-unit properties in 2026.',
+  },
+];
+
+const planningSignals = [
+  {
+    label: 'Loan amount',
+    title: 'The loan amount decides the category',
+    text: 'A purchase price above the conforming limit does not automatically mean jumbo. The down payment can keep the loan amount at or below the county limit.',
+  },
+  {
+    label: 'County limit',
+    title: 'North Alabama uses the baseline limit',
+    text: 'Madison, Limestone, Morgan, Marshall, Jackson, DeKalb, and Cullman counties are baseline FHFA counties for 2026 one-unit conforming limits.',
+  },
+  {
+    label: 'File strength',
+    title: 'Jumbo review is more file-specific',
+    text: 'Jumbo planning commonly pays closer attention to reserves, documentation, income type, property details, appraisal risk, and investor overlay.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the 2026 jumbo loan threshold in Madison County, Alabama?',
+    answer:
+      'For 2026, a one-unit mortgage in Madison County, Alabama generally becomes jumbo when the original loan amount is above $832,750. Madison County is a baseline FHFA county, not a high-cost county.',
+  },
+  {
+    question: 'Is a jumbo loan based on the purchase price or the loan amount?',
+    answer:
+      'A jumbo loan is based on the loan amount compared with the applicable county conforming loan limit. A higher purchase price may still use conforming financing if the down payment keeps the loan amount at or below the county limit.',
+  },
+  {
+    question: 'Are Huntsville and Madison high-cost areas for conforming loan limits?',
+    answer:
+      'No. Huntsville, Madison, Madison County, and nearby North Alabama counties use the 2026 FHFA baseline one-unit conforming limit of $832,750. They do not receive the higher-cost county ceiling.',
+  },
+  {
+    question: 'Why does the jumbo versus conforming decision matter?',
+    answer:
+      'The decision matters because conforming loans follow Fannie Mae and Freddie Mac limits, while jumbo loans follow lender and investor guidelines. Jumbo files may involve different pricing, reserves, documentation, appraisal review, and underwriting expectations.',
+  },
+  {
+    question: 'Can a larger down payment avoid jumbo financing?',
+    answer:
+      'Sometimes. If the purchase price is above the conforming loan limit but the borrower makes a large enough down payment, the resulting loan amount may fit within conforming limits. The right structure depends on cash to close, reserves, payment comfort, and loan options.',
+  },
+  {
+    question: 'When should a buyer talk through jumbo versus conforming options?',
+    answer:
+      'Buyers should talk through jumbo versus conforming options before making offers on higher-priced homes. The strategy should be clear before contract pressure, appraisal questions, reserve requirements, or documentation issues create avoidable delays.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'FHFA conforming loan limit values',
+    url: 'https://www.fhfa.gov/data/conforming-loan-limit',
+  },
+  {
+    label: 'FHFA 2026 conforming loan limit announcement',
+    url: 'https://www.fhfa.gov/news/news-release/fhfa-announces-conforming-loan-limit-values-2026',
+  },
+  {
+    label: 'FHFA conforming loan limit values map',
+    url: 'https://www.fhfa.gov/data/dashboard/conforming-loan-limit-values-map',
+  },
+  {
+    label: 'Fannie Mae loan limits',
+    url: 'https://singlefamily.fanniemae.com/originating-underwriting/loan-limits',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Jumbo vs Conforming Loan Guidance in Huntsville and Madison',
+    description:
+      'Jumbo versus conforming loan guidance for Huntsville, Madison, Madison County, and North Alabama buyers evaluating higher-priced home purchases in 2026.',
+    serviceType: 'Jumbo mortgage guidance',
+    audience: ['jumbo buyers', 'higher-priced homebuyers', 'relocation buyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Jumbo vs Conforming Loans in Huntsville and Madison',
+    description:
+      'A source-backed guide to the 2026 conforming loan limit, when a Huntsville or Madison mortgage becomes jumbo, and how buyers should think through the loan structure before making an offer.',
+    about: [
+      { '@type': 'Thing', name: 'jumbo loans' },
+      { '@type': 'Thing', name: 'conforming loan limits' },
+      { '@type': 'Thing', name: 'jumbo versus conforming loans' },
+      { '@type': 'Thing', name: 'higher-priced home financing' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'Madison County, Alabama' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    '@id': `${pageUrl}#loan-limit-table`,
+    name: '2026 conforming loan limit context for Huntsville and North Alabama',
+    description:
+      'A reader-facing summary of 2026 one-unit conforming loan limit context for Madison County, Limestone County, Morgan County, and most U.S. counties.',
+    creator: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'Jumbo Loans in Huntsville', path: '/huntsville/jumbo-loans/' },
+    { name: 'Jumbo vs Conforming Loans', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Jumbo vs Conforming Loans in Huntsville & Madison | 2026 Guide"
+  description="Understand when a Huntsville or Madison mortgage becomes jumbo, the 2026 conforming loan limit, and how higher-priced buyers should plan before making an offer."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Jumbo Loan Resource</p>
+      <h1 id="resource-heading">Jumbo vs. conforming loans in Huntsville and Madison.</h1>
+      <p class="hero-lede">
+        For higher-priced homes in Huntsville, Madison, and North Alabama, the
+        first planning question is simple: will the loan amount fit within the
+        2026 conforming loan limit, or does the file need jumbo loan strategy?
+      </p>
+      <div class="hero-actions" aria-label="Jumbo versus conforming loan actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through loan structure</a>
+        <a class="button button-secondary" href="/huntsville/jumbo-loans/">View jumbo loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="Jumbo versus conforming highlights">
+        <a href="#limit-table">
+          <strong>2026</strong>
+          <span>{conformingLimit2026} baseline one-unit limit</span>
+        </a>
+        <a href="#decision">
+          <strong>Loan amount</strong>
+          <span>The loan amount, not just the price, drives the category</span>
+        </a>
+        <a href="#faq">
+          <strong>Strategy</strong>
+          <span>Down payment, reserves, appraisal, and documentation all matter</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator explaining jumbo versus conforming loan planning"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Higher-priced home planning</span>
+        <strong>Conforming limit, jumbo threshold, down payment, reserves, and offer strategy</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">When does a Huntsville mortgage become a jumbo loan?</h2>
+        </div>
+        <p>
+          A Huntsville or Madison mortgage generally becomes a jumbo loan when
+          the original loan amount is above the applicable FHFA conforming loan
+          limit. For 2026, Madison County and nearby North Alabama counties use
+          the baseline one-unit conforming loan limit of {conformingLimit2026}.
+          The purchase price matters, but the loan amount is what determines
+          whether jumbo planning is needed.
+        </p>
+      </div>
+      <div class="feature-grid" id="decision">
+        {
+          planningSignals.map((item) => (
+            <article class="feature-card">
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band va-topic-band" aria-labelledby="limit-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-wide">
+        <p class="eyebrow">2026 Loan Limit Context</p>
+        <h2 id="limit-heading">North Alabama is not a high-cost conforming loan limit market.</h2>
+        <p>
+          FHFA sets conforming loan limits by county. For 2026, Alabama counties
+          in the Huntsville, Madison, Decatur, Athens, and broader North Alabama
+          area use the baseline one-unit conforming limit. The high-cost ceiling
+          of {highCostCeiling2026} does not apply here.
+        </p>
+      </div>
+      <div class="data-table-wrap" id="limit-table" role="region" aria-labelledby="limit-heading" tabindex="0">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Location</th>
+              <th scope="col">2026 one-unit conforming limit</th>
+              <th scope="col">Planning note</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              limitRows.map((row) => (
+                <tr>
+                  <td>{row.location}</td>
+                  <td>{row.oneUnitLimit}</td>
+                  <td>{row.marketNote}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="math-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Decision Framework</p>
+          <h2 id="math-heading">The same home can produce different loan paths.</h2>
+        </div>
+        <p>
+          A buyer can be above the conforming limit on price while still below
+          the conforming limit on loan amount. That is why jumbo planning should
+          compare structure before the offer.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        <article>
+          <span>Example 1</span>
+          <h3>Higher price, conforming loan amount</h3>
+          <p>
+            A buyer using a larger down payment may keep the loan amount at or
+            below the county limit even when the purchase price is higher.
+          </p>
+        </article>
+        <article>
+          <span>Example 2</span>
+          <h3>Higher price, jumbo loan amount</h3>
+          <p>
+            A smaller down payment on a higher-priced home can push the loan
+            above the county limit and into jumbo loan review.
+          </p>
+        </article>
+        <article>
+          <span>Example 3</span>
+          <h3>Near-limit strategy</h3>
+          <p>
+            Buyers near the threshold may compare a slightly larger down
+            payment, a conforming structure, or a jumbo structure depending on
+            cash, reserves, rate, and timeline.
+          </p>
+        </article>
+      </div>
+      <div class="dark-note">
+        <p>
+          Specific jumbo guidelines vary by lender, investor, loan amount,
+          occupancy, property type, credit profile, income type, and available
+          reserves. Treat the threshold as the starting point, not the complete
+          approval answer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="local-heading">
+    <div>
+      <p class="eyebrow">Local Planning</p>
+      <h2 id="local-heading">Why this matters in Huntsville and Madison.</h2>
+      <p>
+        Most homes in North Alabama are well below the jumbo threshold, which
+        makes jumbo activity more concentrated. Higher-priced purchases around
+        Madison, Hampton Cove, McMullen Cove, Twickenham, Monte Sano, custom
+        builds, lake homes, and relocation-driven searches can still create
+        real jumbo planning questions.
+      </p>
+      <div class="signal-list" aria-label="Local jumbo planning signals">
+        <span>Huntsville</span>
+        <span>Madison</span>
+        <span>Redstone relocation</span>
+        <span>Higher-priced homes</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Jumbo versus conforming planning factors">
+      <article>
+        <span>Before shopping</span>
+        <strong>Know the likely category</strong>
+        <p>Clarify whether the target range is conforming, jumbo, or close enough to compare both.</p>
+      </article>
+      <article>
+        <span>Before offering</span>
+        <strong>Check cash and reserves</strong>
+        <p>The down payment decision can affect loan category, cash to close, and liquidity after closing.</p>
+      </article>
+      <article>
+        <span>Before closing</span>
+        <strong>Respect documentation timing</strong>
+        <p>Jumbo files can require more detailed review, so late document surprises are expensive.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Jumbo vs. Conforming FAQ</p>
+          <h2 id="faq">Questions higher-priced buyers ask first.</h2>
+        </div>
+        <p>
+          These answers are written for Huntsville and North Alabama buyers who
+          need a clean explanation before they choose a mortgage path.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Official Sources</p>
+      <ul>
+        <li>
+          This page uses FHFA and Fannie Mae source material for 2026 conforming
+          loan limit context. Jumbo program requirements can vary by lender and
+          investor.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Compare the loan path before the offer.</h2>
+      <p>
+        If your Huntsville or Madison purchase may be near the conforming limit,
+        talk through the loan amount, down payment, cash to close, reserves, and
+        offer timing before you are under contract.
+      </p>
+      <div class="hero-actions" aria-label="Jumbo versus conforming next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/huntsville/jumbo-loans/">View jumbo guidance</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
   createBreadcrumbJsonLd,
   createFaqJsonLd,
+  createLearningResourceJsonLd,
   organizationJsonLd,
   professionalServiceJsonLd,
   personJsonLd,
@@ -88,6 +89,21 @@ const schema = [
     mainEntity: { '@id': `${site.url}/#person` },
     citation: industrySources.map((source) => source.url),
   },
+  createLearningResourceJsonLd({
+    pageUrl,
+    name: 'AI Training for REALTORS®',
+    description:
+      'Practical AI education from Clay Duncan for REALTORS®, real estate teams, and mortgage professionals who want usable workflows for client communication, listing support, content planning, follow-up, and responsible AI adoption.',
+    teaches: [
+      'AI fundamentals for REALTORS®',
+      'custom instructions and prompt structure',
+      'client communication workflows',
+      'listing presentation support',
+      'real estate content planning',
+      'responsible AI adoption',
+    ],
+    audience: ['REALTORS®', 'real estate teams', 'brokerage offices', 'mortgage professionals'],
+  }),
   {
     '@context': 'https://schema.org',
     '@type': 'Service',

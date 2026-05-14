@@ -14,10 +14,10 @@ export interface AggregateRating {
   source: string;
 }
 
-// Update reviewCount manually as new reviews accumulate on Google Business Profile. Last updated: 2026-05-02
+// Update reviewCount manually as new reviews accumulate on Google Business Profile. Last updated: 2026-05-13
 export const aggregateRating: AggregateRating = {
   ratingValue: 5.0,
-  reviewCount: 28,
+  reviewCount: 33,
   bestRating: 5,
   worstRating: 1,
   source: 'Google Business Profile',

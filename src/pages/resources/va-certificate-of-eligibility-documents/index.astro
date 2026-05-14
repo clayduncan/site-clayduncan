@@ -1,0 +1,421 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/va-certificate-of-eligibility-documents/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const documentationItems = [
+  {
+    borrower: 'Veterans',
+    documents: 'DD214, preferably the Member 4 copy because it includes character of service and separation details.',
+  },
+  {
+    borrower: 'Active-duty service members',
+    documents:
+      'Current Statement of Service signed by an authorized unit official, showing name, SSN, date of birth, entry date, lost time, and command name.',
+  },
+  {
+    borrower: 'National Guard',
+    documents:
+      'NGB-22, retirement points statement, current Statement of Service, activation orders, and DD214s when applicable.',
+  },
+  {
+    borrower: 'Reserve members',
+    documents:
+      'Retirement points statements, separation documentation, Title 10 active-duty orders, and DD214s when applicable.',
+  },
+  {
+    borrower: 'Surviving spouses',
+    documents:
+      'VA Form 26-1817 or VA Form 26-1880 when applicable, plus marriage certificate, death certificate, and DIC documentation when relevant.',
+  },
+];
+
+const coeMethods = [
+  {
+    step: 'Fastest',
+    title: 'Through a VA-participating lender',
+    text: 'Many lenders can request the COE through VA’s Web LGY system and receive an instant determination when VA records are complete.',
+  },
+  {
+    step: 'Self-service',
+    title: 'Through VA.gov',
+    text: 'Borrowers can request the COE directly online through VA.gov when they want to start the process themselves.',
+  },
+  {
+    step: 'Manual',
+    title: 'By mail with VA Form 26-1880',
+    text: 'Mail is typically slower, but it can be useful when records need manual review or the online/lender path cannot resolve the determination.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is a VA Certificate of Eligibility?',
+    answer:
+      'A VA Certificate of Eligibility, often called a COE, is the document that confirms to a lender that the borrower appears eligible for the VA home loan benefit. It can also show entitlement information, prior VA loan use, and funding fee exemption status.',
+  },
+  {
+    question: 'How do I get a VA Certificate of Eligibility?',
+    answer:
+      'The fastest path is often through a VA-participating lender using VA’s Web LGY system. Borrowers can also request a COE online through VA.gov or by mail using VA Form 26-1880.',
+  },
+  {
+    question: 'What documents do Veterans need for a VA COE?',
+    answer:
+      'Veterans commonly need a DD214. The Member 4 copy is usually preferred because it includes character of service and separation details that can matter for VA review.',
+  },
+  {
+    question: 'What does an active-duty service member need for a VA COE?',
+    answer:
+      'Active-duty service members commonly use a current Statement of Service signed by an authorized unit official. The statement should include the borrower’s identifying information, entry date, lost time, and command information.',
+  },
+  {
+    question: 'Can National Guard and Reserve members get VA loan eligibility?',
+    answer:
+      'Yes. National Guard and Reserve members may qualify through certain active-duty service paths or through six creditable years of service. Guard members may also qualify through specific Title 32 service paths added by federal law. Documentation should be reviewed carefully because the path depends on service history.',
+  },
+  {
+    question: 'Does a COE mean I am approved for a VA loan?',
+    answer:
+      'No. A COE supports VA loan eligibility, but it does not approve the mortgage. The lender still reviews credit, income, assets, residual income, occupancy, property eligibility, appraisal, and underwriting requirements.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'VA: How to request a Certificate of Eligibility',
+    url: 'https://www.va.gov/housing-assistance/home-loans/how-to-request-coe/',
+  },
+  {
+    label: 'VA home loan eligibility',
+    url: 'https://www.va.gov/housing-assistance/home-loans/eligibility/',
+  },
+  {
+    label: 'VA Certificate of Eligibility',
+    url: 'https://benefits.va.gov/homeloans/purchaseco_certificate.asp',
+  },
+  {
+    label: 'VA Form 26-1880',
+    url: 'https://www.va.gov/find-forms/about-form-26-1880/',
+  },
+  {
+    label: 'VA surviving spouse home loan benefits',
+    url: 'https://www.va.gov/family-and-caregiver-benefits/housing-assistance/surviving-spouse-home-loan/',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'VA Certificate of Eligibility and Documentation Guidance',
+    description:
+      'VA Certificate of Eligibility, COE documentation, DD214, Statement of Service, Guard, Reserve, and surviving spouse document guidance for VA buyers in Huntsville, Redstone Arsenal, Madison, and North Alabama.',
+    serviceType: 'VA mortgage loan guidance',
+    audience: ['VA-eligible borrowers', 'Veterans', 'service members', 'military homebuyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'VA Certificate of Eligibility and Documents',
+    description:
+      'A source-backed guide to VA Certificate of Eligibility documents, how to request a COE, and what different borrower types may need before VA pre-approval.',
+    about: [
+      { '@type': 'Thing', name: 'VA Certificate of Eligibility' },
+      { '@type': 'Thing', name: 'VA COE' },
+      { '@type': 'Thing', name: 'DD214' },
+      { '@type': 'Thing', name: 'Statement of Service' },
+      { '@type': 'Thing', name: 'VA Form 26-1880' },
+      { '@type': 'Place', name: 'Redstone Arsenal' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#documentation`,
+    name: 'Common VA COE documentation by borrower type',
+    itemListElement: documentationItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.borrower,
+      description: item.documents,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'VA Loans in Huntsville', path: '/huntsville/va-loans/' },
+    { name: 'VA Certificate of Eligibility', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="VA Certificate of Eligibility & Documents | Huntsville VA Buyers"
+  description="Understand VA Certificate of Eligibility documents, DD214, Statement of Service, Guard, Reserve, and surviving spouse documentation for Huntsville VA buyers."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">VA Loan Resource</p>
+      <h1 id="resource-heading">VA Certificate of Eligibility and documents.</h1>
+      <p class="hero-lede">
+        Before a VA pre-approval is fully useful, the lender needs to know
+        whether the borrower can document VA loan eligibility. The Certificate
+        of Eligibility is the starting point for that review.
+      </p>
+      <div class="hero-actions" aria-label="VA COE actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your COE</a>
+        <a class="button button-secondary" href="/huntsville/va-loans/">View VA loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="VA COE highlights">
+        <a href="#methods">
+          <strong>COE</strong>
+          <span>Confirms VA home loan benefit eligibility</span>
+        </a>
+        <a href="#documents">
+          <strong>Docs</strong>
+          <span>DD214, Statement of Service, Guard, Reserve, spouse records</span>
+        </a>
+        <a href="#limits">
+          <strong>Limits</strong>
+          <span>COE is not the same thing as loan approval</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping VA buyers understand COE documentation"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>VA eligibility planning</span>
+        <strong>COE, DD214, Statement of Service, Guard, Reserve, and surviving spouse documents</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What is a VA Certificate of Eligibility?</h2>
+        </div>
+        <p>
+          A VA Certificate of Eligibility, or COE, is the document that tells a
+          lender the borrower appears eligible for the VA home loan benefit. It
+          can also show entitlement information, prior VA loan use, and funding
+          fee exemption status. A COE supports VA eligibility, but it is not a
+          mortgage approval.
+        </p>
+      </div>
+      <div class="feature-grid" id="methods">
+        {
+          coeMethods.map((item) => (
+            <article class="feature-card">
+              <span>{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band va-topic-band" aria-labelledby="documents">
+    <div class="section-inner">
+      <div class="section-heading section-heading-wide">
+        <p class="eyebrow">Documentation</p>
+        <h2 id="documents">What documents may be needed for the COE?</h2>
+        <p>
+          The right documentation depends on service status. Redstone
+          Arsenal-area buyers may include Veterans, active-duty service members,
+          Guard members, Reservists, surviving spouses, federal employees, and
+          relocating military families, so the COE path should be checked early.
+        </p>
+      </div>
+      <div class="data-table-wrap" role="region" aria-labelledby="documents" tabindex="0">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Borrower type</th>
+              <th scope="col">Common documentation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              documentationItems.map((item) => (
+                <tr>
+                  <td>{item.borrower}</td>
+                  <td>{item.documents}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="limits">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">What The COE Does</p>
+          <h2 id="limits">The COE is important, but it does not approve the loan.</h2>
+        </div>
+        <p>
+          A useful VA pre-approval connects eligibility with real loan
+          qualification. The COE answers one question. Underwriting answers the
+          rest.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        <article>
+          <span>COE confirms</span>
+          <h3>VA eligibility</h3>
+          <p>The COE helps show the lender that the borrower has earned access to the VA home loan benefit.</p>
+        </article>
+        <article>
+          <span>COE may show</span>
+          <h3>Entitlement and exemption status</h3>
+          <p>Prior VA loan use, available entitlement clues, and funding fee exemption status can appear in COE review.</p>
+        </article>
+        <article>
+          <span>COE does not approve</span>
+          <h3>Income, credit, or property</h3>
+          <p>The lender still reviews income, credit, assets, residual income, occupancy, appraisal, and property eligibility.</p>
+        </article>
+      </div>
+      <div class="dark-note">
+        <p>
+          Avoid paying third parties to “retrieve” a COE. VA provides COE access
+          directly, and many VA-participating lenders can request it through VA’s
+          lender system.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="issues-heading">
+    <div>
+      <p class="eyebrow">Common Issues</p>
+      <h2 id="issues-heading">Why a COE can take longer than expected.</h2>
+      <p>
+        Many COEs are available quickly. Others require manual review because
+        service records are incomplete, a DD214 has not been added to VA
+        systems, Guard or Reserve service needs additional proof, prior
+        entitlement was not restored, or discharge status requires further VA
+        review.
+      </p>
+      <div class="signal-list" aria-label="Common VA COE issues">
+        <span>Recent discharge</span>
+        <span>Guard or Reserve records</span>
+        <span>Used entitlement</span>
+        <span>Manual VA review</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="VA COE planning sequence">
+      <article>
+        <span>Before touring</span>
+        <strong>Request the COE early</strong>
+        <p>COE timing varies, so avoid waiting until the contract is under pressure.</p>
+      </article>
+      <article>
+        <span>Before offering</span>
+        <strong>Check entitlement clues</strong>
+        <p>Prior VA loan use or unrestored entitlement can affect the next purchase plan.</p>
+      </article>
+      <article>
+        <span>Before closing</span>
+        <strong>Verify final file</strong>
+        <p>The COE supports eligibility, but the full loan still has to clear underwriting and property review.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">VA COE FAQ</p>
+          <h2 id="faq-heading">Questions buyers ask before VA pre-approval.</h2>
+        </div>
+        <p>
+          These answers are written for VA-eligible buyers, military families,
+          REALTORS®, search systems, and answer engines.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Official Sources</p>
+      <ul>
+        <li>
+          This page uses VA guidance for COE requests, VA eligibility, VA Form
+          26-1880, and surviving-spouse VA home loan benefits.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Get the COE question answered before the offer.</h2>
+      <p>
+        For VA buyers near Redstone Arsenal, COE review should happen before
+        serious shopping so eligibility, entitlement, funding fee exemption, and
+        documentation questions are not discovered late.
+      </p>
+      <div class="hero-actions" aria-label="VA COE next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/resources/va-entitlement-second-use-loans/">
+          Review entitlement
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

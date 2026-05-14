@@ -1,0 +1,451 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/jumbo-loan-relocation-huntsville/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const relocationFactors = [
+  {
+    factor: 'Departing-home proceeds',
+    issue:
+      'Sale or relocation buyout proceeds usually need to arrive and be documented before they can be treated as available funds.',
+  },
+  {
+    factor: 'Relocation package type',
+    issue:
+      'Full-service, lump-sum, hybrid, BVO, GBO, and AVO relocation structures can affect timing, documentation, and cash flow.',
+  },
+  {
+    factor: 'Closing timeline',
+    issue:
+      'A local jumbo timeline of 35 to 45 days is often healthier than assuming every higher-priced purchase can close in 30 days.',
+  },
+  {
+    factor: 'Alabama closing process',
+    issue:
+      'Alabama is an attorney-closing state, which can feel different for buyers moving from title or escrow-heavy states.',
+  },
+  {
+    factor: 'Appraisal and offer strategy',
+    issue:
+      'Higher-priced submarkets can have thinner comparable sales, so appraisal strategy and contingency planning matter before the offer.',
+  },
+];
+
+const relocationDocuments = [
+  {
+    category: 'Employment or transfer details',
+    documents:
+      'Offer letter, transfer letter, start date, compensation details, relocation agreement, and any conditions that affect income timing.',
+  },
+  {
+    category: 'Relocation benefits',
+    documents:
+      'Relocation package summary, closing-cost benefit details, temporary housing terms, and whether benefits are lump-sum or managed by a relocation company.',
+  },
+  {
+    category: 'Departing residence',
+    documents:
+      'Listing agreement, purchase contract, estimated settlement statement, final settlement statement, bridge or HELOC documentation when used.',
+  },
+  {
+    category: 'Cash to close and reserves',
+    documents:
+      'Asset statements, wire receipt, sale-proceeds documentation, reserve plan, and source records for any large or unusual deposits.',
+  },
+  {
+    category: 'Prior-state timing',
+    documents:
+      'Closing date, funding date, attorney/title/escrow contact details, and wire coordination details for the prior-state sale.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Can I use home-sale proceeds from another state for a Huntsville jumbo loan?',
+    answer:
+      'Yes, once the sale proceeds are received and documented. Until the departing-home sale closes and funds arrive, the equity is an expectation rather than a documented asset. Bridge financing or a HELOC may be part of the planning conversation when the buy-side closing happens before the sell-side funds arrive.',
+  },
+  {
+    question: 'How long should a relocating jumbo buyer plan for closing in Huntsville?',
+    answer:
+      'A realistic local jumbo timeline is often 35 to 45 days, sometimes longer when appraisal timing, two-appraisal requirements, relocation proceeds, or complex income documentation are involved. A 30-day close may be possible on a clean, pre-positioned file, but it should not be assumed.',
+  },
+  {
+    question: 'Should I use the relocation provider’s recommended lender?',
+    answer:
+      'Relocation-provider lenders may be convenient and familiar with corporate relocation, but buyers should still compare the recommendation with a lender who understands local jumbo dynamics in Huntsville, Madison, and North Alabama. The right fit depends on pricing, overlays, documentation, appraisal timing, and local execution.',
+  },
+  {
+    question: 'What makes relocating to Alabama different from buying in another state?',
+    answer:
+      'Alabama closings are handled through real estate attorneys, and the local process can differ from title-company or escrow-heavy states. Relocating buyers should coordinate timing early among the lender, REALTORS®, closing attorney, prior-state settlement contact, and relocation provider.',
+  },
+  {
+    question: 'Can a relocation package cover a jumbo appraisal gap?',
+    answer:
+      'A relocation package should not be assumed to cover a buy-side appraisal gap. Appraisal-gap shortfalls, appraisal contingency decisions, and additional cash exposure should be discussed before making the offer.',
+  },
+  {
+    question: 'When should a relocating jumbo buyer start mortgage planning?',
+    answer:
+      'Relocating jumbo buyers should start planning before serious house hunting. The loan amount, cash to close, reserves, departing-home timing, income documentation, appraisal expectations, and offer strategy should be clarified before contract pressure begins.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'Worldwide ERC relocation resources',
+    url: 'https://www.worldwideerc.org/',
+  },
+  {
+    label: 'Fannie Mae loan limits',
+    url: 'https://singlefamily.fanniemae.com/originating-underwriting/loan-limits',
+  },
+  {
+    label: 'FHFA conforming loan limit values',
+    url: 'https://www.fhfa.gov/data/conforming-loan-limit',
+  },
+  {
+    label: 'IRS Publication 523: Selling Your Home',
+    url: 'https://www.irs.gov/forms-pubs/about-publication-523',
+  },
+  {
+    label: 'Fannie Mae Reconsideration of Value',
+    url: 'https://singlefamily.fanniemae.com/initiative-updates/reconsideration-value-rov',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Jumbo Loan Relocation Guidance for Huntsville Buyers',
+    description:
+      'Jumbo mortgage relocation guidance for buyers moving to Huntsville, Madison, Redstone Arsenal, and North Alabama from higher-cost markets.',
+    serviceType: 'Jumbo mortgage relocation guidance',
+    audience: ['relocation buyers', 'jumbo buyers', 'higher-priced homebuyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Jumbo Loan Planning for Relocation Buyers Moving to Huntsville',
+    description:
+      'A local guide for relocating jumbo buyers moving to Huntsville, Madison, Redstone Arsenal, and North Alabama, including sale proceeds, relocation packages, attorney closings, appraisal timing, and offer strategy.',
+    about: [
+      { '@type': 'Thing', name: 'jumbo loan relocation' },
+      { '@type': 'Thing', name: 'relocation mortgage planning' },
+      { '@type': 'Thing', name: 'home sale proceeds' },
+      { '@type': 'Thing', name: 'bridge financing' },
+      { '@type': 'Thing', name: 'corporate relocation package' },
+      { '@type': 'Thing', name: 'jumbo appraisal timing' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'Redstone Arsenal' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#relocation-documentation`,
+    name: 'Relocating jumbo buyer documentation checklist',
+    itemListElement: relocationDocuments.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.category,
+      description: item.documents,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'Jumbo Loans in Huntsville', path: '/huntsville/jumbo-loans/' },
+    { name: 'Jumbo Relocation Planning', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Jumbo Loan Relocation Planning | Huntsville & Madison Buyers"
+  description="Jumbo mortgage planning for relocation buyers moving to Huntsville, Madison, Redstone Arsenal, and North Alabama from higher-cost markets."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Jumbo Loan Resource</p>
+      <h1 id="resource-heading">Jumbo loan planning for buyers relocating to Huntsville.</h1>
+      <p class="hero-lede">
+        Relocating into Huntsville, Madison, or the Redstone Arsenal area with a
+        higher-priced home search creates timing questions that standard jumbo
+        content often misses: sale proceeds, relocation benefits, attorney
+        closings, appraisal timing, and offer strategy.
+      </p>
+      <div class="hero-actions" aria-label="Jumbo relocation actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through relocation timing</a>
+        <a class="button button-secondary" href="/huntsville/jumbo-loans/">View jumbo loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="Jumbo relocation highlights">
+        <a href="#answer-heading">
+          <strong>Timing</strong>
+          <span>Departing-home sale and buy-side closing rarely move perfectly</span>
+        </a>
+        <a href="#documents">
+          <strong>Funds</strong>
+          <span>Relocation proceeds need documentation before they can support the file</span>
+        </a>
+        <a href="#offer">
+          <strong>Offer</strong>
+          <span>Appraisal, reserves, and timeline should be clear before negotiation</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping relocating jumbo buyers plan financing"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Relocation jumbo planning</span>
+        <strong>Sale proceeds, relocation benefits, Alabama closing, appraisal timing, and offer strategy</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What should relocating jumbo buyers know before moving to Huntsville?</h2>
+        </div>
+        <p>
+          Relocating jumbo buyers should plan the mortgage before the offer
+          because the file may depend on departing-home proceeds, a corporate
+          relocation package, new employment timing, verified assets,
+          post-closing reserves, appraisal timing, and Alabama attorney-closing
+          coordination. Until sale proceeds or relocation funds are received and
+          documented, they are usually expectations rather than verified assets.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>Proceeds timing matters</h3>
+          <p>
+            Equity from a prior home can be useful, but the file needs evidence
+            of the sale, receipt of funds, and the timing of how those funds
+            will reach the Alabama closing.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Relocation benefits are not the whole loan answer</h3>
+          <p>
+            Relocation packages may help with moving costs or certain closing
+            costs, but they do not replace jumbo underwriting, appraisal review,
+            or investor guidelines.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Local execution matters</h3>
+          <p>
+            Huntsville-area jumbo transactions can involve thinner comparable
+            sales, local attorney closing coordination, and documentation issues
+            that should be handled early.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band va-topic-band" aria-labelledby="documents">
+    <div class="section-inner">
+      <div class="section-heading section-heading-wide">
+        <p class="eyebrow">Relocation Documents</p>
+        <h2 id="documents">What should be organized before the home search gets serious?</h2>
+        <p>
+          A relocating jumbo buyer is usually managing two transactions, one
+          career move, and one new local market at the same time. The cleaner the
+          documentation is before the offer, the less likely the closing depends
+          on assumptions.
+        </p>
+      </div>
+      <div class="data-table-wrap" role="region" aria-labelledby="documents" tabindex="0">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Planning area</th>
+              <th scope="col">Common documentation issue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              relocationDocuments.map((item) => (
+                <tr>
+                  <td>{item.category}</td>
+                  <td>{item.documents}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="factors-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Local Relocation Factors</p>
+          <h2 id="factors-heading">The move changes the mortgage timeline.</h2>
+        </div>
+        <p>
+          A buyer moving from California, Washington, Texas, New York, Virginia,
+          DC metro, or another higher-cost market may have strong equity and
+          income, but timing still has to be documented.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        {
+          relocationFactors.map((item) => (
+            <article>
+              <span>{item.factor}</span>
+              <h3>{item.factor}</h3>
+              <p>{item.issue}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="dark-note">
+        <p>
+          Tax, legal, relocation-benefit, and asset-liquidation questions should
+          be reviewed with the appropriate professional: CPA, financial advisor,
+          relocation provider, closing attorney, or employer benefits contact.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="offer">
+    <div>
+      <p class="eyebrow">Offer Strategy</p>
+      <h2 id="offer">The strongest offer is not always the fastest offer.</h2>
+      <p>
+        A 30-day close can sound strong, but jumbo relocation files often need
+        enough time for full asset review, departing-home proceeds, appraisal
+        work, closing-attorney coordination, and final underwriting. The goal is
+        not just speed. The goal is a credible offer that can actually close.
+      </p>
+      <div class="signal-list" aria-label="Jumbo relocation offer signals">
+        <span>Verified assets</span>
+        <span>Realistic close date</span>
+        <span>Appraisal planning</span>
+        <span>Attorney coordination</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Jumbo relocation planning sequence">
+      <article>
+        <span>Before touring</span>
+        <strong>Map the sale and purchase timeline</strong>
+        <p>Know whether the departing-home funds will arrive before, at, or after the buy-side closing.</p>
+      </article>
+      <article>
+        <span>Before offering</span>
+        <strong>Confirm funds and reserves</strong>
+        <p>Separate cash to close from post-closing reserves before agreeing to appraisal-gap exposure.</p>
+      </article>
+      <article>
+        <span>Before closing</span>
+        <strong>Coordinate the moving pieces</strong>
+        <p>Keep the lender, buyer’s agent, relocation provider, and closing attorney aligned on milestones.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Jumbo Relocation FAQ</p>
+          <h2 id="faq">Questions relocating higher-priced buyers ask first.</h2>
+        </div>
+        <p>
+          These answers are written for buyers relocating into Huntsville,
+          Madison, Redstone Arsenal, and North Alabama with jumbo or near-jumbo
+          planning questions.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Sources and Guardrails</p>
+      <ul>
+        <li>
+          This page uses public relocation, conforming loan limit, home-sale,
+          and appraisal-process resources for general education. Relocation
+          benefits, tax treatment, appraisal results, and loan approval cannot
+          be guaranteed.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Build the relocation timeline before the offer.</h2>
+      <p>
+        If your Huntsville or Madison purchase depends on a departing-home sale,
+        relocation package, new employment date, bridge option, or appraisal-gap
+        decision, talk through the structure before contract pressure begins.
+      </p>
+      <div class="hero-actions" aria-label="Jumbo relocation next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/resources/jumbo-loan-reserves-asset-documentation/">
+          Review reserves and assets
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

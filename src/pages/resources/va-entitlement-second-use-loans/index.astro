@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/va-entitlement-second-use-loans/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const entitlementConcepts = [
+  {
+    title: 'Basic entitlement',
+    text: 'The COE shows basic entitlement. It is part of VA’s guaranty structure and is not the same thing as a borrower’s loan amount.',
+  },
+  {
+    title: 'Bonus entitlement',
+    text: 'Bonus, second-tier, or secondary entitlement is calculated for loan amounts above $144,000 and is not shown as a simple number on the COE.',
+  },
+  {
+    title: 'Full entitlement',
+    text: 'A borrower generally has full entitlement if they have never used the VA loan benefit or if prior entitlement has been fully restored.',
+  },
+  {
+    title: 'Partial entitlement',
+    text: 'Partial entitlement can apply when a borrower has an active VA loan, still owns a property tied to prior VA entitlement, or had a prior VA loss.',
+  },
+];
+
+const secondUsePaths = [
+  {
+    step: 'Path 1',
+    title: 'Sell and restore',
+    text: 'If the prior VA-financed home is sold and the loan is paid in full, entitlement can generally be restored for a new VA loan.',
+  },
+  {
+    step: 'Path 2',
+    title: 'Keep the home and use remaining entitlement',
+    text: 'A borrower may be able to keep a prior VA-financed home and use remaining bonus entitlement for a new primary residence.',
+  },
+  {
+    step: 'Path 3',
+    title: 'One-time restoration without sale',
+    text: 'Once in a lifetime, a borrower may be able to restore entitlement after paying off the prior VA loan while keeping the property.',
+  },
+  {
+    step: 'Path 4',
+    title: 'Substitution after assumption',
+    text: 'If a qualified Veteran-transferee assumes the loan and substitutes entitlement, the original borrower’s entitlement may be restored.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Can I use my VA loan benefit more than once?',
+    answer:
+      'Yes. VA loan benefits can be reused if prior entitlement is restored, commonly after selling the home and paying off the prior VA loan. Bonus or second-tier entitlement can also allow some borrowers to use a second VA loan while keeping a prior VA-financed property.',
+  },
+  {
+    question: 'What does full VA entitlement mean?',
+    answer:
+      'Full entitlement generally means the borrower has no used entitlement tied up from a prior VA loan. A borrower may have full entitlement if they have never used the VA loan benefit or if a prior VA loan has been paid off and entitlement has been restored.',
+  },
+  {
+    question: 'Do VA loans have loan limits?',
+    answer:
+      'For borrowers with full entitlement, VA does not impose a loan limit. The lender still approves the borrower based on income, credit, residual income, assets, property value, and underwriting requirements. Borrowers with partial entitlement may still need remaining-entitlement calculations tied to the county conforming loan limit.',
+  },
+  {
+    question: 'What is VA bonus entitlement?',
+    answer:
+      'Bonus entitlement, also called second-tier entitlement, is the additional VA guaranty available for loan amounts above $144,000. For borrowers with partial entitlement, remaining bonus entitlement is generally calculated using 25% of the applicable county conforming loan limit minus previously used entitlement that has not been restored.',
+  },
+  {
+    question: 'Can I keep my old house and use a VA loan to buy another one?',
+    answer:
+      'Often, but it depends on remaining entitlement, occupancy, lender qualification, rental documentation, and the details of the prior VA loan. This is common in PCS or relocation scenarios where a borrower keeps a prior home as a rental and buys a new primary residence.',
+  },
+  {
+    question: 'What is one-time restoration without sale?',
+    answer:
+      'One-time restoration without sale is a narrow VA option that may allow a borrower to restore entitlement after the prior VA loan has been paid off even though the borrower still owns the property. The option can be used only once and must be requested through the proper VA process.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'VA home loan entitlement and limits',
+    url: 'https://www.va.gov/housing-assistance/home-loans/loan-limits/',
+  },
+  {
+    label: 'VA home loan eligibility',
+    url: 'https://www.va.gov/housing-assistance/home-loans/eligibility/',
+  },
+  {
+    label: 'VA-backed Veterans home loans',
+    url: 'https://www.va.gov/housing-assistance/home-loans/',
+  },
+  {
+    label: 'FHFA 2026 conforming loan limit values',
+    url: 'https://www.fhfa.gov/news/news-release/fhfa-announces-conforming-loan-limit-values-for-2026',
+  },
+  {
+    label: 'VA Home Loan Circulars',
+    url: 'https://www.benefits.va.gov/homeloans/resources_circulars.asp',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'VA Entitlement and Second Use VA Loan Guidance',
+    description:
+      'VA entitlement, bonus entitlement, second-use VA loan, one-time restoration, and partial-entitlement guidance for VA buyers in Huntsville, Redstone Arsenal, Madison, and North Alabama.',
+    serviceType: 'VA mortgage loan guidance',
+    audience: ['VA-eligible borrowers', 'Veterans', 'service members', 'military homebuyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'VA Entitlement and Second Use VA Loans',
+    description:
+      'A source-backed guide to VA entitlement, bonus entitlement, second-use VA loans, one-time restoration without sale, and partial-entitlement calculations.',
+    about: [
+      { '@type': 'Thing', name: 'VA entitlement' },
+      { '@type': 'Thing', name: 'VA bonus entitlement' },
+      { '@type': 'Thing', name: 'second VA loan' },
+      { '@type': 'Thing', name: 'one-time restoration without sale' },
+      { '@type': 'Thing', name: 'VA loan limits' },
+      { '@type': 'Place', name: 'Redstone Arsenal' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#second-use-paths`,
+    name: 'Common ways VA entitlement can support another VA loan',
+    itemListElement: secondUsePaths.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.title,
+      description: item.text,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'VA Loans in Huntsville', path: '/huntsville/va-loans/' },
+    { name: 'VA Entitlement', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="VA Entitlement & Second Use VA Loans | Huntsville VA Buyers"
+  description="Understand full entitlement, bonus entitlement, second-use VA loans, one-time restoration, and partial-entitlement planning for Huntsville and Redstone Arsenal VA buyers."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">VA Loan Resource</p>
+      <h1 id="resource-heading">VA entitlement and second-use VA loans.</h1>
+      <p class="hero-lede">
+        VA entitlement is often misunderstood. It is not a loan amount. It is
+        the VA guaranty structure that helps eligible borrowers use the VA home
+        loan benefit, reuse it later, and in some cases keep a prior home while
+        buying another primary residence.
+      </p>
+      <div class="hero-actions" aria-label="VA entitlement actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through entitlement</a>
+        <a class="button button-secondary" href="/huntsville/va-loans/">View VA loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="VA entitlement highlights">
+        <a href="#full-entitlement">
+          <strong>Full</strong>
+          <span>No VA-imposed loan limit when entitlement is full</span>
+        </a>
+        <a href="#second-use">
+          <strong>2nd</strong>
+          <span>Second-use VA loans may be possible with remaining entitlement</span>
+        </a>
+        <a href="#restoration">
+          <strong>Restore</strong>
+          <span>Entitlement can often be restored after prior VA loan use</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping VA buyers understand entitlement"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>VA entitlement planning</span>
+        <strong>Full entitlement, bonus entitlement, second use, and restoration</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What is VA entitlement?</h2>
+        </div>
+        <p>
+          VA entitlement is the amount of guaranty VA provides to the lender if
+          an eligible borrower defaults. It is not the borrower’s loan amount.
+          Full entitlement generally means the borrower has no used entitlement
+          tied up from a prior VA loan. Partial entitlement means prior VA use,
+          an active VA loan, or a prior VA loss may require additional math.
+        </p>
+      </div>
+      <div class="feature-grid" id="full-entitlement">
+        {
+          entitlementConcepts.map((item, index) => (
+            <article class="feature-card">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band va-topic-band" aria-labelledby="loan-limits-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-wide">
+        <p class="eyebrow">Loan Limits</p>
+        <h2 id="loan-limits-heading">Full entitlement changed the VA loan limit conversation.</h2>
+        <p>
+          Since 2020, borrowers with full entitlement do not have a VA-imposed
+          loan limit. That does not mean unlimited borrowing. The lender still
+          approves the loan based on income, credit, residual income, assets,
+          appraisal value, property eligibility, and underwriting requirements.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>Full entitlement</span>
+          <h3>No VA-imposed cap</h3>
+          <p>
+            Full-entitlement borrowers are not limited by the county conforming
+            loan limit at the federal VA level, though lender approval still
+            controls the actual loan amount.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>Partial entitlement</span>
+          <h3>County limit still matters</h3>
+          <p>
+            With partial entitlement, the county conforming loan limit helps
+            determine how much remaining VA guaranty is available for a new
+            purchase.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>North Alabama</span>
+          <h3>2026 baseline CLL</h3>
+          <p>
+            Madison, Limestone, and Morgan counties use the 2026 baseline
+            conforming loan limit of $832,750, according to FHFA’s 2026 release.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="second-use">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Second Use</p>
+          <h2 id="second-use">How can a borrower use the VA benefit again?</h2>
+        </div>
+        <p>
+          The second-use question is common for Redstone Arsenal PCS, relocation,
+          and retain-as-rental scenarios. The answer depends on whether prior
+          entitlement has been restored or whether enough bonus entitlement
+          remains.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        {
+          secondUsePaths.map((item) => (
+            <article>
+              <span>{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="dark-note">
+        <p>
+          For partial-entitlement borrowers, a common estimate is: remaining
+          entitlement equals 25% of the applicable county conforming loan limit
+          minus unrestored entitlement already used. Multiplying remaining
+          entitlement by 4 can estimate the maximum no-down-payment loan amount.
+          Borrower-specific math should be reviewed before relying on it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="restoration">
+    <div>
+      <p class="eyebrow">Restoration</p>
+      <h2 id="restoration">Restoring entitlement is not always automatic.</h2>
+      <p>
+        When a VA-financed property is sold and the VA loan is paid in full,
+        entitlement can generally be restored. If the borrower keeps the
+        property, restoration may require a specific request and may involve the
+        once-per-lifetime restoration without sale option.
+      </p>
+      <div class="signal-list" aria-label="VA entitlement restoration topics">
+        <span>Sale and payoff</span>
+        <span>Assumption substitution</span>
+        <span>One-time restoration</span>
+        <span>COE review</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="VA entitlement planning scenarios">
+      <article>
+        <span>PCS scenario</span>
+        <strong>Keep prior home</strong>
+        <p>Remaining bonus entitlement may help a borrower buy a new primary residence while retaining a prior home.</p>
+      </article>
+      <article>
+        <span>COE review</span>
+        <strong>Check used entitlement</strong>
+        <p>The COE can show prior use, basic entitlement, and clues about whether restoration is needed.</p>
+      </article>
+      <article>
+        <span>Local planning</span>
+        <strong>Redstone Arsenal moves</strong>
+        <p>Timing, occupancy, rental income, and entitlement should be reviewed before a second VA offer is written.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">VA Entitlement FAQ</p>
+          <h2 id="faq-heading">Questions buyers ask before reusing the VA benefit.</h2>
+        </div>
+        <p>
+          These answers are written for VA-eligible buyers, military families,
+          REALTORS®, search systems, and answer engines.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Official Sources</p>
+      <ul>
+        <li>
+          This page uses VA entitlement guidance, VA eligibility guidance, VA
+          circular resources, and FHFA’s 2026 conforming loan limit release.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Review entitlement before assuming a second VA loan is simple.</h2>
+      <p>
+        Second-use VA planning should start with the COE, prior VA loan history,
+        occupancy plan, rental documentation, county limit context, and lender
+        qualification review.
+      </p>
+      <div class="hero-actions" aria-label="VA entitlement next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/resources/va-loan-checklist-redstone-arsenal/">
+          View VA checklist
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

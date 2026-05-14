@@ -1,0 +1,440 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/job-change-offer-letter-mortgage/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const scenarios = [
+  {
+    scenario: 'New job already started',
+    guidance:
+      'The lender usually reviews current paystubs, the new offer letter or employment terms, prior employment history, and verification of employment.',
+  },
+  {
+    scenario: 'Offer accepted, job not started',
+    guidance:
+      'A fully executed offer letter or employment contract may support qualification when the loan type allows it and the contract meets specific requirements.',
+  },
+  {
+    scenario: 'Same industry or promotion',
+    guidance:
+      'A lateral move, promotion, or same-line-of-work transition is generally easier to document than a major career change.',
+  },
+  {
+    scenario: 'Major career change',
+    guidance:
+      'A major change can require more explanation because the lender must evaluate stability, history, and likelihood of continued income.',
+  },
+  {
+    scenario: 'Job change during contract',
+    guidance:
+      'Tell the loan officer immediately. A job or compensation change can require re-verification, re-underwriting, and updated closing timing.',
+  },
+];
+
+const offerLetterItems = [
+  {
+    item: 'Employer and borrower',
+    detail: 'The document should clearly identify the employer and the borrower.',
+  },
+  {
+    item: 'Position and pay terms',
+    detail: 'The role, type of pay, compensation amount, and any guaranteed terms should be clear.',
+  },
+  {
+    item: 'Start date',
+    detail: 'The start date should be specific enough for underwriting to evaluate timing.',
+  },
+  {
+    item: 'Signatures',
+    detail: 'The offer letter or contract should be fully executed when the loan path requires it.',
+  },
+  {
+    item: 'Contingencies',
+    detail:
+      'Conditions such as licensing, background checks, credentialing, or probationary terms may need to be resolved or explained before closing.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Can I get a mortgage if I just changed jobs?',
+    answer:
+      'Often yes, especially when the new job is in the same line of work, a promotion, or a clear career advancement. The lender still needs to document current income, prior employment history, and whether the new income is stable enough for the loan type.',
+  },
+  {
+    question: 'Can I buy a house before I start my new job?',
+    answer:
+      'Sometimes. Some loan paths allow qualification with a fully executed employment contract or offer letter before the first paycheck, but the rules depend on the loan type, property type, start date, contract terms, reserves, and underwriting review.',
+  },
+  {
+    question: 'Does an offer letter count as income for a mortgage?',
+    answer:
+      'An offer letter may support income qualification when it meets the loan type’s requirements. It typically needs clear employer, borrower, position, pay, start date, signature, and contingency details. It should not be treated as automatically sufficient.',
+  },
+  {
+    question: 'Do I need two years at the same job to get a mortgage?',
+    answer:
+      'No. A two-year employment history is commonly reviewed, but it does not have to be two years with the same employer. Prior employment, education, training, and same-line-of-work transitions can all matter.',
+  },
+  {
+    question: 'What if I change jobs while I am already under contract?',
+    answer:
+      'Tell your loan officer immediately. Employment changes during contract can trigger re-verification, updated documents, and re-underwriting. Finding out late in the process is much harder to manage.',
+  },
+  {
+    question: 'Is this the same as a medical professional mortgage offer-letter review?',
+    answer:
+      'No. Medical professional programs may have broader pre-start-date flexibility for eligible medical borrowers. This page explains the general job-change and offer-letter mortgage question for broader borrower scenarios.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'Fannie Mae: Employment Offers or Contracts',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.3-03/employment-offers-or-contracts',
+  },
+  {
+    label: 'Fannie Mae: Standards for Employment-Related Income',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.2-02/standards-employment-related-income',
+  },
+  {
+    label: 'Fannie Mae: Verbal Verification of Employment',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.1-04/verbal-verification-employment',
+  },
+  {
+    label: 'HUD Single Family Housing Policy Handbook',
+    url: 'https://www.hud.gov/program_offices/housing/sfh/handbook_4000-1',
+  },
+  {
+    label: 'VA Lender’s Handbook',
+    url: 'https://benefits.va.gov/warms/pam26_7.asp',
+  },
+  {
+    label: 'CFPB Home Loan Toolkit',
+    url: 'https://www.consumerfinance.gov/owning-a-home/explore/home-loan-toolkit/',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Job Change and Offer Letter Mortgage Guidance',
+    description:
+      'Mortgage guidance for buyers changing jobs, using an offer letter, relocating for employment, or buying before a new job starts in Huntsville and North Alabama.',
+    serviceType: 'Job change and offer letter mortgage guidance',
+    audience: ['relocating buyers', 'buyers changing jobs', 'offer letter borrowers', 'complex mortgage buyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Job Change and Offer Letter Mortgage Guidance',
+    description:
+      'A mortgage guide for buyers changing jobs, buying before a new job starts, or using an offer letter in Huntsville, Madison, and North Alabama.',
+    about: [
+      { '@type': 'Thing', name: 'job change mortgage' },
+      { '@type': 'Thing', name: 'offer letter mortgage' },
+      { '@type': 'Thing', name: 'buying before new job starts' },
+      { '@type': 'Thing', name: 'future employment mortgage qualification' },
+      { '@type': 'Thing', name: 'complex mortgage guidance' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#offer-letter-checkpoints`,
+    name: 'Offer letter mortgage checkpoints',
+    itemListElement: offerLetterItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.item,
+      description: item.detail,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'Complex Mortgage Guidance', path: '/huntsville/complex-mortgage-guidance/' },
+    { name: 'Job Change and Offer Letter Mortgage', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Job Change and Offer Letter Mortgage | Huntsville Guidance"
+  description="Mortgage guidance for buyers changing jobs, using an offer letter, relocating for employment, or buying before a new job starts in Huntsville and North Alabama."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Complex Mortgage Resource</p>
+      <h1 id="resource-heading">Can you get a mortgage while changing jobs?</h1>
+      <p class="hero-lede">
+        A job change does not automatically stop a mortgage, but it changes what
+        needs to be documented. The key questions are whether the new income is
+        stable, whether the job is in the same line of work, whether the offer
+        letter is complete, and whether the loan type allows the timing.
+      </p>
+      <div class="hero-actions" aria-label="Job change mortgage actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your timing</a>
+        <a class="button button-secondary" href="/huntsville/complex-mortgage-guidance/">
+          View complex mortgage guidance
+        </a>
+      </div>
+      <div class="hero-path-grid" aria-label="Job change mortgage highlights">
+        <a href="#answer-heading">
+          <strong>Job change</strong>
+          <span>Same-line-of-work moves are usually easier to document</span>
+        </a>
+        <a href="#offer-letter">
+          <strong>Offer letter</strong>
+          <span>Complete terms matter before relying on future income</span>
+        </a>
+        <a href="#risks">
+          <strong>Timing</strong>
+          <span>Tell the lender before the job change becomes a closing problem</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping buyers with job change and offer letter mortgage questions"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Employment timing</span>
+        <strong>New job, offer letter, relocation, start date, paystub, and underwriting review</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">Can you get a mortgage if you just changed jobs?</h2>
+        </div>
+        <p>
+          Yes, many borrowers can still get a mortgage after changing jobs,
+          especially when the new job is in the same line of work, a promotion,
+          or a clear career advancement. The lender still needs to document the
+          two-year employment history, current income, offer terms, start date,
+          and whether the income is likely to continue under the loan type’s
+          rules.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>Already started</h3>
+          <p>
+            Current paystubs, the offer letter, prior employment history, and
+            verification of employment usually become the core documentation.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Starting soon</h3>
+          <p>
+            A fully executed offer letter or contract may support qualification
+            before the first paycheck when the loan type and file allow it.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Under contract</h3>
+          <p>
+            A job change after pre-approval or during contract should be
+            disclosed immediately so the loan can be re-reviewed early.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="scenario-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Scenarios</p>
+          <h2 id="scenario-heading">Job changes are not all treated the same way.</h2>
+        </div>
+        <p>
+          The same income amount can be reviewed differently depending on
+          timing, documentation, industry continuity, pay structure, and whether
+          the buyer has already started the new role.
+        </p>
+      </div>
+      <div class="data-table" role="table" aria-label="Job change mortgage scenarios">
+        {
+          scenarios.map((item) => (
+            <div class="data-row" role="row">
+              <strong role="cell">{item.scenario}</strong>
+              <span role="cell">{item.guidance}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" id="offer-letter" aria-labelledby="offer-heading">
+    <div>
+      <p class="eyebrow">Offer Letter</p>
+      <h2 id="offer-heading">An offer letter may help, but it has to be complete.</h2>
+      <p>
+        “I have an offer letter” is not enough by itself. The lender needs to
+        know whether the document can support the specific loan type and
+        transaction. Fully executed terms, start date, pay structure, role, and
+        contingencies can all matter.
+      </p>
+      <p>
+        This is especially important for relocating buyers, buyers moving into a
+        new Huntsville or North Alabama role, and buyers trying to write an
+        offer before their first paycheck is available.
+      </p>
+    </div>
+    <div class="local-context-panel" aria-label="Offer letter mortgage checkpoints">
+      {
+        offerLetterItems.slice(0, 3).map((item) => (
+          <article>
+            <span>Check</span>
+            <strong>{item.item}</strong>
+            <p>{item.detail}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="documents-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">Documentation</p>
+        <h2 id="documents-heading">What the offer letter or job-change file should clarify.</h2>
+      </div>
+      <div class="timeline-grid">
+        {
+          offerLetterItems.map((item, index) => (
+            <article>
+              <span>{`Item ${index + 1}`}</span>
+              <h3>{item.item}</h3>
+              <p>{item.detail}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" id="risks" aria-labelledby="risk-heading">
+    <div>
+      <p class="eyebrow">Risk Control</p>
+      <h2 id="risk-heading">The worst time to discover a job change is right before closing.</h2>
+      <p>
+        Employment is normally re-verified before closing. If the job,
+        compensation, start date, or employment status changes during the loan
+        process, the file may need updated documents and re-underwriting.
+      </p>
+      <p>
+        The practical rule is simple: tell the loan officer before changing
+        jobs, accepting new compensation terms, moving start dates, or relying
+        on an offer letter. Early review gives the file options.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Review your job-change timing</a>
+        <a class="button button-secondary" href="/resources/buying-home-before-medical-job-starts/">
+          Medical start-date guide
+        </a>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Job change mortgage risks">
+      <article>
+        <span>Timing</span>
+        <strong>Start date moved</strong>
+        <p>A delayed start date may change whether the income can support the closing date.</p>
+      </article>
+      <article>
+        <span>Pay structure</span>
+        <strong>Base, bonus, commission, or contract income</strong>
+        <p>Variable or non-salary income often needs more history than base pay.</p>
+      </article>
+      <article>
+        <span>Continuity</span>
+        <strong>Same field or new career path</strong>
+        <p>A same-line move is easier to document than a major career pivot.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-heading">Job change and offer letter mortgage questions.</h2>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="sources-heading">
+    <div class="section-inner">
+      <div class="source-panel">
+        <div>
+          <p class="eyebrow">Sources</p>
+          <h2 id="sources-heading">Employment income rules depend on the loan type.</h2>
+          <p>
+            This page uses agency and consumer finance references for general
+            planning context. Final treatment depends on current loan type
+            rules, lender overlays, borrower documents, and underwriting review.
+          </p>
+        </div>
+        <ul>
+          {
+            officialSources.map((source) => (
+              <li>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,462 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/medical-professional-loan-vs-conventional/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const comparisonRows = [
+  {
+    factor: 'Down payment',
+    medical:
+      'May allow low or no down payment at certain loan amount tiers, depending on the lender program and borrower profile.',
+    conventional:
+      'Often 3% to 5% minimum for eligible primary residence programs, with 20% down avoiding PMI.',
+  },
+  {
+    factor: 'Mortgage insurance',
+    medical:
+      'Many medical professional programs do not require PMI, but the rate or program terms may reflect that risk differently.',
+    conventional:
+      'PMI is usually required above 80% loan-to-value, but conventional PMI can be cancellable as equity grows.',
+  },
+  {
+    factor: 'Student loans',
+    medical:
+      'Some programs may use documented IDR payments or treat deferment more flexibly, but treatment is lender-specific.',
+    conventional:
+      'Fannie Mae and Freddie Mac use agency rules. Documented payment matters, and fallback calculations can affect DTI.',
+  },
+  {
+    factor: 'Before start date',
+    medical:
+      'Designed around medical career transitions, with some programs reviewing fully executed employment contracts before the first paycheck.',
+    conventional:
+      'Can work with a fully executed employment contract in specific one-unit primary residence purchase scenarios.',
+  },
+  {
+    factor: 'Rate and long-term cost',
+    medical:
+      'May cost more in rate than conventional, but can preserve cash and avoid PMI depending on the file.',
+    conventional:
+      'Often has stronger rate pricing when the borrower has enough down payment and student loans do not constrain DTI.',
+  },
+  {
+    factor: 'Best use case',
+    medical:
+      'Often strongest when cash preservation, student-loan treatment, or pre-start-date timing is the deciding issue.',
+    conventional:
+      'Often strongest when the borrower has 20% down, clean documented student-loan payments, and a conforming loan amount.',
+  },
+];
+
+const decisionCards = [
+  {
+    label: 'Medical path may fit',
+    title: 'Cash preservation matters more than lowest possible rate',
+    text: 'A medical professional program may be worth comparing when the buyer wants to preserve cash for relocation, reserves, furniture, practice needs, or the gap before first paycheck.',
+  },
+  {
+    label: 'Conventional may fit',
+    title: 'The file is clean and the borrower has strong down payment',
+    text: 'Conventional may be better when the buyer has enough cash to avoid PMI, student loans are well documented, and the loan amount fits conforming limits.',
+  },
+  {
+    label: 'Compare both',
+    title: 'Student loans or start-date timing are part of the file',
+    text: 'Residents, fellows, and relocating attendings should usually compare both paths before assuming either loan type is automatically better.',
+  },
+];
+
+const planningQuestions = [
+  'How much cash do you want to keep after closing?',
+  'Will the target loan amount fit conventional limits or require jumbo/portfolio treatment?',
+  'Are student loans in IDR, deferment, forbearance, repayment, or transition?',
+  'Are you buying before a new employment contract starts?',
+  'How long do you expect to keep the home and the mortgage?',
+  'Does the monthly payment or the cash-to-close number matter more for this move?',
+];
+
+const faqs = [
+  {
+    question: 'Is a medical professional mortgage always better than a conventional loan?',
+    answer:
+      'No. A medical professional mortgage can be useful for low down payment, no PMI, student-loan flexibility, or pre-start-date timing, but conventional financing may be cheaper when the borrower has strong down payment, clean documented student-loan payments, and a loan amount that fits conforming guidelines.',
+  },
+  {
+    question: 'When might conventional be better for a doctor or resident?',
+    answer:
+      'Conventional may be better when the borrower can put 20% down, avoid PMI, qualify cleanly under agency student-loan rules, and receive stronger rate pricing than the available medical professional program.',
+  },
+  {
+    question: 'When might a medical professional mortgage be better?',
+    answer:
+      'A medical professional mortgage may be better when cash preservation, no PMI at a low down payment, student-loan treatment, or buying before a new medical role starts is more important than the lowest possible conventional rate.',
+  },
+  {
+    question: 'Does no PMI mean the medical professional mortgage is cheaper?',
+    answer:
+      'Not automatically. No PMI is valuable, but the all-in cost depends on rate, fees, cash to close, reserves, time horizon, loan amount, and when conventional PMI could be removed.',
+  },
+  {
+    question: 'How do student loans affect the comparison?',
+    answer:
+      'Student loans can tilt the comparison because each loan type may calculate the payment differently. A documented IDR payment, deferment status, or fallback percentage can change the borrower’s DTI and eligible purchase range.',
+  },
+  {
+    question: 'Should I compare VA, jumbo, or FHA too?',
+    answer:
+      'Yes, when relevant. VA may be structurally strong for eligible military medical professionals, jumbo may compete for higher-priced purchases with strong assets, and FHA may be a fallback when credit profile matters more than medical-program features.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'Fannie Mae: Loan Limits',
+    url: 'https://singlefamily.fanniemae.com/originating-underwriting/loan-limits',
+  },
+  {
+    label: 'Fannie Mae: Monthly Debt Obligations',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-6-05/monthly-debt-obligations',
+  },
+  {
+    label: 'Fannie Mae: Employment Offers or Contracts',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.3-03/employment-offers-or-contracts',
+  },
+  {
+    label: 'CFPB: Private Mortgage Insurance',
+    url: 'https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/',
+  },
+  {
+    label: 'FHFA: Conforming Loan Limit Values',
+    url: 'https://www.fhfa.gov/data/conforming-loan-limit',
+  },
+  {
+    label: 'AAMC Financial Aid Resources',
+    url: 'https://students-residents.aamc.org/financial-aid',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Medical Professional Loan vs Conventional Loan Guidance',
+    description:
+      'Decision guidance for medical professionals comparing medical professional mortgage programs with conventional financing in Huntsville, Madison, and North Alabama.',
+    serviceType: 'Medical professional mortgage comparison guidance',
+    audience: [
+      'medical professionals',
+      'doctors',
+      'residents',
+      'fellows',
+      'dentists',
+      'healthcare buyers',
+    ],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Medical Professional Loan vs Conventional Loan',
+    description:
+      'A comparison guide for medical professionals choosing between a medical professional mortgage and a conventional loan, including PMI, down payment, student loans, start-date timing, and long-term cost.',
+    about: [
+      { '@type': 'Thing', name: 'medical professional loan vs conventional loan' },
+      { '@type': 'Thing', name: 'physician loan vs conventional mortgage' },
+      { '@type': 'Thing', name: 'no PMI medical professional mortgage' },
+      { '@type': 'Thing', name: 'student loans and mortgage qualification' },
+      { '@type': 'Thing', name: 'future employment mortgage qualification' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#comparison-factors`,
+    name: 'Medical professional loan vs conventional loan comparison factors',
+    itemListElement: comparisonRows.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.factor,
+      description: `${item.medical} ${item.conventional}`,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    {
+      name: 'Medical Professional Mortgage',
+      path: '/huntsville/medical-professional-mortgage/',
+    },
+    { name: 'Medical Loan vs Conventional', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Medical Professional Loan vs Conventional | Huntsville Mortgage"
+  description="Compare medical professional mortgage programs with conventional loans for Huntsville doctors, residents, fellows, dentists, and healthcare buyers."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Medical Professional Resource</p>
+      <h1 id="resource-heading">Medical professional loan vs. conventional loan.</h1>
+      <p class="hero-lede">
+        A medical professional mortgage is not automatically better than a
+        conventional loan. The right path depends on down payment, PMI, student
+        loans, start-date timing, reserves, loan amount, rate, and how long you
+        expect to keep the home and mortgage.
+      </p>
+      <div class="hero-actions" aria-label="Medical loan comparison actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Compare your options</a>
+        <a class="button button-secondary" href="/huntsville/medical-professional-mortgage/">
+          View medical mortgage guidance
+        </a>
+      </div>
+      <div class="hero-path-grid" aria-label="Medical loan comparison highlights">
+        <a href="#answer-heading">
+          <strong>Decision</strong>
+          <span>No PMI does not automatically mean lowest total cost</span>
+        </a>
+        <a href="#comparison-heading">
+          <strong>Compare</strong>
+          <span>Down payment, rate, PMI, reserves, and student loans matter together</span>
+        </a>
+        <a href="#questions-heading">
+          <strong>Plan</strong>
+          <span>Run both paths before making the financing decision</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator comparing medical professional and conventional loan options"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Compare the path</span>
+        <strong>Medical professional mortgage, conventional, VA, jumbo, and FHA when relevant</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">Should a medical professional use a medical mortgage or conventional loan?</h2>
+        </div>
+        <p>
+          A medical professional should compare both paths before deciding. A
+          medical professional mortgage may help when low down payment, no PMI,
+          student-loan treatment, or buying before a new role starts is the
+          limiting issue. Conventional financing may be better when the borrower
+          has strong down payment, clean student-loan documentation, conforming
+          loan size, and a lower all-in cost.
+        </p>
+      </div>
+      <div class="feature-grid">
+        {
+          decisionCards.map((card, index) => (
+            <article class="feature-card">
+              <span>{`0${index + 1}`}</span>
+              <h3>{card.title}</h3>
+              <p><strong>{card.label}.</strong> {card.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" id="comparison-heading" aria-labelledby="comparison-title">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Side-by-Side</p>
+          <h2 id="comparison-title">The comparison should be based on the file, not the marketing label.</h2>
+        </div>
+        <p>
+          A “doctor loan” headline can sound simpler than it is. The useful
+          question is how each path handles the borrower’s actual cash,
+          student-loan profile, income timing, target price, and long-term plan.
+        </p>
+      </div>
+      <div class="data-table" role="table" aria-label="Medical professional loan versus conventional loan comparison">
+        {
+          comparisonRows.map((row) => (
+            <div class="data-row" role="row">
+              <strong role="cell">{row.factor}</strong>
+              <span role="cell">
+                <b>Medical:</b> {row.medical}<br />
+                <b>Conventional:</b> {row.conventional}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="cost-heading">
+    <div>
+      <p class="eyebrow">Total Cost</p>
+      <h2 id="cost-heading">No PMI is valuable, but it is not the whole answer.</h2>
+      <p>
+        Medical professional programs often stand out because they may allow low
+        down payment without private mortgage insurance. That can be useful, but
+        the rate, fees, cash retained after closing, reserves, and time horizon
+        also matter.
+      </p>
+      <p>
+        Conventional financing may include PMI above 80% loan-to-value, but
+        conventional PMI can be removed under certain equity and seasoning
+        rules. A clean comparison should model payment, cash to close, reserves,
+        and expected ownership timeline.
+      </p>
+    </div>
+    <div class="local-context-panel" aria-label="Medical mortgage cost comparison signals">
+      <article>
+        <span>Cash</span>
+        <strong>How much stays after closing?</strong>
+        <p>A lower down payment can preserve liquidity for relocation and reserves.</p>
+      </article>
+      <article>
+        <span>Payment</span>
+        <strong>What is the all-in monthly cost?</strong>
+        <p>Rate, PMI, taxes, insurance, and loan amount all affect the answer.</p>
+      </article>
+      <article>
+        <span>Timeline</span>
+        <strong>How long will you keep the loan?</strong>
+        <p>A short ownership window can change which cost matters most.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" id="questions-heading" aria-labelledby="questions-title">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">Planning Questions</p>
+        <h2 id="questions-title">What to answer before choosing the path.</h2>
+      </div>
+      <div class="timeline-grid">
+        {
+          planningQuestions.map((question, index) => (
+            <article>
+              <span>{`Question ${index + 1}`}</span>
+              <h3>{question}</h3>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="related-heading">
+    <div>
+      <p class="eyebrow">Related Guides</p>
+      <h2 id="related-heading">Use the comparison with the two deeper medical support pages.</h2>
+      <p>
+        If the comparison turns on timing, review the start-date guide. If it
+        turns on debt-to-income, review the student-loan guide. Those two issues
+        are often what make the medical professional path meaningfully different
+        from a standard conventional conversation.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="/resources/buying-home-before-medical-job-starts/">
+          Review start-date planning
+        </a>
+        <a class="button button-secondary" href="/resources/medical-professional-student-loans-mortgage/">
+          Review student-loan planning
+        </a>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Medical professional mortgage related paths">
+      <article>
+        <span>Timing</span>
+        <strong>Buying before the job starts</strong>
+        <p>Offer letters, employment contracts, reserves, and relocation timing.</p>
+      </article>
+      <article>
+        <span>Debt</span>
+        <strong>Student loans and DTI</strong>
+        <p>IDR documentation, deferment, federal loan transition, and program treatment.</p>
+      </article>
+      <article>
+        <span>Next step</span>
+        <strong>Run both scenarios</strong>
+        <p>Compare actual numbers before assuming the specialty program wins.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-heading">Medical professional loan vs. conventional loan.</h2>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="sources-heading">
+    <div class="section-inner">
+      <div class="source-panel">
+        <div>
+          <p class="eyebrow">Sources</p>
+          <h2 id="sources-heading">Loan comparisons should use current program guidelines.</h2>
+          <p>
+            This page uses agency and consumer finance references for general
+            planning context. Medical professional mortgage programs are
+            lender-specific and should be verified at pre-approval.
+          </p>
+        </div>
+        <ul>
+          {
+            officialSources.map((source) => (
+              <li>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

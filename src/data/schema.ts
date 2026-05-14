@@ -8,11 +8,17 @@ type SchemaObject = Record<string, unknown>;
 const siteId = `${site.url}/#website`;
 const personId = `${site.url}/#person`;
 const organizationId = `${site.url}/#princeton-mortgage`;
+const duncanMortgageGroupId = `${site.url}/#duncan-mortgage-group`;
 const professionalServiceId = `${site.url}/#professional-service`;
 export const defaultSchemaImage = new URL(
   '/images/clay-duncan-wbackground-1400.jpg',
   site.url,
 ).href;
+const personSameAs = [
+  ...profileLinks.map((link) => link.url),
+  compliance.individualNmls.url,
+  site.company.url,
+];
 
 export const websiteJsonLd = {
   '@context': 'https://schema.org',
@@ -34,6 +40,8 @@ export const personJsonLd = {
   url: site.url,
   image: defaultSchemaImage,
   jobTitle: site.jobTitle,
+  disambiguatingDescription:
+    'Clay Duncan is a Huntsville, Alabama mortgage loan originator at Princeton Mortgage, NMLS #118739, and AI trainer for REALTORS®.',
   hasOccupation: {
     '@type': 'Occupation',
     name: 'Mortgage Loan Originator',
@@ -44,17 +52,31 @@ export const personJsonLd = {
   worksFor: {
     '@id': organizationId,
   },
-  identifier: {
-    '@type': 'PropertyValue',
-    propertyID: 'Google Knowledge Graph',
-    value: site.googleKnowledgeGraphId,
-  },
+  identifier: [
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'NMLS',
+      value: site.nmlsId,
+      url: compliance.individualNmls.url,
+    },
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'Google Knowledge Graph',
+      value: site.googleKnowledgeGraphId,
+    },
+  ],
   areaServed: site.serviceArea,
+  memberOf: {
+    '@id': duncanMortgageGroupId,
+  },
   knowsAbout: [
     'mortgage lending',
     'VA loans',
+    'Redstone Arsenal VA loans',
     'complex mortgage guidance',
     'higher-priced home financing',
+    'jumbo loans',
+    'medical professional mortgage guidance',
     'AI training for REALTORS®',
     'real estate AI education',
     'loan officer growth',
@@ -64,9 +86,20 @@ export const personJsonLd = {
     'USDA loans',
     'first-time homebuyer education',
     'AI education for real estate professionals',
-    'mortgage leadership',
   ],
-  sameAs: profileLinks.map((link) => link.url),
+  sameAs: personSameAs,
+} as const;
+
+export const duncanMortgageGroupJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': duncanMortgageGroupId,
+  name: 'Duncan Mortgage Group',
+  description:
+    'Duncan Mortgage Group is a mortgage team brand powered by Princeton Mortgage.',
+  parentOrganization: {
+    '@id': organizationId,
+  },
 } as const;
 
 export const organizationJsonLd = {
@@ -102,7 +135,7 @@ export const professionalServiceJsonLd = {
     '@id': organizationId,
   },
   serviceType: 'Mortgage loan origination',
-  sameAs: profileLinks.map((link) => link.url),
+  sameAs: personSameAs,
 } as const;
 
 export function createMortgageServiceJsonLd({
@@ -135,9 +168,49 @@ export function createMortgageServiceJsonLd({
   };
 }
 
+export function createLearningResourceJsonLd({
+  pageUrl,
+  name,
+  description,
+  teaches,
+  audience,
+}: {
+  pageUrl: string;
+  name: string;
+  description: string;
+  teaches: string[];
+  audience: string[];
+}): SchemaObject {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LearningResource',
+    '@id': `${pageUrl}#learning-resource`,
+    name,
+    description,
+    url: pageUrl,
+    image: defaultSchemaImage,
+    creator: { '@id': personId },
+    provider: { '@id': organizationId },
+    about: teaches.map((topic) => ({
+      '@type': 'Thing',
+      name: topic,
+    })),
+    teaches,
+    educationalLevel: 'Beginner to intermediate professional training',
+    learningResourceType: 'Training',
+    audience: audience.map((audienceType) => ({
+      '@type': 'Audience',
+      audienceType,
+    })),
+    isAccessibleForFree: true,
+    inLanguage: 'en-US',
+  };
+}
+
 export const homePageSchema = [
   websiteJsonLd,
   personJsonLd,
+  duncanMortgageGroupJsonLd,
   organizationJsonLd,
   professionalServiceJsonLd,
   createMortgageServiceJsonLd({
@@ -273,12 +346,15 @@ export function createEventJsonLd(event: EventItem): SchemaObject {
     '@type': 'Event',
     '@id': eventUrl,
     name: event.title,
-    startDate: event.date,
+    startDate: event.startDateTime ?? event.date,
     eventAttendanceMode:
       event.format === 'online'
         ? 'https://schema.org/OnlineEventAttendanceMode'
         : 'https://schema.org/OfflineEventAttendanceMode',
-    eventStatus: 'https://schema.org/EventScheduled',
+    eventStatus:
+      event.status === 'past'
+        ? 'https://schema.org/EventCompleted'
+        : 'https://schema.org/EventScheduled',
     location:
       event.format === 'online'
         ? {

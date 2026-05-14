@@ -1,0 +1,374 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/va-loan-checklist-redstone-arsenal/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const checklistSections = [
+  {
+    label: '01',
+    title: 'Eligibility and COE',
+    items: [
+      'Certificate of Eligibility or the information needed for your lender to request it',
+      'DD214 for Veterans, or a current statement of service for active-duty service members',
+      'Prior VA loan history if you have used the benefit before',
+    ],
+  },
+  {
+    label: '02',
+    title: 'Income and employment',
+    items: [
+      'Recent pay stubs, W-2s, or other income documentation requested by the lender',
+      'Orders, relocation details, or start-date information if timing is part of the move',
+      'Documentation for civilian, contractor, or variable income when applicable',
+    ],
+  },
+  {
+    label: '03',
+    title: 'Cash to close',
+    items: [
+      'Bank statements and asset documentation for closing costs and reserves',
+      'Funding fee exemption documentation if you may qualify',
+      'Seller credit and concession strategy before the offer is written',
+    ],
+  },
+  {
+    label: '04',
+    title: 'Offer and property',
+    items: [
+      'Pre-approval letter aligned with the actual purchase plan',
+      'Agent communication plan for VA appraisal and property condition expectations',
+      'Commute and timing context for Huntsville, Madison, Redstone Arsenal, and North Alabama',
+    ],
+  },
+];
+
+const faqs = [
+  {
+    question: 'What documents should I gather first for a VA loan near Redstone Arsenal?',
+    answer:
+      'Start with your Certificate of Eligibility or the information needed to request it, service documentation such as a DD214 or statement of service, income documents, bank statements, and any prior VA loan history.',
+  },
+  {
+    question: 'Can my lender request my Certificate of Eligibility?',
+    answer:
+      'Yes. The VA says borrowers can request a Certificate of Eligibility online or ask their lender to submit the request through VA systems.',
+  },
+  {
+    question: 'Does full VA entitlement mean there is no loan limit?',
+    answer:
+      'The VA says borrowers with full entitlement generally do not have a VA loan limit, but the borrower still must qualify for the loan amount and the property appraisal must support the purchase price.',
+  },
+  {
+    question: 'Why should Redstone Arsenal buyers discuss VA strategy before making an offer?',
+    answer:
+      'VA buyers near Redstone Arsenal should discuss eligibility, entitlement, funding fee, closing costs, appraisal expectations, commute, and timing before making an offer so the contract strategy matches the financing plan.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'VA-backed Veterans home loans',
+    url: 'https://www.va.gov/housing-assistance/home-loans/',
+  },
+  {
+    label: 'VA eligibility and Certificate of Eligibility',
+    url: 'https://www.va.gov/housing-assistance/home-loans/eligibility/',
+  },
+  {
+    label: 'How to request a VA home loan COE',
+    url: 'https://www.va.gov/housing-assistance/home-loans/how-to-apply/',
+  },
+  {
+    label: 'VA entitlement and loan limits',
+    url: 'https://www.va.gov/housing-assistance/home-loans/loan-limits/',
+  },
+  {
+    label: 'VA funding fee and closing costs',
+    url: 'https://www.va.gov/housing-assistance/home-loans/funding-fee-and-closing-costs/',
+  },
+  {
+    label: 'Redstone Arsenal / Team Redstone',
+    url: 'https://home.army.mil/redstone/',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Redstone Arsenal VA Loan Checklist',
+    description:
+      'VA loan checklist for Redstone Arsenal-area buyers planning a Huntsville, Madison, or North Alabama home purchase.',
+    serviceType: 'VA mortgage loan guidance',
+    audience: ['VA-eligible borrowers', 'Veterans', 'service members', 'military homebuyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'VA Loan Checklist Near Redstone Arsenal',
+    description:
+      'A practical VA loan checklist for Redstone Arsenal-area buyers gathering COE, income, asset, funding fee, offer, and property information.',
+    about: [
+      { '@type': 'Thing', name: 'VA loan checklist' },
+      { '@type': 'Thing', name: 'Certificate of Eligibility' },
+      { '@type': 'Thing', name: 'VA entitlement' },
+      { '@type': 'Thing', name: 'VA funding fee' },
+      { '@type': 'Place', name: 'Redstone Arsenal' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#checklist`,
+    name: 'Redstone Arsenal VA loan checklist',
+    itemListElement: checklistSections.flatMap((section, sectionIndex) =>
+      section.items.map((item, itemIndex) => ({
+        '@type': 'ListItem',
+        position: sectionIndex * 10 + itemIndex + 1,
+        name: `${section.title}: ${item}`,
+      })),
+    ),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'VA Loans in Huntsville', path: '/huntsville/va-loans/' },
+    { name: 'VA Loan Checklist Near Redstone Arsenal', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="VA Loan Checklist Near Redstone Arsenal | Huntsville VA Buyers"
+  description="A VA loan checklist for Redstone Arsenal-area buyers gathering COE, income, asset, funding fee, offer, and property details before buying in Huntsville or North Alabama."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">VA Loan Resource</p>
+      <h1 id="resource-heading">VA loan checklist for Redstone Arsenal-area buyers.</h1>
+      <p class="hero-lede">
+        Use this checklist to gather the documents and planning details that
+        commonly shape a VA-backed home purchase in Huntsville, Madison,
+        Redstone Arsenal, and North Alabama.
+      </p>
+      <div class="hero-actions" aria-label="VA checklist actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your VA plan</a>
+        <a class="button button-secondary" href="/huntsville/va-loans/">View VA loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="VA checklist highlights">
+        <a href="#coe">
+          <strong>COE</strong>
+          <span>Eligibility and service documentation</span>
+        </a>
+        <a href="#cash-to-close">
+          <strong>Costs</strong>
+          <span>Funding fee, credits, and cash to close</span>
+        </a>
+        <a href="#offer">
+          <strong>Offer</strong>
+          <span>Appraisal, timing, and agent communication</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping VA buyers near Redstone Arsenal"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Redstone Arsenal VA planning</span>
+        <strong>COE, entitlement, costs, timing, and offer strategy</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What should VA buyers gather before shopping near Redstone Arsenal?</h2>
+        </div>
+        <p>
+          VA buyers near Redstone Arsenal should gather service eligibility
+          information, Certificate of Eligibility details, income documents,
+          asset statements, prior VA loan history, and any timing information
+          tied to relocation, orders, employment, or a local purchase deadline
+          before making offers in Huntsville or North Alabama.
+        </p>
+      </div>
+      <div class="feature-grid feature-grid-four">
+        {
+          checklistSections.map((section) => (
+            <article class="feature-card" id={section.title === 'Eligibility and COE' ? 'coe' : section.title === 'Cash to close' ? 'cash-to-close' : section.title === 'Offer and property' ? 'offer' : undefined}>
+              <span>{section.label}</span>
+              <h3>{section.title}</h3>
+              <ul class="resource-list">
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="redstone-heading">
+    <div>
+      <p class="eyebrow">Local Planning</p>
+      <h2 id="redstone-heading">The checklist is local because the timing is local.</h2>
+      <p>
+        Redstone Arsenal brings military, federal, contractor, and relocation
+        activity into the Huntsville housing market. A VA file can be strong and
+        still need early coordination around commute, timing, appraisal
+        expectations, seller credits, and how the pre-approval is presented to
+        the listing side.
+      </p>
+      <div class="signal-list" aria-label="VA checklist local signals">
+        <span>Redstone Arsenal</span>
+        <span>Huntsville</span>
+        <span>Madison</span>
+        <span>North Alabama</span>
+        <a href="/resources/va-funding-fee-exemptions-refunds/">VA funding fee</a>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="VA loan planning sequence">
+      <article>
+        <span>Before touring</span>
+        <strong>Know the benefit</strong>
+        <p>Review eligibility, COE, entitlement, and whether prior VA loan use changes the plan.</p>
+      </article>
+      <article>
+        <span>Before offering</span>
+        <strong>Know the cash</strong>
+        <p>Review funding fee, exemption status, closing costs, seller credits, and payment comfort.</p>
+      </article>
+      <article>
+        <span>Before closing</span>
+        <strong>Know the timeline</strong>
+        <p>Keep underwriting, appraisal, repairs, conditions, and closing disclosures moving.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="process-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">How To Use This</p>
+          <h2 id="process-heading">Bring the checklist into the first conversation.</h2>
+        </div>
+        <p>
+          The purpose is not to make the buyer do the lender’s job. The purpose
+          is to identify questions early enough to avoid preventable offer,
+          underwriting, appraisal, or closing pressure.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        <article>
+          <span>Step 1</span>
+          <h3>Confirm the COE path</h3>
+          <p>Know whether the COE is already available or needs to be requested.</p>
+        </article>
+        <article>
+          <span>Step 2</span>
+          <h3>Review entitlement</h3>
+          <p>Clarify full entitlement, remaining entitlement, and prior VA loan use.</p>
+        </article>
+        <article>
+          <span>Step 3</span>
+          <h3>Plan the offer</h3>
+          <p>Discuss appraisal expectations, seller credits, closing costs, and timing.</p>
+        </article>
+        <article>
+          <span>Step 4</span>
+          <h3>Communicate clearly</h3>
+          <p>Make sure the borrower, agent, lender, and closing team are aligned.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">VA Checklist FAQ</p>
+          <h2 id="faq-heading">Questions to answer early.</h2>
+        </div>
+        <p>
+          These answers are written plainly so buyers, agents, search engines,
+          and answer engines can understand the checklist quickly.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Official Sources</p>
+      <ul>
+        <li>
+          This checklist uses official VA sources for borrower education and
+          the U.S. Army Redstone Arsenal site for local context.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Talk through the VA plan before the offer.</h2>
+      <p>
+        The right time to clarify eligibility, entitlement, funding fee, cash to
+        close, and offer strategy is before the pressure of a contract deadline.
+      </p>
+      <div class="hero-actions" aria-label="VA checklist next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/huntsville/va-loans/">View VA loans</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

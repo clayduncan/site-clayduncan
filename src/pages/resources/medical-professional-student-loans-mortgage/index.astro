@@ -1,0 +1,457 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/medical-professional-student-loans-mortgage/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const ruleComparisons = [
+  {
+    path: 'Conventional',
+    treatment:
+      'Student loans generally need a documented payment or a calculated payment included in monthly obligations. A missing or unclear payment can create a higher qualifying payment than the borrower expects.',
+  },
+  {
+    path: 'FHA',
+    treatment:
+      'FHA generally uses the documented payment when it fully amortizes the debt, or a placeholder percentage when the payment is $0, deferred, in forbearance, or not fully amortizing.',
+  },
+  {
+    path: 'VA',
+    treatment:
+      'VA has a distinct calculation. Deferred loans may be excluded when documented at least 12 months beyond closing; otherwise VA compares the actual payment with a balance-based calculation.',
+  },
+  {
+    path: 'Medical professional programs',
+    treatment:
+      'Some programs may use documented IDR payments, some may treat deferred loans more flexibly, and some may use a percentage of the balance. The exact treatment is lender-specific.',
+  },
+];
+
+const documentationItems = [
+  {
+    item: 'Current servicer statement',
+    why: 'Shows balance, status, payment amount, servicer, and whether the loan is in repayment, deferment, forbearance, or transition.',
+  },
+  {
+    item: 'IDR or IBR documentation',
+    why: 'Helps show the documented payment that may be used when a program allows income-driven repayment treatment.',
+  },
+  {
+    item: 'Deferment or forbearance details',
+    why: 'The end date matters. Some paths treat long deferment periods differently from short or undocumented deferments.',
+  },
+  {
+    item: 'Repayment-plan transition notices',
+    why: 'Borrowers moving out of SAVE or into another plan may need current notices showing the new plan, status, and payment.',
+  },
+  {
+    item: 'Private student loan statements',
+    why: 'Private student loans still need to be documented, and their payment treatment can differ from federal loans.',
+  },
+];
+
+const mistakes = [
+  'Assuming student loans do not count because they are deferred.',
+  'Assuming a $0 payment will always be used as $0 for mortgage qualification.',
+  'Refinancing federal loans only to improve a mortgage file without reviewing IDR, PSLF, and federal protections.',
+  'Applying before the servicer statement reflects the current repayment plan.',
+  'Choosing a loan path before comparing conventional, VA, FHA, jumbo, and medical professional options.',
+];
+
+const faqs = [
+  {
+    question: 'Do student loans count against medical professionals buying a home?',
+    answer:
+      'Student loans can count in mortgage qualification, but the treatment depends on the loan type, repayment status, documentation, and lender program. Medical professional programs may be more flexible than standard agency rules, but the specific treatment must be verified for the borrower’s file.',
+  },
+  {
+    question: 'Can a resident or fellow qualify with student loans in deferment?',
+    answer:
+      'Possibly. Some medical professional programs may treat deferred student loans more favorably when the deferment is documented beyond a required window. Conventional, FHA, and VA rules use their own student-loan calculations, so the right path depends on the full file.',
+  },
+  {
+    question: 'Can an income-driven repayment payment be used for mortgage qualification?',
+    answer:
+      'In many cases, a documented income-driven repayment payment can be reviewed for mortgage qualification, but the details vary by loan type and program. The borrower should provide the most recent servicer statement and repayment-plan documentation.',
+  },
+  {
+    question: 'Will the end of SAVE affect a medical professional mortgage application?',
+    answer:
+      'It can. Borrowers transitioning out of SAVE should expect underwriters to ask for current servicer documentation showing the new repayment plan, payment amount, and loan status. This area should be checked at the time of pre-approval because federal student loan rules are changing in 2026.',
+  },
+  {
+    question: 'Should I refinance federal student loans before applying for a mortgage?',
+    answer:
+      'Do not make that decision based only on mortgage qualification. Refinancing federal student loans can affect income-driven repayment, PSLF eligibility, and federal protections. Talk with a qualified financial advisor or specialized student loan counselor before acting.',
+  },
+  {
+    question: 'What should I send Clay before a medical professional mortgage review?',
+    answer:
+      'Bring current student loan servicer statements, repayment-plan documentation, deferment or forbearance details, employment or training status, income documentation, and the target purchase range. The goal is to compare mortgage paths before the home search creates pressure.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'Fannie Mae: Monthly Debt Obligations',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-6-05/monthly-debt-obligations',
+  },
+  {
+    label: 'HUD Single Family Housing Policy Handbook',
+    url: 'https://www.hud.gov/program_offices/housing/sfh/handbook_4000-1',
+  },
+  {
+    label: 'VA Circular 26-17-02: Student Loan Debts and Obligations',
+    url: 'https://www.benefits.va.gov/HOMELOANS/documents/circulars/26_17_2.pdf',
+  },
+  {
+    label: 'U.S. Department of Education: SAVE Plan Next Steps',
+    url: 'https://www.ed.gov/about/news/press-release/us-department-of-education-announces-next-steps-borrowers-enrolled-unlawful-save-plan',
+  },
+  {
+    label: 'Federal Student Aid: IDR Plan FAQs',
+    url: 'https://studentaid.gov/articles/faqs-idr-plan/',
+  },
+  {
+    label: 'AAMC Financial Aid Resources',
+    url: 'https://students-residents.aamc.org/financial-aid',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Medical Professional Student Loan Mortgage Guidance',
+    description:
+      'Mortgage guidance for doctors, residents, fellows, dentists, and medical professionals with student loans buying in Huntsville, Madison, and North Alabama.',
+    serviceType: 'Medical professional mortgage student loan guidance',
+    audience: [
+      'medical professionals with student loans',
+      'residents',
+      'fellows',
+      'doctors',
+      'dentists',
+      'healthcare buyers',
+    ],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Student Loans and Medical Professional Mortgages',
+    description:
+      'A mortgage guide for medical professionals, residents, and fellows with student loans, covering IDR documentation, deferment, agency rules, medical professional programs, and the 2026 federal student loan transition.',
+    about: [
+      { '@type': 'Thing', name: 'student loans and mortgage qualification' },
+      { '@type': 'Thing', name: 'medical professional mortgage' },
+      { '@type': 'Thing', name: 'physician loan student loans' },
+      { '@type': 'Thing', name: 'income-driven repayment mortgage' },
+      { '@type': 'Thing', name: 'resident and fellow mortgage planning' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#student-loan-documents`,
+    name: 'Student loan documents for medical professional mortgage review',
+    itemListElement: documentationItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.item,
+      description: item.why,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    {
+      name: 'Medical Professional Mortgage',
+      path: '/huntsville/medical-professional-mortgage/',
+    },
+    { name: 'Student Loans and Medical Mortgages', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Student Loans and Medical Professional Mortgages | Clay Duncan"
+  description="Mortgage guidance for medical professionals, residents, and fellows with student loans buying in Huntsville, Madison, and North Alabama."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Medical Professional Resource</p>
+      <h1 id="resource-heading">Student loans and medical professional mortgages.</h1>
+      <p class="hero-lede">
+        Student loans do not automatically stop a medical professional from
+        buying a home, but they can change the mortgage path. Residents,
+        fellows, doctors, dentists, and other eligible medical buyers should
+        review repayment status, deferment, IDR documentation, and program
+        rules before the home search gets serious.
+      </p>
+      <div class="hero-actions" aria-label="Medical student loan mortgage actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your student loans</a>
+        <a class="button button-secondary" href="/huntsville/medical-professional-mortgage/">
+          View medical mortgage guidance
+        </a>
+      </div>
+      <div class="hero-path-grid" aria-label="Student loan mortgage highlights">
+        <a href="#answer-heading">
+          <strong>DTI</strong>
+          <span>The documented payment can change the qualifying math</span>
+        </a>
+        <a href="#documentation">
+          <strong>Documents</strong>
+          <span>Servicer statements and plan confirmations matter</span>
+        </a>
+        <a href="#boundaries">
+          <strong>Strategy</strong>
+          <span>Refinance and PSLF questions need specialized advice</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping medical professionals with student loan mortgage questions"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Student loan review</span>
+        <strong>IDR, deferment, SAVE transition, reserves, and mortgage qualification</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">How do student loans affect a medical professional mortgage?</h2>
+        </div>
+        <p>
+          Student loans affect mortgage qualification through the monthly
+          payment used in the borrower’s debt-to-income calculation. Depending
+          on the loan type and program, the lender may use a documented IDR
+          payment, a deferment-based treatment, a percentage of the outstanding
+          balance, or another documented payment. Medical professional programs
+          may offer more flexibility, but the treatment varies by lender and
+          must be verified before relying on it.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>Documented payment</h3>
+          <p>
+            A current servicer statement can help show whether the loan is in
+            repayment, IDR, deferment, forbearance, or transition.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Program rules vary</h3>
+          <p>
+            Conventional, FHA, VA, jumbo, and medical professional programs can
+            treat the same student loan profile differently.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Timing matters</h3>
+          <p>
+            Borrowers in repayment-plan transition may need updated
+            documentation before the file can be reviewed cleanly.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="comparison-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Mortgage Paths</p>
+          <h2 id="comparison-heading">The same student loan profile can qualify differently by loan type.</h2>
+        </div>
+        <p>
+          This is why medical buyers should not assume one answer. A resident,
+          fellow, or early-career attending may need to compare multiple
+          mortgage paths before choosing the best fit.
+        </p>
+      </div>
+      <div class="data-table" role="table" aria-label="Student loan treatment by mortgage path">
+        {
+          ruleComparisons.map((item) => (
+            <div class="data-row" role="row">
+              <strong role="cell">{item.path}</strong>
+              <span role="cell">{item.treatment}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="transition-heading">
+    <div>
+      <p class="eyebrow">2026 Student Loan Transition</p>
+      <h2 id="transition-heading">Repayment-plan changes make current documentation more important.</h2>
+      <p>
+        Borrowers who were enrolled in SAVE or who are moving between repayment
+        plans should expect the mortgage file to depend on the most current
+        student loan documentation available. Underwriters need to understand
+        the loan status, documented payment, repayment plan, and whether the
+        servicer has confirmed the current arrangement.
+      </p>
+      <p>
+        The mortgage takeaway is practical: do not rely on an old payment
+        amount, an outdated screenshot, or an assumption about how student loans
+        will be counted. Get the current servicer documentation before serious
+        mortgage planning.
+      </p>
+    </div>
+    <div class="local-context-panel" aria-label="Student loan transition planning">
+      <article>
+        <span>Current status</span>
+        <strong>Repayment, deferment, forbearance, or transition</strong>
+        <p>The loan status affects the documentation Clay needs to review.</p>
+      </article>
+      <article>
+        <span>Current payment</span>
+        <strong>What the servicer says now</strong>
+        <p>The most recent documented payment is more useful than an old estimate.</p>
+      </article>
+      <article>
+        <span>Current plan</span>
+        <strong>IDR, IBR, standard, or other plan</strong>
+        <p>Repayment-plan questions should be verified with the servicer or a student loan counselor.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" id="documentation" aria-labelledby="documents-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">Documentation</p>
+        <h2 id="documents-heading">What to collect before a mortgage review.</h2>
+      </div>
+      <div class="timeline-grid">
+        {
+          documentationItems.map((item, index) => (
+            <article>
+              <span>{`Item ${index + 1}`}</span>
+              <h3>{item.item}</h3>
+              <p>{item.why}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" id="boundaries" aria-labelledby="boundaries-heading">
+    <div>
+      <p class="eyebrow">Important Boundaries</p>
+      <h2 id="boundaries-heading">Clay can clarify the mortgage math. Student-loan strategy needs the right specialist.</h2>
+      <p>
+        A mortgage review can show how a documented payment, deferment, or
+        repayment status may affect buying power. It should not replace
+        student-loan strategy advice, PSLF guidance, tax planning, or legal
+        advice.
+      </p>
+      <p>
+        Before refinancing federal loans, changing repayment plans, choosing a
+        PSLF strategy, or making tax-sensitive decisions, talk with your federal
+        student loan servicer, a qualified financial advisor, CPA, or
+        specialized student loan counselor.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through the mortgage side</a>
+        <a class="button button-secondary" href="/resources/medical-professional-loan-vs-conventional/">
+          Compare loan paths
+        </a>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Student loan mistakes to avoid">
+      {
+        mistakes.slice(0, 3).map((mistake) => (
+          <article>
+            <span>Avoid</span>
+            <strong>{mistake}</strong>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-heading">Student loans and medical professional mortgages.</h2>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="sources-heading">
+    <div class="section-inner">
+      <div class="source-panel">
+        <div>
+          <p class="eyebrow">Sources</p>
+          <h2 id="sources-heading">Student loan treatment should be checked at pre-approval.</h2>
+          <p>
+            This page uses agency, federal, and professional education
+            references for general mortgage planning context. Program treatment
+            and federal repayment rules can change, especially during 2026.
+          </p>
+        </div>
+        <ul>
+          {
+            officialSources.map((source) => (
+              <li>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

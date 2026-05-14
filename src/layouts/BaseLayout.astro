@@ -14,6 +14,45 @@ interface Props {
 const { title, description, canonical, robots, schema } = Astro.props;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const schemaItems = Array.isArray(schema) ? schema : schema ? [schema] : [];
+const currentPath = Astro.url.pathname;
+const navItems = [
+  {
+    label: 'Mortgage',
+    href: '/huntsville/mortgage-guidance/',
+    isActive:
+      currentPath.startsWith('/huntsville/') || currentPath.startsWith('/resources/'),
+  },
+  {
+    label: 'AI Training',
+    href: '/realtor-ai-training/',
+    isActive: currentPath.startsWith('/realtor-ai-training/'),
+  },
+  {
+    label: 'Events',
+    href: '/events/',
+    isActive: currentPath.startsWith('/events/'),
+  },
+  {
+    label: 'About',
+    href: '/about/',
+    isActive: currentPath.startsWith('/about/'),
+  },
+  {
+    label: 'Reviews',
+    href: '/reviews/',
+    isActive: currentPath.startsWith('/reviews/'),
+  },
+  {
+    label: 'Blog',
+    href: '/blog/',
+    isActive: currentPath.startsWith('/blog/'),
+  },
+  {
+    label: 'Join Us',
+    href: '/join-us/',
+    isActive: currentPath.startsWith('/join-us/'),
+  },
+];
 ---
 
 <!doctype html>
@@ -61,59 +100,71 @@ const schemaItems = Array.isArray(schema) ? schema : schema ? [schema] : [];
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
-      <a class="site-logo" href="/" aria-label="Clay Duncan home">
-        <img src="/favicon.svg" width="40" height="40" alt="" aria-hidden="true" />
-        <span>
-          <strong>Clay Duncan</strong>
-          <small>{site.tagline}</small>
-        </span>
-      </a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="/huntsville/mortgage-guidance/">Mortgage Hub</a>
-        <a href="/realtor-ai-training/">AI Training</a>
-        <a href="/about/">About</a>
-        <a href="/reviews/">Reviews</a>
-        <a href="/events/">Events</a>
-        <a href="/blog/">Blog</a>
-        <a href="/join-us/">Join Us</a>
-      </nav>
+      <div class="site-header-inner">
+        <a class="site-logo" href="/" aria-label="Clay Duncan home">
+          <img src="/favicon.svg" width="40" height="40" alt="" aria-hidden="true" />
+          <span>
+            <strong>Clay Duncan</strong>
+            <small>{site.tagline}</small>
+          </span>
+        </a>
+        <div class="team-brand" aria-label="Duncan Mortgage Group powered by Princeton Mortgage">
+          <strong>Duncan Mortgage Group</strong>
+          <small>Powered by Princeton Mortgage</small>
+        </div>
+        <nav class="site-nav" aria-label="Primary navigation">
+          {
+            navItems.map((item) => (
+              <a
+                class:list={{ 'nav-active': item.isActive }}
+                href={item.href}
+                aria-current={item.isActive ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
     </header>
     <main id="content">
       <slot />
     </main>
     <footer class="site-footer">
-      <div class="footer-contact">
-        <p>
-          {compliance.individualNmls.name}, {compliance.individualNmls.title},
-          <a href={compliance.individualNmls.url} rel="noopener noreferrer" target="_blank">
-            NMLS #{compliance.individualNmls.id}
-          </a>
-        </p>
-        <p>
-          <a href={site.phoneHref}>{site.phone}</a> &middot;
-          <a href={site.emailHref}>{site.email}</a>
-        </p>
-      </div>
-      <div class="footer-links">
-        <nav class="social-links" aria-label="Social profiles">
-          {
-            profileLinks.map((link) => (
-              <a href={link.url} rel="me noopener noreferrer" target="_blank">
-                {link.label}
-              </a>
-            ))
-          }
-        </nav>
-        <p>&copy; {new Date().getFullYear()} Clay Duncan.</p>
-      </div>
-      <div class="site-disclosure">
-        <p>
-          {compliance.companyNmls.name},
-          <a href={compliance.companyNmls.url} rel="noopener noreferrer" target="_blank">
-            NMLS #{compliance.companyNmls.id}
-          </a>.
-        </p>
-        <p>{compliance.equalHousing}</p>
+      <div class="site-footer-inner">
+        <div class="footer-contact">
+          <p>
+            {compliance.individualNmls.name}, {compliance.individualNmls.title},
+            <a href={compliance.individualNmls.url} rel="noopener noreferrer" target="_blank">
+              NMLS #{compliance.individualNmls.id}
+            </a>
+          </p>
+          <p>
+            <a href={site.phoneHref}>{site.phone}</a> &middot;
+            <a href={site.emailHref}>{site.email}</a>
+          </p>
+        </div>
+        <div class="footer-links">
+          <nav class="social-links" aria-label="Social profiles">
+            {
+              profileLinks.map((link) => (
+                <a href={link.url} rel="me noopener noreferrer" target="_blank">
+                  {link.label}
+                </a>
+              ))
+            }
+          </nav>
+          <p>&copy; {new Date().getFullYear()} Clay Duncan.</p>
+        </div>
+        <div class="site-disclosure">
+          <p>
+            {compliance.companyNmls.name},
+            <a href={compliance.companyNmls.url} rel="noopener noreferrer" target="_blank">
+              NMLS #{compliance.companyNmls.id}
+            </a>.
+          </p>
+          <p>{compliance.equalHousing}</p>
+        </div>
       </div>
     </footer>
   </body>

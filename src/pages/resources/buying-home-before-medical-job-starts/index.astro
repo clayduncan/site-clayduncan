@@ -1,0 +1,464 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/buying-home-before-medical-job-starts/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const timingFactors = [
+  {
+    factor: 'Start-date window',
+    detail:
+      'Some medical professional mortgage programs may review future employment before the first paycheck, but the acceptable window varies by program and file.',
+  },
+  {
+    factor: 'Executed contract',
+    detail:
+      'The offer letter or employment contract usually needs clear terms, signatures, compensation, position, employer, and start date.',
+  },
+  {
+    factor: 'Cash and reserves',
+    detail:
+      'The file still needs documented funds for closing and a plan for the gap between closing, relocation, and the first paycheck.',
+  },
+  {
+    factor: 'Student loans',
+    detail:
+      'Student loan documentation matters, especially for residents and fellows. Treatment varies by guideline and repayment status.',
+  },
+  {
+    factor: 'Change risk',
+    detail:
+      'Start-date changes, contract changes, employment contingencies, or role changes should be surfaced immediately before closing.',
+  },
+];
+
+const documentItems = [
+  {
+    category: 'Employment contract or offer letter',
+    documents:
+      'Fully executed agreement with employer name, role, compensation, start date, signatures, and any contingencies or conditions.',
+  },
+  {
+    category: 'Program and credential details',
+    documents:
+      'Medical credential, residency or fellowship appointment details when applicable, and any documents needed to confirm eligible professional status.',
+  },
+  {
+    category: 'Assets and reserves',
+    documents:
+      'Bank, brokerage, retirement, gift, relocation-benefit, and large-deposit documentation needed to verify funds for closing and reserves.',
+  },
+  {
+    category: 'Student loan documents',
+    documents:
+      'Current servicer statements, payment status, deferment information, or income-driven repayment documentation when student loans are part of the file.',
+  },
+  {
+    category: 'Relocation timing',
+    documents:
+      'Lease end date, moving schedule, temporary housing details, relocation benefits, and any spouse or family timing details that affect the purchase.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Can I buy a home before my medical job starts?',
+    answer:
+      'In some medical professional mortgage scenarios, yes. A fully executed offer letter or employment contract may be reviewed before the first paycheck, but the start-date window, documentation, reserves, and program requirements vary by borrower and lender guidelines.',
+  },
+  {
+    question: 'What needs to be in my employment contract or offer letter?',
+    answer:
+      'The contract or offer letter should clearly identify the employer, position, start date, compensation, signatures, and any contingencies or conditions. The cleaner and more complete the document is, the easier it is to review before the home search gets serious.',
+  },
+  {
+    question: 'How early before my start date can I close?',
+    answer:
+      'Some programs commonly work inside a 60- to 90-day window before employment starts, and some may allow a longer window. The exact answer depends on the specific program, employment terms, assets, reserves, credit profile, and underwriting review.',
+  },
+  {
+    question: 'Do I need reserves before my first medical paycheck?',
+    answer:
+      'Often, yes. Even when future income can be reviewed, the file may still need documented funds for closing and reserves that help cover the gap between closing, relocation, and the first paycheck.',
+  },
+  {
+    question: 'What happens if my medical job start date changes?',
+    answer:
+      'Tell the lender immediately. A start-date change can affect the way future income is reviewed, the timing of closing, and whether additional documentation is needed before the file can move forward.',
+  },
+  {
+    question: 'Do student loans matter if I am a resident or fellow?',
+    answer:
+      'Yes. Student loans can affect mortgage planning, but they do not automatically disqualify every resident or fellow. The lender needs current student loan documentation, and repayment strategy questions should be reviewed with the loan servicer or a qualified student loan advisor.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'Fannie Mae: Employment Offers or Contracts',
+    url: 'https://selling-guide.fanniemae.com/sel/b3-3.3-03/employment-offers-or-contracts',
+  },
+  {
+    label: 'Regions Physicians and Emerging Professionals Mortgage',
+    url: 'https://www.regions.com/personal-banking/home-loans/mortgage/home-loan-options/physicians-emerging-professional-mortgage',
+  },
+  {
+    label: 'BMO Physicians Mortgage Program',
+    url: 'https://www.bmo.com/en-us/pdf/mortgage/physician-mortgage-program.pdf',
+  },
+  {
+    label: 'AAMC Financial Aid Resources',
+    url: 'https://students-residents.aamc.org/financial-aid',
+  },
+  {
+    label: 'AMA: Relocation After Residency',
+    url: 'https://www.ama-assn.org/medical-residents/transition-resident-attending/relocation-bonus-after-residency-what-expect-what',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'Medical Professional Mortgage Timing Before a Job Starts',
+    description:
+      'Mortgage planning guidance for medical professionals, residents, fellows, and relocating healthcare buyers who want to buy a home before a new role starts in Huntsville and North Alabama.',
+    serviceType: 'Medical professional mortgage timing guidance',
+    audience: [
+      'medical professionals',
+      'residents',
+      'fellows',
+      'relocating physicians',
+      'healthcare buyers',
+    ],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'Buying a Home Before Your Medical Job Starts',
+    description:
+      'A Huntsville medical professional mortgage guide covering offer letters, employment contracts, start-date windows, reserves, student loans, and relocation timing before a new medical role begins.',
+    about: [
+      { '@type': 'Thing', name: 'medical professional mortgage' },
+      { '@type': 'Thing', name: 'physician loan offer letter' },
+      { '@type': 'Thing', name: 'future employment income' },
+      { '@type': 'Thing', name: 'medical residency mortgage' },
+      { '@type': 'Thing', name: 'fellowship mortgage planning' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+      { '@type': 'Place', name: 'Madison, Alabama' },
+      { '@type': 'Place', name: 'North Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#documentation`,
+    name: 'Medical professional mortgage documents before start date',
+    itemListElement: documentItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.category,
+      description: item.documents,
+    })),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    {
+      name: 'Medical Professional Mortgage',
+      path: '/huntsville/medical-professional-mortgage/',
+    },
+    { name: 'Buying Before Your Medical Job Starts', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Buying Before Your Medical Job Starts | Huntsville Mortgage"
+  description="Medical professional mortgage timing for residents, fellows, and relocating doctors buying before a start date in Huntsville, Madison, and North Alabama."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">Medical Professional Resource</p>
+      <h1 id="resource-heading">Buying a home before your medical job starts.</h1>
+      <p class="hero-lede">
+        Residents, fellows, and relocating medical professionals may be able to
+        use a fully executed offer letter or employment contract before the
+        first paycheck. The timing, documentation, reserves, student-loan
+        treatment, and program guidelines should be reviewed before the offer.
+      </p>
+      <div class="hero-actions" aria-label="Medical job start mortgage actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your timing</a>
+        <a class="button button-secondary" href="/huntsville/medical-professional-mortgage/">
+          View medical mortgage guidance
+        </a>
+      </div>
+      <div class="hero-path-grid" aria-label="Medical job start mortgage highlights">
+        <a href="#contract">
+          <strong>Contract</strong>
+          <span>Offer letter terms need to be complete and reviewable</span>
+        </a>
+        <a href="#answer-heading">
+          <strong>Start date</strong>
+          <span>The acceptable window varies by program and file</span>
+        </a>
+        <a href="#documents">
+          <strong>Reserves</strong>
+          <span>Plan the gap between closing, relocation, and first paycheck</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping medical professionals buy before a job starts"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>Before the first paycheck</span>
+        <strong>Offer letter, start date, reserves, student loans, and relocation timing</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">Can medical professionals buy before a new job starts?</h2>
+        </div>
+        <p>
+          In some medical professional mortgage scenarios, a borrower can buy a
+          primary residence before the new medical job begins by using a fully
+          executed employment contract or offer letter. The file still needs a
+          clear start date, reviewable compensation, documented funds for
+          closing, reserves for the gap to the first paycheck, and underwriting
+          approval under current program guidelines.
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>Start-date window</h3>
+          <p>
+            Some programs may review future employment before the first
+            paycheck, but the acceptable timing window should be confirmed
+            before writing an offer.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Executed offer</h3>
+          <p>
+            The offer letter or contract should clearly show the employer,
+            position, compensation, start date, signatures, and unresolved
+            contingencies.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Bridge to paycheck</h3>
+          <p>
+            The mortgage plan should account for cash to close, moving costs,
+            temporary housing, family timing, and reserves before income begins.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" id="contract" aria-labelledby="contract-heading">
+    <div>
+      <p class="eyebrow">Contract Review</p>
+      <h2 id="contract-heading">The offer letter needs to answer the lender’s timing questions.</h2>
+      <p>
+        A verbal offer, vague start date, unsigned letter, or compensation range
+        is not the same thing as a fully reviewable employment contract. The
+        cleaner the employment terms are, the easier it is to understand whether
+        the home search can move before the first day of work.
+      </p>
+      <p>
+        This matters for medical professionals moving to Huntsville Hospital,
+        Madison Hospital, Crestwood Medical Center, HudsonAlpha, Redstone
+        Arsenal-related medical operations, private practices, or other North
+        Alabama healthcare roles.
+      </p>
+    </div>
+    <div class="local-context-panel" aria-label="Medical employment contract checkpoints">
+      <article>
+        <span>Written terms</span>
+        <strong>Role, employer, and start date</strong>
+        <p>Future income needs clear documentation before it can support the file.</p>
+      </article>
+      <article>
+        <span>Compensation</span>
+        <strong>Base pay, guarantees, and structure</strong>
+        <p>W-2, contract, bonus, and 1099 details can affect the way income is reviewed.</p>
+      </article>
+      <article>
+        <span>Conditions</span>
+        <strong>Licensing, credentialing, and contingencies</strong>
+        <p>Unresolved conditions should be discussed before contract pressure starts.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="timing-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Timing Factors</p>
+          <h2 id="timing-heading">What can affect buying before the first medical paycheck?</h2>
+        </div>
+        <p>
+          The basic question is simple: can the file support the home purchase
+          before employment begins? The answer depends on the program, the
+          contract, the borrower profile, and how cleanly the timeline can be
+          documented.
+        </p>
+      </div>
+      <div class="data-table" role="table" aria-label="Medical mortgage start-date timing factors">
+        {
+          timingFactors.map((item) => (
+            <div class="data-row" role="row">
+              <strong role="cell">{item.factor}</strong>
+              <span role="cell">{item.detail}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" id="documents" aria-labelledby="documents-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">Documentation</p>
+        <h2 id="documents-heading">What to collect before the home search gets serious.</h2>
+      </div>
+      <div class="timeline-grid">
+        {
+          documentItems.map((item, index) => (
+            <article>
+              <span>{`Item ${index + 1}`}</span>
+              <h3>{item.category}</h3>
+              <p>{item.documents}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="caution-heading">
+    <div>
+      <p class="eyebrow">Important Boundaries</p>
+      <h2 id="caution-heading">This is a mortgage timing conversation, not a promise of approval.</h2>
+      <p>
+        Medical professional mortgage programs are lender-specific. Eligibility,
+        start-date windows, student-loan treatment, reserve requirements,
+        property rules, down-payment options, and loan amount limits can change
+        by program and borrower profile.
+      </p>
+      <p>
+        Student-loan strategy, tax planning, contract negotiation, relocation
+        compensation, and legal questions should be reviewed with the right
+        professional. Clay’s role is to help clarify how the mortgage file may
+        be reviewed before you make housing decisions.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through your start date</a>
+        <a class="button button-secondary" href="/resources/medical-professional-student-loans-mortgage/">
+          Review student-loan planning
+        </a>
+        <a class="button button-secondary" href="/resources/medical-professional-loan-vs-conventional/">
+          Compare loan paths
+        </a>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="Medical mortgage timing fit">
+      <article>
+        <span>Best fit</span>
+        <strong>Primary residence planning</strong>
+        <p>This guidance is for medical professionals buying a home they plan to occupy.</p>
+      </article>
+      <article>
+        <span>Not automatic</span>
+        <strong>Program guidelines still apply</strong>
+        <p>Offer-letter review does not remove credit, asset, property, or underwriting requirements.</p>
+      </article>
+      <article>
+        <span>Best timing</span>
+        <strong>Before the offer</strong>
+        <p>Start-date questions should be handled before a contract deadline creates pressure.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-heading">Buying before your medical job starts.</h2>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="sources-heading">
+    <div class="section-inner">
+      <div class="source-panel">
+        <div>
+          <p class="eyebrow">Sources</p>
+          <h2 id="sources-heading">Program details should be verified against current guidelines.</h2>
+          <p>
+            This page uses public lending and professional education references
+            for general planning context. Final eligibility depends on current
+            program guidelines and underwriting review.
+          </p>
+        </div>
+        <ul>
+          {
+            officialSources.map((source) => (
+              <li>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

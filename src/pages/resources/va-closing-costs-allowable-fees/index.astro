@@ -1,0 +1,376 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbJsonLd,
+  createFaqJsonLd,
+  createMortgageServiceJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  personJsonLd,
+} from '../../../data/schema';
+import { site } from '../../../data/site';
+
+const pagePath = '/resources/va-closing-costs-allowable-fees/';
+const pageUrl = new URL(pagePath, site.url).href;
+
+const concessionItems = [
+  {
+    title: 'Counts toward the 4% cap',
+    text: 'Seller-paid VA funding fee, prepaid taxes and insurance, buyer debt payoff, temporary buydown funds, and added items of value can count as concessions.',
+  },
+  {
+    title: 'Does not count toward the cap',
+    text: 'Customary buyer closing costs paid by the seller, such as origination, title insurance, recording fees, survey, and normal discount points, are not treated as seller concessions.',
+  },
+  {
+    title: 'Why the distinction matters',
+    text: 'A VA offer can ask for customary closing costs plus separate concessions, so the buyer’s cash-to-close plan should be structured intentionally before the contract is written.',
+  },
+];
+
+const planningSteps = [
+  {
+    step: 'Step 1',
+    title: 'Separate the funding fee',
+    text: 'The VA funding fee is separate from normal closing costs. It may be financed, paid in cash, or paid by the seller as a concession if the structure fits the transaction.',
+  },
+  {
+    step: 'Step 2',
+    title: 'Review lender charges',
+    text: 'VA limits lender-overhead charges through the 1% rule. The structure matters because a flat 1% origination and separate overhead charges should not be stacked.',
+  },
+  {
+    step: 'Step 3',
+    title: 'Plan seller credits correctly',
+    text: 'Customary closing costs and seller concessions are different categories. Mislabeling them can make the offer look less workable than it actually is.',
+  },
+  {
+    step: 'Step 4',
+    title: 'Confirm cash to close',
+    text: 'The final plan should connect earnest money, lender costs, title costs, prepaid items, seller credits, funding fee treatment, and the Closing Disclosure.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What closing costs do VA buyers pay?',
+    answer:
+      'VA buyers commonly pay costs such as the VA appraisal fee, credit report, title insurance, recording fees, survey, hazard insurance prepayment, flood determination, and lender origination charges subject to VA limits. The VA funding fee is separate and may be financed, paid in cash, or paid by the seller as a concession if the transaction allows it.',
+  },
+  {
+    question: 'What is the VA 1% origination fee rule?',
+    answer:
+      'VA rules allow the lender to charge a flat origination fee up to 1% of the loan amount, or to itemize certain lender charges subject to the VA framework. The key point is that lender-overhead charges should not be stacked on top of a full 1% origination fee.',
+  },
+  {
+    question: 'Can the seller pay VA loan closing costs?',
+    answer:
+      'Yes. A seller can pay customary buyer closing costs on a VA loan. Those customary closing costs are different from seller concessions, which are separately limited under VA rules.',
+  },
+  {
+    question: 'Is there a 4% seller concession cap on VA loans?',
+    answer:
+      'Yes, but the 4% cap applies to seller concessions, not to customary closing costs. Seller-paid funding fee, prepaid taxes and insurance, buyer debt payoff, and temporary buydowns can count toward the 4% concession cap. Customary closing costs paid by the seller generally do not count toward that cap.',
+  },
+  {
+    question: 'Do VA loans have no closing costs?',
+    answer:
+      'No. VA loans can reduce out-of-pocket cost in some situations, especially when the funding fee is financed or the seller pays costs, but VA buyers still have closing costs. The right statement is that VA buyers may be able to structure closing costs differently depending on the loan, seller credits, and funding fee status.',
+  },
+  {
+    question: 'Can a VA buyer pay buyer-broker compensation?',
+    answer:
+      'VA has a temporary local variance allowing certain Veteran-paid buyer-broker compensation for qualifying purchase contracts, subject to specific requirements. This area should be reviewed carefully because the charge cannot be financed into the VA loan and must be reflected properly in the transaction documents.',
+  },
+];
+
+const officialSources = [
+  {
+    label: 'VA funding fee and loan closing costs',
+    url: 'https://www.va.gov/housing-assistance/home-loans/funding-fee-and-closing-costs/',
+  },
+  {
+    label: 'VA Pamphlet 26-7 Chapter 8: Borrower Fees and Charges and the VA Funding Fee',
+    url: 'https://www.benefits.va.gov/WARMS/docs/admin26/m26-07/Chapter_8_Borrower_Fees_and_Charges_and_the_VA_Funding_Fee.pdf',
+  },
+  {
+    label: 'VA Home Loan Circulars',
+    url: 'https://www.benefits.va.gov/homeloans/resources_circulars.asp',
+  },
+  {
+    label: '38 CFR 36.4303: VA escape clause regulation',
+    url: 'https://www.law.cornell.edu/cfr/text/38/36.4303',
+  },
+  {
+    label: 'VA-backed Veterans home loans',
+    url: 'https://www.va.gov/housing-assistance/home-loans/',
+  },
+];
+
+const schema = [
+  personJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  createMortgageServiceJsonLd({
+    pageUrl,
+    name: 'VA Closing Costs and Allowable Fees Guidance',
+    description:
+      'VA closing cost, allowable fee, seller concession, funding fee, buyer-broker variance, and earnest-money guidance for VA buyers in Huntsville, Redstone Arsenal, Madison, and North Alabama.',
+    serviceType: 'VA mortgage loan guidance',
+    audience: ['VA-eligible borrowers', 'Veterans', 'service members', 'military homebuyers'],
+  }),
+  createFaqJsonLd(faqs),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: 'VA Closing Costs and Allowable Fees',
+    description:
+      'A source-backed guide to VA closing costs, allowable fees, the 1% lender fee rule, 4% seller concession cap, and cash-to-close planning.',
+    about: [
+      { '@type': 'Thing', name: 'VA closing costs' },
+      { '@type': 'Thing', name: 'VA allowable fees' },
+      { '@type': 'Thing', name: 'VA seller concessions' },
+      { '@type': 'Thing', name: 'VA 1% origination fee rule' },
+      { '@type': 'Thing', name: 'VA funding fee' },
+      { '@type': 'Place', name: 'Redstone Arsenal' },
+      { '@type': 'Place', name: 'Huntsville, Alabama' },
+    ],
+    primaryImageOfPage: new URL('/images/clay-duncan-wbackground-1400.jpg', site.url).href,
+    isPartOf: { '@id': `${site.url}/#website` },
+    mainEntity: { '@id': `${site.url}/#person` },
+    citation: officialSources.map((source) => source.url),
+  },
+  createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Mortgage Hub', path: '/huntsville/mortgage-guidance/' },
+    { name: 'VA Loans in Huntsville', path: '/huntsville/va-loans/' },
+    { name: 'VA Closing Costs', path: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="VA Closing Costs & Allowable Fees | Huntsville VA Buyers"
+  description="Understand VA closing costs, allowable fees, the 1% lender fee rule, 4% seller concession cap, funding fee, and cash-to-close planning for Huntsville VA buyers."
+  schema={schema}
+>
+  <section class="hero-section landing-hero va-landing-hero" aria-labelledby="resource-heading">
+    <div class="hero-copy">
+      <p class="eyebrow">VA Loan Resource</p>
+      <h1 id="resource-heading">VA closing costs and allowable fees.</h1>
+      <p class="hero-lede">
+        VA buyers can still have closing costs. The important question is not
+        whether costs exist. It is which costs are allowed, which costs can be
+        paid by the seller, how the funding fee is handled, and how the offer is
+        structured before cash to close becomes a surprise.
+      </p>
+      <div class="hero-actions" aria-label="VA closing cost actions">
+        <a class="button button-primary" href={site.schedulingUrl}>Talk through cash to close</a>
+        <a class="button button-secondary" href="/huntsville/va-loans/">View VA loan guidance</a>
+      </div>
+      <div class="hero-path-grid" aria-label="VA closing cost highlights">
+        <a href="#one-percent">
+          <strong>1%</strong>
+          <span>Lender fee structure should be reviewed carefully</span>
+        </a>
+        <a href="#seller-concessions">
+          <strong>4%</strong>
+          <span>Seller concession cap applies to concessions, not customary costs</span>
+        </a>
+        <a href="#cash-to-close">
+          <strong>CD</strong>
+          <span>Final numbers show on the Closing Disclosure</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media va-hero-media">
+      <img
+        src="/images/clay-duncan-wbackground-1400.jpg"
+        width="1400"
+        height="787"
+        alt="Clay Duncan, Huntsville mortgage loan originator helping VA buyers understand closing costs"
+      />
+      <div class="va-visual-card va-visual-card-top">
+        <span>VA cash-to-close planning</span>
+        <strong>Allowable fees, seller credits, funding fee, and earnest money</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="answer-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Direct Answer</p>
+          <h2 id="answer-heading">What closing costs do VA buyers pay?</h2>
+        </div>
+        <p>
+          VA buyers commonly pay costs such as the VA appraisal fee, credit
+          report, title insurance, recording fees, survey, hazard insurance,
+          flood determination, and lender origination charges subject to VA
+          limits. The VA funding fee is separate and may be financed, paid in
+          cash, or paid by the seller as a concession if the transaction allows
+          it.
+        </p>
+      </div>
+      <div class="feature-grid" id="one-percent">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>The 1% lender fee rule</h3>
+          <p>
+            VA limits lender-overhead charges. A full flat 1% origination fee
+            should not be stacked with separate processing, underwriting,
+            document preparation, or similar overhead charges.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>02</span>
+          <h3>Customary closing costs</h3>
+          <p>
+            VA buyers can pay normal third-party and transaction costs, and the
+            seller may also pay customary buyer closing costs when the offer is
+            structured that way.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span>03</span>
+          <h3>Funding fee is separate</h3>
+          <p>
+            The funding fee is not the same thing as regular closing costs. It
+            can affect loan amount, monthly payment, seller concessions, and
+            refund or exemption questions.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-dark" aria-labelledby="seller-concessions">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">Seller Credits</p>
+          <h2 id="seller-concessions">The 4% cap applies to concessions, not every seller-paid cost.</h2>
+        </div>
+        <p>
+          This is the point that gets missed most often. Customary buyer closing
+          costs paid by the seller are treated differently from seller
+          concessions under VA rules.
+        </p>
+      </div>
+      <div class="timeline-grid">
+        {
+          concessionItems.map((item, index) => (
+            <article>
+              <span>{`Category ${index + 1}`}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="dark-note">
+        <p>
+          Practical example: a VA buyer may negotiate seller-paid customary
+          closing costs and still have room for concessions such as funding fee,
+          prepaid taxes or insurance, debt payoff, or a temporary buydown,
+          subject to VA rules and the actual transaction details.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section" aria-labelledby="cash-to-close">
+    <div>
+      <p class="eyebrow">Cash To Close</p>
+      <h2 id="cash-to-close">Build the closing-cost plan before the offer.</h2>
+      <p>
+        For Redstone Arsenal-area VA buyers, the cleanest purchase plan connects
+        the pre-approval, seller credit request, funding fee treatment, earnest
+        money, appraisal risk, title charges, prepaid taxes and insurance, and
+        the final Closing Disclosure.
+      </p>
+      <div class="signal-list" aria-label="VA cash to close planning topics">
+        <span>Funding fee</span>
+        <span>Seller credits</span>
+        <span>Earnest money</span>
+        <span>Closing Disclosure</span>
+      </div>
+    </div>
+    <div class="local-context-panel" aria-label="VA closing cost planning sequence">
+      {
+        planningSteps.map((item) => (
+          <article>
+            <span>{item.step}</span>
+            <strong>{item.title}</strong>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">VA Closing Cost FAQ</p>
+          <h2 id="faq-heading">Questions buyers ask before final numbers are due.</h2>
+        </div>
+        <p>
+          These answers are written for VA-eligible buyers, military families,
+          REALTORS®, search systems, and answer engines.
+        </p>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <article>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section split-section-reverse" aria-labelledby="sources-heading">
+    <div class="source-panel">
+      <p class="eyebrow">Official Sources</p>
+      <ul>
+        <li>
+          This page uses VA consumer guidance, VA Pamphlet 26-7 Chapter 8, VA
+          Home Loan Circular resources, and the federal VA escape clause
+          regulation.
+        </li>
+        {
+          officialSources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer" target="_blank">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2 id="sources-heading">Review the cash-to-close plan before the contract.</h2>
+      <p>
+        VA closing-cost planning should happen before the offer so seller
+        credits, funding fee treatment, earnest money, and final cash to close
+        are working together instead of being solved late.
+      </p>
+      <div class="hero-actions" aria-label="VA closing cost next steps">
+        <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
+        <a class="button button-secondary" href="/resources/va-funding-fee-exemptions-refunds/">
+          Review funding fee rules
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

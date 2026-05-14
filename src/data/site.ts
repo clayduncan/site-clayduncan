@@ -24,6 +24,9 @@ export const site = {
     'Huntsville, Alabama',
     'Madison, Alabama',
     'Madison County, Alabama',
+    'Decatur, Alabama',
+    'Athens, Alabama',
+    'Redstone Arsenal',
     'North Alabama',
   ],
   socialLinks: [

@@ -98,11 +98,71 @@ const llmsPath = path.join(root, 'public/llms.txt');
 const llms = fs.existsSync(llmsPath) ? fs.readFileSync(llmsPath, 'utf8') : '';
 
 assert(
-  htmlFiles.length === 15,
-  `Expected 15 built HTML files, found ${htmlFiles.length}.`,
+  htmlFiles.length === 29,
+  `Expected 29 built HTML files, found ${htmlFiles.length}.`,
 );
 assert(sitemapUrls.includes('/join-us/'), 'Sitemap must include /join-us/.');
 assert(sitemapUrls.includes('/blog/'), 'Sitemap must include /blog/.');
+assert(
+  sitemapUrls.includes('/resources/va-loan-checklist-redstone-arsenal/'),
+  'Sitemap must include the Redstone Arsenal VA loan checklist resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/va-certificate-of-eligibility-documents/'),
+  'Sitemap must include the VA COE and documentation resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/va-funding-fee-exemptions-refunds/'),
+  'Sitemap must include the VA funding fee resource.',
+);
+assert(
+  sitemapUrls.includes(
+    '/resources/va-appraisal-minimum-property-requirements/',
+  ),
+  'Sitemap must include the VA appraisal and MPR resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/va-closing-costs-allowable-fees/'),
+  'Sitemap must include the VA closing costs and allowable fees resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/va-entitlement-second-use-loans/'),
+  'Sitemap must include the VA entitlement and second-use resource.',
+);
+assert(
+  sitemapUrls.includes(
+    '/resources/jumbo-vs-conforming-loans-huntsville-madison/',
+  ),
+  'Sitemap must include the jumbo vs conforming resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/jumbo-loan-reserves-asset-documentation/'),
+  'Sitemap must include the jumbo reserves and asset documentation resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/jumbo-loan-relocation-huntsville/'),
+  'Sitemap must include the jumbo relocation planning resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/buying-home-before-medical-job-starts/'),
+  'Sitemap must include the medical professional pre-start-date resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/medical-professional-student-loans-mortgage/'),
+  'Sitemap must include the medical professional student-loan resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/medical-professional-loan-vs-conventional/'),
+  'Sitemap must include the medical professional comparison resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/job-change-offer-letter-mortgage/'),
+  'Sitemap must include the job change and offer letter mortgage resource.',
+);
+assert(
+  sitemapUrls.includes('/resources/self-employed-mortgage-documentation/'),
+  'Sitemap must include the self-employed mortgage documentation resource.',
+);
 assert(
   sitemapUrls.includes(
     '/blog/how-realtors-can-use-ai-without-losing-the-human-side-of-real-estate/',
@@ -130,6 +190,90 @@ assert(
 assert(
   llms.includes('https://www.clayduncan.com/blog/'),
   'llms.txt must include /blog/.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/va-loan-checklist-redstone-arsenal/',
+  ),
+  'llms.txt must include the Redstone Arsenal VA loan checklist resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/va-certificate-of-eligibility-documents/',
+  ),
+  'llms.txt must include the VA COE and documentation resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/va-funding-fee-exemptions-refunds/',
+  ),
+  'llms.txt must include the VA funding fee resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/va-appraisal-minimum-property-requirements/',
+  ),
+  'llms.txt must include the VA appraisal and MPR resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/va-closing-costs-allowable-fees/',
+  ),
+  'llms.txt must include the VA closing costs and allowable fees resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/va-entitlement-second-use-loans/',
+  ),
+  'llms.txt must include the VA entitlement and second-use resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/jumbo-vs-conforming-loans-huntsville-madison/',
+  ),
+  'llms.txt must include the jumbo vs conforming resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/jumbo-loan-reserves-asset-documentation/',
+  ),
+  'llms.txt must include the jumbo reserves and asset documentation resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/jumbo-loan-relocation-huntsville/',
+  ),
+  'llms.txt must include the jumbo relocation planning resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/buying-home-before-medical-job-starts/',
+  ),
+  'llms.txt must include the medical professional pre-start-date resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/medical-professional-student-loans-mortgage/',
+  ),
+  'llms.txt must include the medical professional student-loan resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/medical-professional-loan-vs-conventional/',
+  ),
+  'llms.txt must include the medical professional comparison resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/job-change-offer-letter-mortgage/',
+  ),
+  'llms.txt must include the job change and offer letter mortgage resource.',
+);
+assert(
+  llms.includes(
+    'https://www.clayduncan.com/resources/self-employed-mortgage-documentation/',
+  ),
+  'llms.txt must include the self-employed mortgage documentation resource.',
 );
 assert(
   llms.includes(

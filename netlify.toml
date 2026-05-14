@@ -12,6 +12,11 @@ to = "/about/"
 status = 301
 
 [[redirects]]
+from = "/about-me/"
+to = "/about/"
+status = 301
+
+[[redirects]]
 from = "/join-us"
 to = "/join-us/"
 status = 301
