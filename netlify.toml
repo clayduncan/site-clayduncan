@@ -6,6 +6,9 @@ publish = "dist"
 NODE_VERSION = "22"
 ASTRO_TELEMETRY_DISABLED = "1"
 
+[[plugins]]
+package = "./plugins/netlify-plugin-indexnow"
+
 [[redirects]]
 from = "/about-me"
 to = "/about/"
