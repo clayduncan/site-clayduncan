@@ -65,7 +65,10 @@ export const personJsonLd = {
       value: site.googleKnowledgeGraphId,
     },
   ],
-  areaServed: site.serviceArea,
+  workLocation: {
+    '@type': 'Place',
+    name: 'Huntsville, Alabama',
+  },
   memberOf: {
     '@id': duncanMortgageGroupId,
   },
@@ -128,13 +131,9 @@ export const professionalServiceJsonLd = {
   email: site.email,
   priceRange: '$$',
   areaServed: site.serviceArea,
-  provider: {
-    '@id': personId,
-  },
   parentOrganization: {
     '@id': organizationId,
   },
-  serviceType: 'Mortgage loan origination',
   sameAs: personSameAs,
 } as const;
 
@@ -299,7 +298,7 @@ export function createReviewJsonLd(review: Review): SchemaObject {
     '@context': 'https://schema.org',
     '@type': 'Review',
     itemReviewed: {
-      '@id': personId,
+      '@id': professionalServiceId,
     },
     author: {
       '@type': 'Person',
@@ -325,9 +324,15 @@ export function createAggregateRatingJsonLd(
 ): SchemaObject {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': personId,
-    name: site.name,
+    '@type': 'ProfessionalService',
+    '@id': professionalServiceId,
+    name: 'Clay Duncan Mortgage Services',
+    url: site.url,
+    image: defaultSchemaImage,
+    areaServed: site.serviceArea,
+    parentOrganization: {
+      '@id': organizationId,
+    },
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: rating.ratingValue,
