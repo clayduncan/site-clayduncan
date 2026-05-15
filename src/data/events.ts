@@ -1,18 +1,30 @@
 export type EventStatus = 'upcoming' | 'past';
 
+export interface EventVenueAddress {
+  streetAddress?: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode?: string;
+  addressCountry: string;
+}
+
 export interface EventItem {
   title: string;
   date: string;
   startDateTime?: string;
+  endDateTime?: string;
   displayTime?: string;
   location: string;
+  venueAddress?: EventVenueAddress;
   format: 'in-person' | 'online';
   audience: string;
   status: EventStatus;
   summary: string;
   takeaways?: string[];
+  image?: string;
   registrationUrl?: string;
   registrationText?: string;
+  offerValidFrom?: string;
 }
 
 const realtor101Summary =
@@ -63,6 +75,13 @@ export const events: EventItem[] = [
     startDateTime: '2026-05-21T12:00:00-05:00',
     displayTime: '12:00 PM CT',
     location: 'Gunters Landing Clubhouse, Guntersville, AL',
+    venueAddress: {
+      streetAddress: '1000 Gunters Landing Road',
+      addressLocality: 'Guntersville',
+      addressRegion: 'AL',
+      postalCode: '35976',
+      addressCountry: 'US',
+    },
     format: 'in-person',
     audience: 'REALTORS®',
     status: 'upcoming',
@@ -175,6 +194,13 @@ export const events: EventItem[] = [
     startDateTime: '2026-05-07T11:00:00-05:00',
     displayTime: '11:00 AM CST',
     location: 'KW Horizon',
+    venueAddress: {
+      streetAddress: '2105 Mastin Lake Road NE, Suite A',
+      addressLocality: 'Huntsville',
+      addressRegion: 'AL',
+      postalCode: '35810',
+      addressCountry: 'US',
+    },
     format: 'in-person',
     audience: 'REALTORS®',
     status: 'past',
@@ -258,6 +284,13 @@ export const events: EventItem[] = [
     title: 'AI for REALTORS® 101 - Introductory Course',
     date: '2026-02-12',
     location: 'Stovehouse Event Center - Alley Suite',
+    venueAddress: {
+      streetAddress: '3414 Governors Drive SW',
+      addressLocality: 'Huntsville',
+      addressRegion: 'AL',
+      postalCode: '35805',
+      addressCountry: 'US',
+    },
     format: 'in-person',
     audience: 'REALTORS®',
     status: 'past',

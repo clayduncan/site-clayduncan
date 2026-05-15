@@ -345,6 +345,9 @@ export function createAggregateRatingJsonLd(
 
 export function createEventJsonLd(event: EventItem): SchemaObject {
   const eventUrl = `${site.url}/events/#${event.date}`;
+  const eventImage = event.image ?? defaultSchemaImage;
+  const eventEndDate = event.endDateTime ?? getEventEndDate(event);
+  const eventOfferUrl = event.registrationUrl ?? eventUrl;
 
   return {
     '@context': 'https://schema.org',
@@ -352,6 +355,8 @@ export function createEventJsonLd(event: EventItem): SchemaObject {
     '@id': eventUrl,
     name: event.title,
     startDate: event.startDateTime ?? event.date,
+    endDate: eventEndDate,
+    image: eventImage,
     eventAttendanceMode:
       event.format === 'online'
         ? 'https://schema.org/OnlineEventAttendanceMode'
@@ -365,11 +370,15 @@ export function createEventJsonLd(event: EventItem): SchemaObject {
         ? {
             '@type': 'VirtualLocation',
             name: event.location,
-            url: event.registrationUrl ?? `${site.url}/events/`,
+            url: eventOfferUrl,
           }
         : {
             '@type': 'Place',
             name: event.location,
+            address: {
+              '@type': 'PostalAddress',
+              ...getEventAddress(event),
+            },
           },
     description: event.summary,
     organizer: {
@@ -382,7 +391,47 @@ export function createEventJsonLd(event: EventItem): SchemaObject {
       '@type': 'Audience',
       audienceType: event.audience,
     },
-    url: event.registrationUrl ?? `${site.url}/events/`,
+    url: eventOfferUrl,
     isAccessibleForFree: true,
+    offers: {
+      '@type': 'Offer',
+      url: eventOfferUrl,
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      validFrom: event.offerValidFrom ?? event.date,
+    },
+  };
+}
+
+function getEventEndDate(event: EventItem): string {
+  if (!event.startDateTime) {
+    return event.date;
+  }
+
+  const endDate = new Date(event.startDateTime);
+  const durationMinutes = event.title.toLowerCase().includes('future of ai')
+    ? 15
+    : 90;
+  endDate.setMinutes(endDate.getMinutes() + durationMinutes);
+
+  return endDate.toISOString();
+}
+
+function getEventAddress(event: EventItem): EventItem['venueAddress'] {
+  if (event.venueAddress) {
+    return event.venueAddress;
+  }
+
+  const addressLocality = event.location.includes('Decatur')
+    ? 'Decatur'
+    : event.location.includes('Guntersville')
+      ? 'Guntersville'
+      : 'Huntsville';
+
+  return {
+    addressLocality,
+    addressRegion: 'AL',
+    addressCountry: 'US',
   };
 }
