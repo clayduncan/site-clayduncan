@@ -148,7 +148,9 @@ assert(
   'Sitemap must include the medical professional pre-start-date resource.',
 );
 assert(
-  sitemapUrls.includes('/resources/medical-professional-student-loans-mortgage/'),
+  sitemapUrls.includes(
+    '/resources/medical-professional-student-loans-mortgage/',
+  ),
   'Sitemap must include the medical professional student-loan resource.',
 );
 assert(

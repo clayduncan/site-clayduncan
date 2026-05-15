@@ -1089,7 +1089,8 @@ main {
 .data-table th,
 .data-table td {
   padding: 0.95rem 1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-navy), transparent 85%);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-navy), transparent 85%);
   text-align: left;
   vertical-align: top;
 }
