@@ -117,11 +117,7 @@ const schema = [
         <a class="button button-primary" href={site.schedulingUrl}>Talk through your scenario</a>
         <a class="button button-secondary" href={site.applicationUrl}>Start a loan application</a>
       </div>
-      <dl class="proof-strip" aria-label="Complex mortgage guidance highlights">
-        <div>
-          <dt>Strategy</dt>
-          <dd>Clarify the path before the offer</dd>
-        </div>
+      <dl class="proof-strip complex-scenario-strip" aria-label="Complex mortgage guidance highlights">
         <div>
           <dt>Self-employed</dt>
           <dd>
@@ -137,10 +133,6 @@ const schema = [
               Offer letters, start dates, and new income
             </a>
           </dd>
-        </div>
-        <div>
-          <dt>Local</dt>
-          <dd>Huntsville, Madison, and North Alabama guidance</dd>
         </div>
       </dl>
     </div>
@@ -400,3 +392,15 @@ const schema = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .complex-scenario-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 44rem) {
+    .complex-scenario-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
