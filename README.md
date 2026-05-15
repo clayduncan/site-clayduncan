@@ -1,6 +1,6 @@
 # clayduncan.com
 
-Astro rebuild for `clayduncan.com`, deployed from the `main` branch of `clayduncan/site-clayduncan` to Netlify.
+Astro rebuild for `clayduncan.com`, deployed from the `main` branch of `clayduncan/site-clayduncan` to Netlify. The public brand system now includes `Clay Duncan` and the affiliated `Duncan Mortgage Group, powered by Princeton Mortgage` header treatment.
 
 ## Local Development
 
@@ -11,6 +11,6 @@ Astro rebuild for `clayduncan.com`, deployed from the `main` branch of `claydunc
 
 This project is intentionally static, fast, and content-first.
 
-MDX and sitemap were installed during scaffold work and are accepted as early Phase Three groundwork. They become active as blog and structured content pages ship.
+MDX and sitemap support are active. Blog content ships through the Astro content collection, and sitemap output is generated during the production build. The site also includes GA4, Bing verification, and IndexNow deploy pings.
 
 See `SETUP.md` for local setup and `docs/phase-3-architecture.md` for Phase Three architecture decisions.

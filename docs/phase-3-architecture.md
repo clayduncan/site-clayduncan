@@ -2,19 +2,19 @@
 
 ## Decisions
 
-- Phase Three work runs on `codex/phase-3-aeo-architecture`.
-- MDX and sitemap were installed during the scaffold. They are accepted as early Phase Three groundwork and become active as blog and content pages ship.
+- Phase Three work shipped from `main` through Netlify after local verification.
+- MDX and sitemap support are active. Blog content uses the Astro content collection, and sitemap output is generated during production builds.
 - The public brand is `Clay Duncan` because the domain is `clayduncan.com`.
-- Levi Duncan should not receive a page in this phase. The likely future structure is separate personal sites connected through a Team Duncan property.
-- Wix cutover and redirect mapping are deferred until a dedicated cutover task.
+- Levi Duncan should not receive a page in this phase. The likely future structure is separate personal sites connected through a Duncan Mortgage Group property.
+- Wix cutover and redirect mapping are separate operational tasks.
 
 ## Content System Priorities
 
 1. AEO homepage.
 2. Core page/schema helpers.
-3. High-priority Huntsville pages for down payment assistance, VA loans, USDA loans, FHA loans, and closing costs.
-4. Blog/category structure for AI education, Huntsville market intel, and mortgage insights.
-5. Calculators after the page architecture is stable.
+3. High-priority Huntsville pages for VA loans, jumbo loans, medical professional mortgage guidance, and complex mortgage guidance.
+4. Blog/category structure focused on REALTOR® AI education, event recaps, and selective mortgage strategy.
+5. Focused support resources only where they add high-quality AEO value.
 
 ## Image Conventions
 
@@ -39,7 +39,8 @@ Schema lives in `src/data/schema.ts` and should be composed from canonical site 
 Use page-level JSON-LD for:
 
 - Person
-- LocalBusiness
+- ProfessionalService
+- Organization
 - WebSite
 - BreadcrumbList
 - FAQPage

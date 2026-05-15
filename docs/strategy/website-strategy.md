@@ -12,7 +12,7 @@ The site is part of a larger future ecosystem:
 
 - `clayduncan.com` - Clay's personal authority site, built first because Clay is the proven asset with existing reputation, reviews, NMLS history, and citation potential.
 - `leviaduncan.com` - Levi Duncan's future personal authority site, built second on the same static Astro/Netlify playbook but with distinct positioning.
-- Future Team Duncan property - a shared team hub, built third, that routes consumers to the right person and explains the combined team value.
+- Future Duncan Mortgage Group property - a shared team hub, built third, that routes consumers to the right person and explains the combined team value.
 
 The three-site ecosystem should share design discipline, technical standards, AEO structure, and cross-linking strategy, but should not duplicate content. Each site needs a clear primary entity and consumer reason to exist.
 

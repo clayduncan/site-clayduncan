@@ -14,7 +14,7 @@
 - Use Astro best practices and minimal client-side JavaScript.
 - Do not add Next.js or extra frameworks.
 - Do not add hard-coded credentials, secrets, tokens, or private keys.
-- Do not add integrations yet; sitemap and MDX come in the next phase.
+- Do not add new integrations without explicit approval. Current approved integrations include MDX content, sitemap generation, GA4, Bing verification, and IndexNow deploy pings.
 - Keep work deployable from the `main` branch.
 
 ## AEO Requirements

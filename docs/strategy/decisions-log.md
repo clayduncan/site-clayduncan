@@ -12,7 +12,7 @@ This file records durable project decisions so future chats can quickly understa
 - clayduncan.com should continue to balance three pillars: AEO, SEO-rich content, and superior UI experience.
 - Landing pages are part of the main website, not separate mini-sites.
 - `/huntsville/va-loans/` is the first SEO/AEO landing-page baseline.
-- Confirmed the strategic ecosystem direction: `clayduncan.com` first, `leviaduncan.com` second, and a future shared Team Duncan property third.
+- Confirmed the strategic ecosystem direction: `clayduncan.com` first, `leviaduncan.com` second, and a future shared Duncan Mortgage Group property third.
 - clayduncan.com is Clay Duncan's personal authority site, not the full Team Duncan site.
 - leviduncan.com should eventually use the same static Astro/Netlify playbook but carry distinct positioning rather than duplicate Clay's content.
 - The future team property should act as a routing and credibility hub, not a duplicate content warehouse.
@@ -20,7 +20,7 @@ This file records durable project decisions so future chats can quickly understa
 - Levi should primarily own beginner and accessibility paths: first-time homebuyers, down payment assistance, USDA, FHA, buyer readiness, budgeting, and early mortgage education.
 - The three sites should share AEO, SEO, UI, schema, and content-quality standards while maintaining distinct primary entities.
 - Consumer-facing architecture should start with the buyer's situation before the loan product.
-- `Team Duncan` remains an open brand/domain decision. `Duncan Mortgage Team` is the current strategic favorite because it is clearer and more searchable than `The Team Duncan`.
+- The shared brand name moved from earlier Team Duncan/Duncan Mortgage Team language to `Duncan Mortgage Group`, shown in the site header as powered by Princeton Mortgage.
 - Generic `teamduncan.com` appears to be used by another real estate/property-management business, so avoid assuming that exact domain is available or strategically clean.
 - Approved the richer landing-page UI direction: editorial hero, strong proof strip, direct-answer section, local context, process/readiness section, FAQ, official source panel, and final CTA.
 - Approved `/huntsville/va-loans/` as the first visual baseline for premium service landing pages.
