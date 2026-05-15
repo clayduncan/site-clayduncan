@@ -7,13 +7,19 @@ interface Props {
   title: string;
   description: string;
   canonical?: string;
+  ogTitle?: string;
+  ogType?: 'website' | 'article';
   robots?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  twitterTitle?: string;
 }
 
-const { title, description, canonical, robots, schema } = Astro.props;
+const { title, description, canonical, ogTitle, ogType = 'website', robots, schema, twitterTitle } =
+  Astro.props;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const schemaItems = Array.isArray(schema) ? schema : schema ? [schema] : [];
+const socialTitle = ogTitle ?? title;
+const xTitle = twitterTitle ?? socialTitle;
 const currentPath = Astro.url.pathname;
 const navItems = [
   {
@@ -83,13 +89,13 @@ const navItems = [
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;550;650;750;800;850&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&display=swap"
     />
     <title>{title}</title>
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={socialTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Clay Duncan" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={xTitle} />
     <meta name="twitter:description" content={description} />
     {
       schemaItems.map((schemaItem) => (
