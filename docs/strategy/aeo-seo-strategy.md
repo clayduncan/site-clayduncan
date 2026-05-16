@@ -563,6 +563,8 @@ Acceptable for genuine variation (one page per Huntsville neighborhood with real
 
 **Post-DMG performance standard for Duncan-related sites (adopted 05-16-2026):** Self-host subset WOFF2 fonts and preload them in the document `<head>`; do not load Google Fonts from the CDN. Use the GA4 defer pattern that loads after a 3-second timeout or first user interaction. Inline critical CSS in the `<head>` using the Astro `global.css?inline` pattern when the site is static and CSS size is controlled. Keep `robots.txt` open to AI retrieval and training crawlers by default, with only private operational paths such as `/admin/` and `/api/` blocked. Publish an `llms.txt` file for each canonical authority hub with production URLs, clear entity framing, and the current brand language. Implementation reference: Pass 1 commit `88bd899`; Pass 2 commit `e0ea90a`.
 
+**Measured ClayDuncan.com result (05-16-2026):** After the three-pass performance update and shared hero image recompression, Lighthouse mobile Performance scored 97-99 across `/`, `/about/`, `/realtor-ai-training/`, `/huntsville/mortgage-guidance/`, `/huntsville/va-loans/`, `/reviews/`, `/blog/`, and `/events/`. The final lift came from reducing `/images/clay-duncan-wbackground-1400.jpg` from 271 KiB to 142 KiB while preserving the existing image path and page markup.
+
 **Image optimization:**
 
 - Descriptive filenames: `clay-duncan-mortgage-originator-huntsville.jpg` not `IMG_4582.jpg`
