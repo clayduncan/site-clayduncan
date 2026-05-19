@@ -8,18 +8,39 @@ interface Props {
   description: string;
   canonical?: string;
   ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
   ogType?: 'website' | 'article';
   robots?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  twitterCard?: 'summary' | 'summary_large_image';
   twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
 }
 
-const { title, description, canonical, ogTitle, ogType = 'website', robots, schema, twitterTitle } =
-  Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  ogType = 'website',
+  robots,
+  schema,
+  twitterCard = 'summary',
+  twitterTitle,
+  twitterDescription,
+  twitterImage,
+} = Astro.props;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const schemaItems = Array.isArray(schema) ? schema : schema ? [schema] : [];
 const socialTitle = ogTitle ?? title;
+const socialDescription = ogDescription ?? description;
 const xTitle = twitterTitle ?? socialTitle;
+const xDescription = twitterDescription ?? socialDescription;
+const xImage = twitterImage ?? ogImage;
 const currentPath = Astro.url.pathname;
 const navItems = [
   {
@@ -115,12 +136,14 @@ const navItems = [
     <title>{title}</title>
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={socialTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={socialDescription} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Clay Duncan" />
-    <meta name="twitter:card" content="summary" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:title" content={xTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={xDescription} />
+    {xImage && <meta name="twitter:image" content={xImage} />}
     {
       schemaItems.map((schemaItem) => (
         <script type="application/ld+json" set:html={JSON.stringify(schemaItem)} />

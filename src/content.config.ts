@@ -10,6 +10,12 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    metaTitle: z.string().optional(),
+    ogTitle: z.string().optional(),
+    ogDescription: z.string().optional(),
+    ogImage: z.string().optional(),
+    ogImageAlt: z.string().optional(),
+    schemaDescription: z.string().optional(),
     publishDate: z.date(),
     updatedDate: z.date().optional(),
     author: z.string().default('Clay Duncan'),
@@ -23,6 +29,14 @@ const blog = defineCollection({
       ])
       .default('ai-for-realtors'),
     tags: z.array(z.string()).default([]),
+    faqs: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        }),
+      )
+      .default([]),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),

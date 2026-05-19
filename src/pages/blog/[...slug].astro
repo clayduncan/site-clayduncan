@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
   createBreadcrumbJsonLd,
+  createFaqJsonLd,
   defaultSchemaImage,
   organizationJsonLd,
   professionalServiceJsonLd,
@@ -27,9 +28,16 @@ const slug = post.id.replace(/\.mdx?$/, '').replace(/\/index$/, '');
 const pagePath = `/blog/${slug}/`;
 const pageUrl = new URL(pagePath, site.url).href;
 const pageTitle =
-  slug === 'how-realtors-can-use-ai-without-losing-the-human-side-of-real-estate'
+  post.data.metaTitle ??
+  (slug === 'how-realtors-can-use-ai-without-losing-the-human-side-of-real-estate'
     ? 'AI for REALTORS® Without Losing the Human Side | Clay Duncan'
-    : `${post.data.title} | Clay Duncan`;
+    : `${post.data.title} | Clay Duncan`);
+const pageImage = post.data.ogImage
+  ? new URL(post.data.ogImage, site.url).href
+  : defaultSchemaImage;
+const pageDescription = post.data.description;
+const socialDescription = post.data.ogDescription ?? pageDescription;
+const modifiedDate = post.data.updatedDate ?? post.data.publishDate;
 
 const categoryLabels = {
   'ai-for-realtors': 'AI for REALTORS®',
@@ -59,16 +67,24 @@ const schema = [
     '@id': `${pageUrl}#article`,
     url: pageUrl,
     headline: post.data.title,
-    description: post.data.description,
-    image: defaultSchemaImage,
-    datePublished: post.data.publishDate.toISOString(),
-    dateModified: (post.data.updatedDate ?? post.data.publishDate).toISOString(),
-    author: { '@id': `${site.url}/#person` },
-    publisher: { '@id': `${site.url}/#person` },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${pageUrl}#webpage`,
+    description: post.data.schemaDescription ?? post.data.description,
+    image: pageImage,
+    datePublished: post.data.publishDate.toISOString().slice(0, 10),
+    dateModified: modifiedDate.toISOString().slice(0, 10),
+    author: {
+      '@type': 'Person',
+      name: post.data.author,
+      url: `${site.url}/about/`,
     },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Duncan Mortgage Group',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${site.url}/brand-assets/duncan-d-mark-512.png`,
+      },
+    },
+    mainEntityOfPage: pageUrl,
     about: [
       ...articleAbout.map((tag) => ({ '@type': 'Thing', name: tag })),
     ],
@@ -78,14 +94,22 @@ const schema = [
     { name: 'Blog', path: '/blog/' },
     { name: post.data.title, path: pagePath },
   ]),
+  ...(post.data.faqs.length > 0 ? [createFaqJsonLd(post.data.faqs)] : []),
 ];
 ---
 
 <BaseLayout
   title={pageTitle}
-  description={post.data.description}
-  ogTitle={`${post.data.title} | Clay Duncan`}
-  twitterTitle={`${post.data.title} | Clay Duncan`}
+  description={pageDescription}
+  canonical={pageUrl}
+  robots="index, follow"
+  ogTitle={post.data.ogTitle ?? `${post.data.title} | Clay Duncan`}
+  ogDescription={socialDescription}
+  ogImage={pageImage}
+  twitterCard={post.data.ogImage ? 'summary_large_image' : 'summary'}
+  twitterTitle={post.data.ogTitle ?? `${post.data.title} | Clay Duncan`}
+  twitterDescription={socialDescription}
+  twitterImage={pageImage}
   ogType="article"
   schema={schema}
 >
@@ -95,10 +119,25 @@ const schema = [
       <h1>{post.data.title}</h1>
       <p>{post.data.description}</p>
       <div class="article-meta">
-        <span>{post.data.author}</span>
-        <span>{dateFormatter.format(post.data.publishDate)}</span>
+        <span>By <a href="/about/">{post.data.author}</a></span>
+        <span>Published {dateFormatter.format(post.data.publishDate)}</span>
+        <span>Updated {dateFormatter.format(modifiedDate)}</span>
       </div>
     </header>
+    {
+      post.data.ogImage && (
+        <img
+          class="article-featured-image"
+          src={post.data.ogImage}
+          width="1200"
+          height="630"
+          alt={
+            post.data.ogImageAlt ??
+            `Featured image for ${post.data.title}`
+          }
+        />
+      )
+    }
     <div class="article-body">
       <Content />
     </div>
