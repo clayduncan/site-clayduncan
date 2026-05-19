@@ -1546,7 +1546,6 @@ main {
 }
 
 .article-header h1 {
-  max-width: 52rem;
   margin: 0;
   color: var(--color-ink);
   font-size: clamp(3rem, 5vw, 4.85rem);
@@ -1555,7 +1554,6 @@ main {
 }
 
 .article-header > p:not(.eyebrow) {
-  max-width: 48rem;
   color: var(--color-navy);
   font-size: clamp(1.15rem, 2vw, 1.35rem);
 }
@@ -1586,7 +1584,6 @@ main {
 }
 
 .article-body {
-  max-width: 45rem;
   padding: clamp(2rem, 5vw, 3rem) 0;
 }
 
