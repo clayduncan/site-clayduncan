@@ -70,31 +70,6 @@ export const events: EventItem[] = [
       'https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fus02web.zoom.us%2Fwebinar%2Fregister%2FWN_JqgkLSwHSLeqVIUrwWLZMg%23%2Fregistration&data=05%7C02%7CClay%40princetonmortgage.com%7C964a704115d841a4182d08deab6f6a0d%7Cace3f3ba553340ec831be164d8efe73f%7C0%7C0%7C639136692215656991%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=QiGL%2Fg%2BD4nP77lef7fCs%2BmKvxjN9dZLlvdvsfpm9LaQ%3D&reserved=0',
   },
   {
-    title: 'Future of AI in Real Estate',
-    date: '2026-05-21',
-    startDateTime: '2026-05-21T12:00:00-05:00',
-    displayTime: '12:00 PM CT',
-    location: 'Gunters Landing Clubhouse, Guntersville, AL',
-    venueAddress: {
-      streetAddress: '1000 Gunters Landing Road',
-      addressLocality: 'Guntersville',
-      addressRegion: 'AL',
-      postalCode: '35976',
-      addressCountry: 'US',
-    },
-    format: 'in-person',
-    audience: 'REALTORS®',
-    status: 'upcoming',
-    summary:
-      'A 15-minute opening briefing for the Marshall County Board of REALTORS® on what is changing with AI in real estate and what agents should understand now.',
-    takeaways: [
-      'A practical update on where AI is moving in the real estate industry',
-      'What REALTORS® should understand before the tools become everyday infrastructure',
-      'A concise opener for the one-hour Marshall County Board of REALTORS® meeting',
-    ],
-    registrationText: 'No registration required',
-  },
-  {
     title: 'Quick Build: RELO Package',
     date: '2026-05-28',
     location: 'Online via Zoom',
@@ -176,6 +151,31 @@ export const events: EventItem[] = [
     summary: reloPackageSummary,
     takeaways: reloPackageTakeaways,
     registrationText: 'Registration details coming',
+  },
+  {
+    title: 'Future of AI in Real Estate',
+    date: '2026-05-21',
+    startDateTime: '2026-05-21T12:00:00-05:00',
+    displayTime: '12:00 PM CT',
+    location: 'Gunters Landing Clubhouse, Guntersville, AL',
+    venueAddress: {
+      streetAddress: '1000 Gunters Landing Road',
+      addressLocality: 'Guntersville',
+      addressRegion: 'AL',
+      postalCode: '35976',
+      addressCountry: 'US',
+    },
+    format: 'in-person',
+    audience: 'REALTORS®',
+    status: 'past',
+    summary:
+      'A 15-minute opening briefing for the Marshall County Board of REALTORS® on what is changing with AI in real estate and what agents should understand now.',
+    takeaways: [
+      'A practical update on where AI is moving in the real estate industry',
+      'What REALTORS® should understand before the tools become everyday infrastructure',
+      'A concise opener for the one-hour Marshall County Board of REALTORS® meeting',
+    ],
+    registrationText: 'No registration required',
   },
   {
     title: 'The AI Success System',
