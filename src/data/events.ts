@@ -317,7 +317,15 @@ export const events: EventItem[] = [
   },
 ];
 
-export const upcomingEvents = events.filter(
-  (event) => event.status === 'upcoming',
-);
-export const pastEvents = events.filter((event) => event.status === 'past');
+const sortByDateAsc = (a: EventItem, b: EventItem) =>
+  a.date.localeCompare(b.date);
+
+const sortByDateDesc = (a: EventItem, b: EventItem) =>
+  b.date.localeCompare(a.date);
+
+export const upcomingEvents = events
+  .filter((event) => event.status === 'upcoming')
+  .sort(sortByDateAsc);
+export const pastEvents = events
+  .filter((event) => event.status === 'past')
+  .sort(sortByDateDesc);
