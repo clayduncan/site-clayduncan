@@ -87,7 +87,7 @@ export const events: EventItem[] = [
     location: 'Online via Zoom',
     format: 'online',
     audience: 'REALTORS®',
-    status: 'upcoming',
+    status: 'past',
     summary: aiSuccessSystemSummary,
     takeaways: aiSuccessSystemTakeaways,
     registrationUrl:
