@@ -7,7 +7,7 @@
 ## Summary
 
 - **robots.txt result:** Green. No checked AI crawler is blocked. Existing named crawler blocks allow retrieval while preserving `/admin/` and `/api/` exclusions.
-- **llms.txt result:** Green. The file is present, uses production `https://www.clayduncan.com/` URLs, frames the site as Clay Duncan's canonical personal authority hub, uses the locked brand language "Duncan Mortgage Group, powered by Princeton Mortgage," and contains no Wix-era URLs.
+- **llms.txt result:** Green. The file is present, uses production `https://www.clayduncan.com/` URLs, frames the site as Clay Duncan's canonical personal authority hub, uses the locked brand language "Team Duncan, powered by Princeton Mortgage," and contains no Wix-era URLs.
 - **Formatting result:** Green. `src/styles/global.css` formatting drift from the Pass 1 `@font-face` addition was corrected by Prettier with no semantic CSS changes.
 
 ## Bot-by-Bot Status
@@ -35,8 +35,8 @@ The current `public/llms.txt` passes the checklist:
 - Present in repo and intended for root serving at `https://www.clayduncan.com/llms.txt`.
 - Uses production `https://www.clayduncan.com/` URLs only.
 - Frames `clayduncan.com` as Clay Duncan's personal authority hub.
-- Uses "Duncan Mortgage Group, powered by Princeton Mortgage" for brand framing.
-- Does not use "Team Duncan" or "Duncan Mortgage Team."
+- Uses "Team Duncan, powered by Princeton Mortgage" for brand framing.
+- Does not use "Team Duncan" or "Team Duncan."
 - Lists the key authority pages: homepage, About, REALTOR AI Training, Mortgage Hub and child pages, Reviews, Blog, Events, and Join Us.
 - Contains no decommissioned Wix URLs.
 

@@ -4,7 +4,7 @@ Last updated: 2026-05-09
 
 ## Purpose
 
-This harness measures how answer engines understand Clay Duncan, clayduncan.com, Duncan Mortgage Group, and Clay's core specialties before more content is added.
+This harness measures how answer engines understand Clay Duncan, clayduncan.com, Team Duncan, and Clay's core specialties before more content is added.
 
 The goal is not traffic reporting. The goal is answer accuracy, citation presence, and entity association.
 
@@ -17,7 +17,7 @@ Run the query set against:
 - Google Search with AI Overviews when available
 - Microsoft Copilot / Bing
 
-If an engine does not return a cited answer, still record whether Clay, Princeton Mortgage, Duncan Mortgage Group, or clayduncan.com appeared anywhere in the response.
+If an engine does not return a cited answer, still record whether Clay, Princeton Mortgage, Team Duncan, or clayduncan.com appeared anywhere in the response.
 
 ## What To Record
 
@@ -83,7 +83,7 @@ The 50-query set is grouped into:
 
 - The query is too broad or rate-driven
 - A national aggregator structurally owns the answer
-- The topic belongs to Levi or a future Duncan Mortgage Group site
+- The topic belongs to Levi or a future Team Duncan site
 - The content would be thin or duplicative
 
 ## First Content Decisions Likely To Come From This
@@ -124,7 +124,7 @@ Use these for fast post-update testing:
 6. jumbo loans Huntsville Alabama
 7. AI training for REALTORS Huntsville
 8. Clay Duncan AI training
-9. Duncan Mortgage Group
+9. Team Duncan
 10. Princeton Mortgage Clay Duncan
 
 ## Decision Rule

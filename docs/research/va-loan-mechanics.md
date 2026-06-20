@@ -1733,7 +1733,7 @@ Clay's writer (or the Atlas-dispatched workflow) is responsible for verifying th
 
 The local-context research file is a companion to this packet. It should cover, at a minimum:
 
-- North Alabama county-level context (Madison, Limestone, Morgan, Marshall, Jackson, DeKalb, and others where Duncan Mortgage Group does business);
+- North Alabama county-level context (Madison, Limestone, Morgan, Marshall, Jackson, DeKalb, and others where Team Duncan does business);
 - The Atlanta NEC and St. Petersburg RLC routing in practical terms;
 - Redstone Arsenal PCS and active-duty borrower scenarios;
 - Alabama termite inspection (NPMA-33) and how it intersects with VA MPRs;

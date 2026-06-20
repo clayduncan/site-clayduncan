@@ -5,7 +5,7 @@
 - Phase Three work shipped from `main` through Netlify after local verification.
 - MDX and sitemap support are active. Blog content uses the Astro content collection, and sitemap output is generated during production builds.
 - The public brand is `Clay Duncan` because the domain is `clayduncan.com`.
-- Levi Duncan should not receive a page in this phase. The likely future structure is separate personal sites connected through a Duncan Mortgage Group property.
+- Levi Duncan should not receive a page in this phase. The likely future structure is separate personal sites connected through a Team Duncan property.
 - Wix cutover and redirect mapping are separate operational tasks.
 
 ## Content System Priorities

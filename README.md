@@ -1,6 +1,6 @@
 # clayduncan.com
 
-Astro rebuild for `clayduncan.com`, deployed from the `main` branch of `clayduncan/site-clayduncan` to Netlify. The public brand system now includes `Clay Duncan` and the affiliated `Duncan Mortgage Group, powered by Princeton Mortgage` header treatment.
+Astro rebuild for `clayduncan.com`, deployed from the `main` branch of `clayduncan/site-clayduncan` to Netlify. The public brand system now includes `Clay Duncan` and the affiliated `Team Duncan, powered by Princeton Mortgage` header treatment.
 
 ## Local Development
 

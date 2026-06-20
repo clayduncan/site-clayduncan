@@ -97,9 +97,9 @@ export const duncanMortgageGroupJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': duncanMortgageGroupId,
-  name: 'Duncan Mortgage Group',
+  name: 'Team Duncan',
   description:
-    'Duncan Mortgage Group is a mortgage team brand powered by Princeton Mortgage.',
+    'Team Duncan is a mortgage team brand powered by Princeton Mortgage.',
   parentOrganization: {
     '@id': organizationId,
   },
