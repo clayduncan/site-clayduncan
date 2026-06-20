@@ -185,8 +185,9 @@ const schema = [
         <div class="cta-band">
           <h2>Read more reviews on Google.</h2>
           <p>
-            Clay’s verified Google Business Profile includes 28 five-star
-            reviews from clients, partners, and training attendees.
+            Clay’s verified Google Business Profile includes {
+              aggregateRating.reviewCount
+            } five-star reviews from clients, partners, and training attendees.
           </p>
           <a
             class="button button-primary"

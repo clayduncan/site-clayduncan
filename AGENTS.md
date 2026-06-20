@@ -16,6 +16,7 @@
 - Do not add hard-coded credentials, secrets, tokens, or private keys.
 - Do not add new integrations without explicit approval. Current approved integrations include MDX content, sitemap generation, GA4, Bing verification, and IndexNow deploy pings.
 - Keep work deployable from the `main` branch.
+- **Google review count is a single source of truth.** Update `aggregateRating.reviewCount` in `src/data/reviews.ts` and every reference across the site, schema, and generated `llms.txt` updates automatically. Do not hardcode review counts anywhere else.
 
 ## AEO Requirements
 
