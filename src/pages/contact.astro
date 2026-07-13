@@ -8,9 +8,9 @@ import {
 } from '../data/schema';
 import { site } from '../data/site';
 
-const branchDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  `${site.branch.company} ${site.branch.street} ${site.branch.city} ${site.branch.state} ${site.branch.postalCode}`,
-)}`;
+const branchMapDestination = `${site.branch.company} ${site.branch.street} ${site.branch.city} ${site.branch.state} ${site.branch.postalCode}`;
+const branchAppleMapsUrl = `https://maps.apple.com/?daddr=${encodeURIComponent(branchMapDestination)}`;
+const branchGoogleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branchMapDestination)}`;
 
 const schema = [
   personJsonLd,
@@ -56,9 +56,17 @@ const schema = [
           {site.branch.city}, {site.branch.state} {site.branch.postalCode}
         </p>
         <p>Branch NMLS #{site.branch.nmls}</p>
-        <a href={branchDirectionsUrl} rel="noopener noreferrer" target="_blank">
-          Get directions
-        </a>
+        <div class="directions-block">
+          <h3>Get directions to this location</h3>
+          <div class="directions-actions">
+            <a class="button button-on-dark" href={branchAppleMapsUrl} rel="noopener noreferrer" target="_blank">
+              Apple Maps
+            </a>
+            <a class="button button-on-dark" href={branchGoogleMapsUrl} rel="noopener noreferrer" target="_blank">
+              Google Maps
+            </a>
+          </div>
+        </div>
       </div>
       <a class="button button-primary" href={site.schedulingUrl}>
         Schedule a conversation
