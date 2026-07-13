@@ -9,6 +9,7 @@ export interface EventVenueAddress {
 }
 
 export interface EventItem {
+  slug?: string;
   title: string;
   date: string;
   startDateTime?: string;
@@ -19,8 +20,9 @@ export interface EventItem {
   format: 'in-person' | 'online';
   audience: string;
   status: EventStatus;
-  summary: string;
+  summary?: string;
   takeaways?: string[];
+  supportingCopy?: string;
   image?: string;
   registrationUrl?: string;
   registrationText?: string;
@@ -47,6 +49,24 @@ const reloPackageTakeaways = [
   'A beginning-to-end relocation package workflow',
   'A finished email to the potential client with the package delivered',
   'A step-by-step instructional guide for reference after the course',
+];
+
+const listingPresentationSummary =
+  'A focused Quick Build on crafting a stronger listing presentation REALTORS® can use to win more listing conversations.';
+
+const listingPresentationTakeaways = [
+  'A practical structure for a listing presentation',
+  'AI-assisted preparation for seller conversations',
+  'Messaging that helps REALTORS® communicate value clearly',
+];
+
+const targetMarketCampaignSummary =
+  'A focused Quick Build on using AI to identify the likely buyer profile for a listing and shape a marketing campaign around that audience.';
+
+const targetMarketCampaignTakeaways = [
+  'A target-market profile for a specific listing',
+  'Messaging angles built around the likely buyer',
+  'Campaign ideas REALTORS® can adapt for listing marketing',
 ];
 
 export const events: EventItem[] = [
@@ -99,16 +119,9 @@ export const events: EventItem[] = [
     location: 'Online via Zoom',
     format: 'online',
     audience: 'REALTORS®',
-    status: 'upcoming',
-    summary:
-      'A focused Quick Build on crafting a stronger listing presentation REALTORS® can use to win more listing conversations.',
-    takeaways: [
-      'A practical structure for a listing presentation',
-      'AI-assisted preparation for seller conversations',
-      'Messaging that helps REALTORS® communicate value clearly',
-    ],
-    registrationUrl:
-      'https://us02web.zoom.us/webinar/register/WN_X0KJ-3Q0S9aJ4ag47OuNBw',
+    status: 'past',
+    summary: listingPresentationSummary,
+    takeaways: listingPresentationTakeaways,
   },
   {
     title: 'Quick Build: RELO Package',
@@ -116,41 +129,72 @@ export const events: EventItem[] = [
     location: 'Online via Zoom',
     format: 'online',
     audience: 'REALTORS®',
-    status: 'upcoming',
+    status: 'past',
     summary: reloPackageSummary,
     takeaways: reloPackageTakeaways,
-    registrationUrl:
-      'https://us02web.zoom.us/webinar/register/WN_yQ-QlewpQ_2sMU-s4UM0Xw',
   },
   {
-    title: 'Quick Build: Target Market Campaign',
+    title: 'Quick Build: Gamma',
     date: '2026-07-23',
+    startDateTime: '2026-07-23T09:00:00-05:00',
+    displayTime: '9:00 AM CT',
     location: 'Online via Zoom',
     format: 'online',
     audience: 'REALTORS®',
     status: 'upcoming',
     summary:
-      'A focused Quick Build on using AI to identify the likely buyer profile for a listing and shape a marketing campaign around that audience.',
+      'A focused Quick Build on Gamma — how to set it up, run it, and use it to produce client-ready materials in a fraction of the time.',
     takeaways: [
-      'A target-market profile for a specific listing',
-      'Messaging angles built around the likely buyer',
-      'Campaign ideas REALTORS® can adapt for listing marketing',
+      'Setting up Gamma',
+      'Best settings and features to know',
+      'Creating presentations from a simple prompt',
+      'Editing and customizing presentations',
+      'Practical ways REALTORS® can use Gamma in their business',
     ],
+    supportingCopy:
+      'Agents will walk away knowing how to create listing presentations, buyer guides, seller guides, relocation packages, market reports, and more, all in significantly less time. This is the same presentation platform we used to build the Listing Presentation and Relocation Package resources featured in our previous AI Quick Builds.',
     registrationUrl:
       'https://us02web.zoom.us/webinar/register/WN_oE3ZkZoiTga4eHbRbuuMwQ',
   },
   {
-    title: 'Quick Build: RELO Package',
+    slug: '2026-08-06-listing-presentation',
+    title: 'Quick Build: Listing Presentation',
+    date: '2026-08-06',
+    startDateTime: '2026-08-06T09:00:00-05:00',
+    displayTime: '9:00 AM CT',
+    location: 'Online via Zoom',
+    format: 'online',
+    audience: 'REALTORS®',
+    status: 'upcoming',
+    summary: listingPresentationSummary,
+    takeaways: listingPresentationTakeaways,
+    registrationText: 'Registration details coming',
+  },
+  {
+    slug: '2026-08-06-claytools-ai',
+    title: 'ClayTools.AI Setup and Training',
     date: '2026-08-06',
     startDateTime: '2026-08-06T12:00:00-05:00',
     displayTime: '12:00 PM CT',
-    location: 'Trip Twin Realty',
+    location: 'Location details coming',
     format: 'in-person',
     audience: 'REALTORS®',
     status: 'upcoming',
-    summary: reloPackageSummary,
-    takeaways: reloPackageTakeaways,
     registrationText: 'Registration details coming',
+  },
+  {
+    title: 'Quick Build: Target Market Campaign',
+    date: '2026-08-20',
+    startDateTime: '2026-08-20T09:00:00-05:00',
+    displayTime: '9:00 AM CT',
+    location: 'Online via Zoom',
+    format: 'online',
+    audience: 'REALTORS®',
+    status: 'upcoming',
+    summary: targetMarketCampaignSummary,
+    takeaways: targetMarketCampaignTakeaways,
+    registrationUrl:
+      'https://us02web.zoom.us/webinar/register/WN_oE3ZkZoiTga4eHbRbuuMwQ',
   },
   {
     title: 'Future of AI in Real Estate',
@@ -318,10 +362,12 @@ export const events: EventItem[] = [
 ];
 
 const sortByDateAsc = (a: EventItem, b: EventItem) =>
-  a.date.localeCompare(b.date);
+  (a.startDateTime ?? a.date).localeCompare(b.startDateTime ?? b.date);
 
 const sortByDateDesc = (a: EventItem, b: EventItem) =>
-  b.date.localeCompare(a.date);
+  (b.startDateTime ?? b.date).localeCompare(a.startDateTime ?? a.date);
+
+export const getEventAnchorId = (event: EventItem) => event.slug ?? event.date;
 
 export const upcomingEvents = events
   .filter((event) => event.status === 'upcoming')

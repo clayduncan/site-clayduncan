@@ -1,5 +1,5 @@
 import { compliance } from './compliance';
-import type { EventItem } from './events';
+import { getEventAnchorId, type EventItem } from './events';
 import type { AggregateRating, Review } from './reviews';
 import { profileLinks, site } from './site';
 
@@ -355,7 +355,7 @@ export function createAggregateRatingJsonLd(
 }
 
 export function createEventJsonLd(event: EventItem): SchemaObject {
-  const eventUrl = `${site.url}/events/#${event.date}`;
+  const eventUrl = `${site.url}/events/#${getEventAnchorId(event)}`;
   const eventImage = event.image ?? defaultSchemaImage;
   const eventEndDate = event.endDateTime ?? getEventEndDate(event);
   const eventOfferUrl = event.registrationUrl ?? eventUrl;
@@ -391,7 +391,7 @@ export function createEventJsonLd(event: EventItem): SchemaObject {
               ...getEventAddress(event),
             },
           },
-    description: event.summary,
+    ...(event.summary ? { description: event.summary } : {}),
     organizer: {
       '@id': personId,
     },

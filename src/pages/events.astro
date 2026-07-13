@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { events, pastEvents, upcomingEvents } from '../data/events';
+import {
+  events,
+  getEventAnchorId,
+  pastEvents,
+  upcomingEvents,
+} from '../data/events';
 import {
   createBreadcrumbJsonLd,
   createEventJsonLd,
@@ -40,7 +45,7 @@ const schema = [
       itemListElement: events.map((event, index) => ({
         '@type': 'ListItem',
         position: index + 1,
-        item: { '@id': `${site.url}/events/#${event.date}` },
+        item: { '@id': `${site.url}/events/#${getEventAnchorId(event)}` },
       })),
     },
     isPartOf: { '@id': `${site.url}/#website` },
@@ -52,7 +57,7 @@ const schema = [
       { '@type': 'Place', name: 'North Alabama' },
     ],
   },
-  ...events.map((event) => createEventJsonLd(event)),
+  ...upcomingEvents.map((event) => createEventJsonLd(event)),
   createBreadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Events', path: pagePath },
@@ -78,7 +83,7 @@ const schema = [
         <a class="button button-primary" href={site.schedulingUrl}>Ask about hosting a session</a>
         <a class="button button-secondary" href="/realtor-ai-training/">Explore AI training</a>
       </div>
-      <dl class="proof-strip" aria-label="Clay Duncan event highlights">
+      <dl class="proof-strip proof-strip-two" aria-label="Clay Duncan event highlights">
         <div>
           <dt>{upcomingEvents.length}</dt>
           <dd>upcoming AI trainings listed</dd>
@@ -86,10 +91,6 @@ const schema = [
         <div>
           <dt>{pastEvents.length}</dt>
           <dd>recent AI training recaps</dd>
-        </div>
-        <div>
-          <dt>Skool</dt>
-          <dd>future learning hub planned through Princeton</dd>
         </div>
       </dl>
     </div>
@@ -130,7 +131,7 @@ const schema = [
       <div class="event-stack" aria-label="Upcoming events">
         {
           upcomingEvents.map((event) => (
-            <article class="event-card event-card-featured event-card-upcoming" id={event.date}>
+            <article class="event-card event-card-featured event-card-upcoming" id={getEventAnchorId(event)}>
               <div class="event-card-title">
                 <p>{event.audience}</p>
                 <h3>{event.title}</h3>
@@ -163,7 +164,7 @@ const schema = [
                 </div>
               </dl>
               <div class="event-card-summary">
-                <p>{event.summary}</p>
+                {event.summary && <p>{event.summary}</p>}
                 {
                   event.takeaways && (
                     <ul class="event-takeaways">
@@ -173,6 +174,9 @@ const schema = [
                     </ul>
                   )
                 }
+                {event.supportingCopy && (
+                  <p class="event-supporting-copy">{event.supportingCopy}</p>
+                )}
               </div>
             </article>
           ))
@@ -192,7 +196,7 @@ const schema = [
       <div class="event-grid" aria-label="Past AI training events">
         {
           pastEvents.map((event) => (
-            <article class="event-card" id={event.date}>
+            <article class="event-card" id={getEventAnchorId(event)}>
               <p>{event.audience}</p>
               <h3>{event.title}</h3>
               <dl>
@@ -205,7 +209,7 @@ const schema = [
                   <dd>{event.location}</dd>
                 </div>
               </dl>
-              <p>{event.summary}</p>
+              {event.summary && <p>{event.summary}</p>}
             </article>
           ))
         }

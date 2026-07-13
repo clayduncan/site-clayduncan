@@ -572,6 +572,10 @@ main {
   margin: 2.5rem 0 0;
 }
 
+.proof-strip-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .proof-strip div {
   background: color-mix(
     in srgb,
@@ -1439,6 +1443,10 @@ main {
   color: var(--color-muted);
   font-family: var(--font-sans);
   font-size: 1rem;
+}
+
+.event-card-summary .event-supporting-copy {
+  color: var(--color-navy);
 }
 
 .event-takeaways {
