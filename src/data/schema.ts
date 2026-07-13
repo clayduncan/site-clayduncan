@@ -10,6 +10,14 @@ const personId = `${site.url}/#person`;
 const organizationId = `${site.url}/#princeton-mortgage`;
 const duncanMortgageGroupId = `${site.url}/#duncan-mortgage-group`;
 const professionalServiceId = `${site.url}/#professional-service`;
+const branchPostalAddress = {
+  '@type': 'PostalAddress',
+  streetAddress: site.branch.street,
+  addressLocality: site.branch.city,
+  addressRegion: site.branch.state,
+  postalCode: site.branch.postalCode,
+  addressCountry: site.branch.country,
+} as const;
 export const defaultSchemaImage = new URL(
   '/images/clay-duncan-wbackground-1400.jpg',
   site.url,
@@ -67,7 +75,8 @@ export const personJsonLd = {
   ],
   workLocation: {
     '@type': 'Place',
-    name: 'Huntsville, Alabama',
+    name: `${site.branch.company} Huntsville Branch`,
+    address: branchPostalAddress,
   },
   memberOf: {
     '@id': duncanMortgageGroupId,
@@ -126,9 +135,10 @@ export const professionalServiceJsonLd = {
   url: site.url,
   image: defaultSchemaImage,
   description:
-    'Home-based mortgage origination services from Clay Duncan for Huntsville, Madison, Redstone Arsenal, and North Alabama borrowers.',
+    'Mortgage origination services from Clay Duncan for Huntsville, Madison, Redstone Arsenal, and North Alabama borrowers.',
   telephone: site.phone,
   email: site.email,
+  address: branchPostalAddress,
   priceRange: '$$',
   areaServed: site.serviceArea,
   parentOrganization: {
@@ -329,6 +339,7 @@ export function createAggregateRatingJsonLd(
     name: 'Clay Duncan Mortgage Services',
     url: site.url,
     image: defaultSchemaImage,
+    address: branchPostalAddress,
     areaServed: site.serviceArea,
     parentOrganization: {
       '@id': organizationId,

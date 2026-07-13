@@ -94,12 +94,12 @@ const sitemapUrls = [
   ...sitemap.matchAll(/<loc>https:\/\/www\.clayduncan\.com([^<]+)<\/loc>/g),
 ].map((match) => match[1]);
 
-const llmsPath = path.join(root, 'public/llms.txt');
+const llmsPath = path.join(dist, 'llms.txt');
 const llms = fs.existsSync(llmsPath) ? fs.readFileSync(llmsPath, 'utf8') : '';
 
 assert(
-  htmlFiles.length === 29,
-  `Expected 29 built HTML files, found ${htmlFiles.length}.`,
+  htmlFiles.length === 30,
+  `Expected 30 built HTML files, found ${htmlFiles.length}.`,
 );
 assert(sitemapUrls.includes('/join-us/'), 'Sitemap must include /join-us/.');
 assert(sitemapUrls.includes('/blog/'), 'Sitemap must include /blog/.');

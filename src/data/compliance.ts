@@ -13,6 +13,10 @@ export const compliance = {
     id: site.company.nmlsId,
     url: 'https://www.nmlsconsumeraccess.org/EntityDetails.aspx/COMPANY/113856',
   },
+  branchNmls: {
+    name: `${site.branch.company} Huntsville Branch`,
+    id: site.branch.nmls,
+  },
   companyLegalAddress: {
     streetAddress: '439 Grand Avenue',
     addressLocality: 'Ewing',
