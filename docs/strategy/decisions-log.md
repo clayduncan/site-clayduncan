@@ -33,6 +33,12 @@ This file records durable project decisions so future chats can quickly understa
 - Approved deep navy as the default filled CTA color for the warm authority system, with dark cognac as the hover/accent state.
 - Removed the separate `/huntsville/military-homebuyers/` page because it overlapped too heavily with `/huntsville/va-loans/`. The VA page should own Redstone Arsenal and military-homebuyer intent unless a future broader relocation guide becomes clearly differentiated.
 
+## 2026-07-13
+
+- Retired the address-free ProfessionalService state for clayduncan.com because a licensed Princeton Mortgage Huntsville branch address now exists: Princeton Mortgage Corporation, 203 Longwood Drive, Huntsville, AL 35801, Branch NMLS #2857825.
+- Clay's ProfessionalService schema should remain the address-bearing local service node with `areaServed`; do not reintroduce `LocalBusiness` unless a future schema decision explicitly changes the model.
+- Treat the current branch address as provisional branch-license form. Future updates such as a suite number or USPS-normalized street directional should be made in `src/data/site.ts` only.
+
 ## Future Decisions
 
 Add new decisions here with dates, short rationale, and any affected files or pages.

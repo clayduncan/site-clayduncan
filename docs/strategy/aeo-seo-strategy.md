@@ -410,7 +410,7 @@ us today!
 - `Person` (Clay Duncan, Levi Duncan) – canonical on respective personal sites
 - `Organization` (Team Duncan as marketing brand; Princeton Mortgage as licensed parent)
 - `ProfessionalService` (Team Duncan's services at the team level, no NMLS identifier)
-- `ProfessionalService` with `areaServed` for Clay's and Levi's personal sites; `LocalBusiness` was retired for Clay because he has no public office address, and the missing-address warning is not resolvable without one
+- `ProfessionalService` with `areaServed` for Clay's and Levi's personal sites. Clay's ProfessionalService node is now address-bearing because the licensed Princeton Mortgage Huntsville branch address exists. `LocalBusiness` remains retired; do not reintroduce it unless a future strategy decision explicitly changes the schema model.
 - `Service` (loan products on personal sites, agent training on Clay's site, Homebuyer Masterclass on Levi's)
 - `Article` and `FAQPage` (content pages)
 - `Course` or `LearningResource` (Levi's Homebuyer Masterclass; Clay's AI training program)
@@ -823,7 +823,7 @@ Acceptable for genuine variation (one page per Huntsville neighborhood with real
 - City + service: "first time homebuyer Huntsville Alabama"
 - Neighborhood pages: Madison, Athens, Decatur, Hampton Cove, Jones Valley, Big Cove
 - "Best/top" queries: "best mortgage lender in Huntsville"
-- "Near me": handled via ProfessionalService `areaServed` and GBP proximity. Historical note: LocalBusiness would be the stronger local schema type only if a public office address exists; for Clay's current home-based model, it was deliberately retired to avoid address validation warnings.
+- "Near me": handled via ProfessionalService `areaServed`, the licensed branch PostalAddress on Clay's ProfessionalService node, and GBP proximity. Historical note: LocalBusiness was deliberately retired and should not be reintroduced without a separate schema decision.
 
 **Google Business Profile optimization:**
 
@@ -1427,7 +1427,7 @@ The roll-up's footer should display Princeton Mortgage's company NMLS as the lic
 - [ ] Roll-up Organization schema does NOT claim its own NMLS
 - [ ] Princeton Mortgage NMLS visible in footer of all 3 sites
 - [ ] Roll-up references Princeton Mortgage as parentOrganization
-- [ ] ProfessionalService service-area properties on personal sites; use LocalBusiness only if a public office address exists
+- [ ] ProfessionalService service-area properties on personal sites; Clay's ProfessionalService also carries the licensed Huntsville branch PostalAddress
 - [ ] `@graph` connects entities via `@id`
 - [ ] BreadcrumbList schema sitewide
 - [ ] Author bio page exists with full credentials and photo on each personal site

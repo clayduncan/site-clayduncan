@@ -10,6 +10,9 @@ import { aggregateRating } from '../data/reviews';
 import { site } from '../data/site';
 
 const formattedAverage = aggregateRating.ratingValue.toFixed(1);
+const branchDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${site.branch.company} ${site.branch.street} ${site.branch.city} ${site.branch.state} ${site.branch.postalCode}`,
+)}`;
 
 const schema = [
   personJsonLd,
@@ -291,6 +294,28 @@ const schema = [
       <div class="hero-actions" aria-label="About page next steps">
         <a class="button button-primary" href={site.schedulingUrl}>Chat with Clay</a>
         <a class="button button-secondary" href="/reviews/">Read reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-band section-band-light" aria-labelledby="office-heading">
+    <div class="section-inner">
+      <div class="answer-panel">
+        <div>
+          <p class="eyebrow">Office Address</p>
+          <h2 id="office-heading">Where is Clay’s Huntsville branch office?</h2>
+        </div>
+        <div class="source-panel">
+          <p>{site.branch.company}</p>
+          <p>{site.branch.street}</p>
+          <p>
+            {site.branch.city}, {site.branch.state} {site.branch.postalCode}
+          </p>
+          <p>Branch NMLS #{site.branch.nmls}</p>
+          <a href={branchDirectionsUrl} rel="noopener noreferrer" target="_blank">
+            Get directions
+          </a>
+        </div>
       </div>
     </div>
   </section>

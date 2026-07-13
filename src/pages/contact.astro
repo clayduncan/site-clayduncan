@@ -8,6 +8,10 @@ import {
 } from '../data/schema';
 import { site } from '../data/site';
 
+const branchDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${site.branch.company} ${site.branch.street} ${site.branch.city} ${site.branch.state} ${site.branch.postalCode}`,
+)}`;
+
 const schema = [
   personJsonLd,
   organizationJsonLd,
@@ -44,6 +48,18 @@ const schema = [
         Huntsville, Madison, Redstone Arsenal, and North Alabama through
         Princeton Mortgage.
       </p>
+      <div class="contact-office">
+        <h3>Office Address</h3>
+        <p>{site.branch.company}</p>
+        <p>{site.branch.street}</p>
+        <p>
+          {site.branch.city}, {site.branch.state} {site.branch.postalCode}
+        </p>
+        <p>Branch NMLS #{site.branch.nmls}</p>
+        <a href={branchDirectionsUrl} rel="noopener noreferrer" target="_blank">
+          Get directions
+        </a>
+      </div>
       <a class="button button-primary" href={site.schedulingUrl}>
         Schedule a conversation
       </a>

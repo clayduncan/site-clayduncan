@@ -20,6 +20,15 @@ export const site = {
     url: 'https://www.princetonmortgage.com/',
     nmlsId: '113856',
   },
+  branch: {
+    company: 'Princeton Mortgage Corporation',
+    street: '203 Longwood Drive',
+    city: 'Huntsville',
+    state: 'AL',
+    postalCode: '35801',
+    country: 'US',
+    nmls: '2857825',
+  },
   serviceArea: [
     'Huntsville, Alabama',
     'Madison, Alabama',
