@@ -176,7 +176,7 @@ export const events: EventItem[] = [
     date: '2026-08-06',
     startDateTime: '2026-08-06T12:00:00-05:00',
     displayTime: '12:00 PM CT',
-    location: 'Trip Twin Realty',
+    location: 'TwinsREALTY',
     format: 'in-person',
     audience: 'REALTORS®',
     status: 'upcoming',
