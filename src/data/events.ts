@@ -176,11 +176,20 @@ export const events: EventItem[] = [
     date: '2026-08-06',
     startDateTime: '2026-08-06T12:00:00-05:00',
     displayTime: '12:00 PM CT',
-    location: 'Location details coming',
+    location: 'Trip Twin Realty',
     format: 'in-person',
     audience: 'REALTORS®',
     status: 'upcoming',
-    registrationText: 'Registration details coming',
+    summary:
+      'A hands-on setup session to get you up and running on ClayTools.ai, the hub of AI-powered tools for listing agents.',
+    takeaways: [
+      'Setting up your agent profile (your photo, branding, and preferred lender)',
+      'A walkthrough of the current tools: Relo Package Generator, Listing Presentation Generator, CMA Generator, Caravan Tool, and Targeted Market Analysis',
+      'Running your first package start to finish',
+    ],
+    supportingCopy:
+      'Agents will leave with their account fully configured and ready to use on their next listing.',
+    registrationText: 'Registration full',
   },
   {
     title: 'Quick Build: Target Market Campaign',
