@@ -6,6 +6,9 @@ publish = "dist"
 NODE_VERSION = "22"
 ASTRO_TELEMETRY_DISABLED = "1"
 
+[functions."scheduled-rebuild"]
+schedule = "45 10 * * 2"
+
 [[plugins]]
 package = "./plugins/netlify-plugin-indexnow"
 

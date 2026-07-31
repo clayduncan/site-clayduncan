@@ -10,9 +10,10 @@ import {
   personJsonLd,
 } from '../../data/schema';
 import { site } from '../../data/site';
+import { isPublishedBlogPost } from '../../utils/blog';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await getCollection('blog', isPublishedBlogPost);
 
   return posts.map((post) => ({
     params: {
