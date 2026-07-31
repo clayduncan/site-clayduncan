@@ -141,7 +141,7 @@ export const events: EventItem[] = [
     location: 'Online via Zoom',
     format: 'online',
     audience: 'REALTORS®',
-    status: 'upcoming',
+    status: 'past',
     summary:
       'A focused Quick Build on Gamma — how to set it up, run it, and use it to produce client-ready materials in a fraction of the time.',
     takeaways: [
@@ -153,8 +153,6 @@ export const events: EventItem[] = [
     ],
     supportingCopy:
       'Agents will walk away knowing how to create listing presentations, buyer guides, seller guides, relocation packages, market reports, and more, all in significantly less time. This is the same presentation platform we used to build the Listing Presentation and Relocation Package resources featured in our previous AI Quick Builds.',
-    registrationUrl:
-      'https://us02web.zoom.us/webinar/register/WN_oE3ZkZoiTga4eHbRbuuMwQ',
   },
   {
     slug: '2026-08-06-listing-presentation',
