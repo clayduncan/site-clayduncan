@@ -85,6 +85,10 @@ const keyPages = [
     'How REALTORS Can Use AI Without Losing the Human Side of Real Estate',
     `${site.url}/blog/how-realtors-can-use-ai-without-losing-the-human-side-of-real-estate/`,
   ],
+  [
+    'Field Notes #01: Your Long Chat Is Getting Dumber and More Expensive',
+    `${site.url}/blog/field-notes-long-chat-dumber-expensive/`,
+  ],
 ];
 
 const body = `# Clay Duncan
