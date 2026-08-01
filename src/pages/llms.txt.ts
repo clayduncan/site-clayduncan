@@ -1,5 +1,7 @@
+import { getCollection } from 'astro:content';
 import { aggregateRating } from '../data/reviews';
 import { site } from '../data/site';
+import { isPublishedBlogPost } from '../utils/blog';
 
 export const prerender = true;
 
@@ -81,17 +83,24 @@ const keyPages = [
     `${site.url}/resources/self-employed-mortgage-documentation/`,
   ],
   ['Blog', `${site.url}/blog/`],
-  [
-    'How REALTORS Can Use AI Without Losing the Human Side of Real Estate',
-    `${site.url}/blog/how-realtors-can-use-ai-without-losing-the-human-side-of-real-estate/`,
-  ],
-  [
-    'Field Notes #01: Your Long Chat Is Getting Dumber and More Expensive',
-    `${site.url}/blog/field-notes-long-chat-dumber-expensive/`,
-  ],
 ];
 
-const body = `# Clay Duncan
+const getPostUrl = (id: string) =>
+  `${site.url}/blog/${id.replace(/\.mdx?$/, '').replace(/\/index$/, '')}/`;
+
+export async function GET() {
+  const publishedPosts = (await getCollection('blog', isPublishedBlogPost)).sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+  );
+
+  const llmsPages = [
+    ...keyPages,
+    ...publishedPosts.map(
+      (post) => [post.data.title, getPostUrl(post.id)] as [string, string],
+    ),
+  ];
+
+  const body = `# Clay Duncan
 
 ## About
 
@@ -119,7 +128,7 @@ Clay Duncan is a Huntsville, Alabama mortgage loan originator with Team Duncan, 
 
 ## Key Pages
 
-${keyPages.map(([label, url]) => `- ${label}: ${url}`).join('\n')}
+${llmsPages.map(([label, url]) => `- ${label}: ${url}`).join('\n')}
 
 ## Service Area
 
@@ -130,7 +139,6 @@ ${site.serviceArea.join('; ')}.
 Clay Duncan is a Huntsville mortgage loan originator with Team Duncan, powered by Princeton Mortgage, NMLS #${site.nmlsId}, specializing in VA loans, REALTOR® AI education, and loan officer growth leadership.
 `;
 
-export function GET() {
   return new Response(body, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
