@@ -25,6 +25,7 @@ export interface EventItem {
   supportingCopy?: string;
   image?: string;
   registrationUrl?: string;
+  registrationLabel?: string;
   registrationText?: string;
   offerValidFrom?: string;
 }
@@ -58,15 +59,6 @@ const listingPresentationTakeaways = [
   'A practical structure for a listing presentation',
   'AI-assisted preparation for seller conversations',
   'Messaging that helps REALTORS® communicate value clearly',
-];
-
-const targetMarketCampaignSummary =
-  'A focused Quick Build on using AI to identify the likely buyer profile for a listing and shape a marketing campaign around that audience.';
-
-const targetMarketCampaignTakeaways = [
-  'A target-market profile for a specific listing',
-  'Messaging angles built around the likely buyer',
-  'Campaign ideas REALTORS® can adapt for listing marketing',
 ];
 
 export const events: EventItem[] = [
@@ -143,7 +135,7 @@ export const events: EventItem[] = [
     audience: 'REALTORS®',
     status: 'past',
     summary:
-      'A focused Quick Build on Gamma — how to set it up, run it, and use it to produce client-ready materials in a fraction of the time.',
+      'A focused Quick Build on Gamma: how to set it up, run it, and use it to produce client-ready materials in a fraction of the time.',
     takeaways: [
       'Setting up Gamma',
       'Best settings and features to know',
@@ -163,16 +155,15 @@ export const events: EventItem[] = [
     location: 'Online via Zoom',
     format: 'online',
     audience: 'REALTORS®',
-    status: 'upcoming',
+    status: 'past',
     summary: listingPresentationSummary,
     takeaways: listingPresentationTakeaways,
-    registrationText: 'Registration details coming',
   },
   {
-    slug: '2026-08-06-claytools-ai',
+    slug: '2026-08-13-claytools-ai',
     title: 'ClayTools.AI Setup and Training',
-    date: '2026-08-06',
-    startDateTime: '2026-08-06T12:00:00-05:00',
+    date: '2026-08-13',
+    startDateTime: '2026-08-13T12:00:00-05:00',
     displayTime: '12:00 PM CT',
     location: 'TwinsREALTY',
     format: 'in-person',
@@ -190,18 +181,44 @@ export const events: EventItem[] = [
     registrationText: 'Registration full',
   },
   {
-    title: 'Quick Build: Target Market Campaign',
-    date: '2026-08-20',
-    startDateTime: '2026-08-20T09:00:00-05:00',
-    displayTime: '9:00 AM CT',
-    location: 'Online via Zoom',
-    format: 'online',
-    audience: 'REALTORS®',
+    title: 'VAREP National Convention: Managing AI Like You Manage People',
+    date: '2026-10-26',
+    displayTime: 'Afternoon general session (time to be confirmed)',
+    location: 'Hyatt Regency Jacksonville Riverfront, Jacksonville, FL',
+    format: 'in-person',
+    audience: 'Housing Professionals',
     status: 'upcoming',
-    summary: targetMarketCampaignSummary,
-    takeaways: targetMarketCampaignTakeaways,
-    registrationUrl:
-      'https://us02web.zoom.us/webinar/register/WN_oE3ZkZoiTga4eHbRbuuMwQ',
+    summary:
+      'A featured general-session presentation at the VAREP National Convention for housing professionals who already use AI and want to move past one-off tasks. Clay shows how to delegate work to AI the way you would delegate to a person, and how to verify it before it ever reaches a client.',
+    takeaways: [
+      'Delegating an outcome instead of dictating the steps',
+      'Verifying AI output before it reaches a client or partner',
+      'Connecting a finished AI output to the next step in the business',
+    ],
+    supportingCopy:
+      'Attendees leave with a one-page delegation brief they can use on their first AI-assisted process.',
+    registrationUrl: 'https://varep.org/events/',
+    registrationLabel: 'Registration through VAREP',
+  },
+  {
+    title: 'VAREP National Convention: Quick Build RELO Package',
+    date: '2026-10-27',
+    displayTime: 'Afternoon breakout (time to be confirmed)',
+    location: 'Hyatt Regency Jacksonville Riverfront, Jacksonville, FL',
+    format: 'in-person',
+    audience: 'Housing Professionals',
+    status: 'upcoming',
+    summary:
+      'A focused Quick Build breakout where Clay creates a complete military relocation package start to finish, built around a PCS scenario. A guided demonstration, not a build-along, so nobody spends the session fighting a login screen.',
+    takeaways: [
+      'Turning a single client conversation into a finished relocation package',
+      'Research, personalization, and presentation in one pass',
+      'Where professional judgment has to stay in the loop',
+    ],
+    supportingCopy:
+      'Attendees leave with an implementation handout they can run against their own next relocation client.',
+    registrationUrl: 'https://varep.org/events/',
+    registrationLabel: 'Registration through VAREP',
   },
   {
     title: 'Future of AI in Real Estate',

@@ -39,7 +39,7 @@ const schema = [
     url: pageUrl,
     name: 'Clay Duncan Events',
     description:
-      'Upcoming and past AI training events from Clay Duncan for REALTORS®, teams, mortgage professionals, and homebuyers.',
+      'Upcoming and past AI training events from Clay Duncan for REALTORS®, real estate teams, housing professionals, mortgage professionals, and homebuyers.',
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: events.map((event, index) => ({
@@ -67,7 +67,7 @@ const schema = [
 
 <BaseLayout
   title="Events | AI Training with Clay Duncan"
-  description="View upcoming and past Clay Duncan AI training events for REALTORS®, real estate teams, mortgage professionals, and homebuyers."
+  description="View upcoming and past Clay Duncan AI training events for REALTORS®, real estate teams, housing professionals, mortgage professionals, and homebuyers."
   schema={schema}
 >
   <section class="hero-section landing-hero va-landing-hero" aria-labelledby="events-heading">
@@ -112,20 +112,20 @@ const schema = [
     <div class="section-inner upcoming-events-inner">
       <div>
         <p class="eyebrow">Upcoming</p>
-        <h2 id="upcoming-heading">REALTOR®-focused AI events.</h2>
+        <h2 id="upcoming-heading">AI events for real estate and housing professionals.</h2>
         <p>
-          Clay teaches two types of trainings. The first is an entry-level
-          fundamentals course called The AI Success System. It covers the
-          foundations of getting started with a large language model, including
-          the differences between chats, projects, custom GPTs, and artifacts,
-          plus setting up preferences with custom instructions and rules to
-          begin daily workflows.
+          Clay teaches two types of trainings. The first is a fundamentals or
+          strategy session for professionals who need a clearer way to use AI in
+          real business workflows. These sessions cover practical setup,
+          delegation, verification, and the judgment needed before AI-assisted
+          work reaches a client or partner.
         </p>
         <p>
-          The second type is the pocket presentation. These are one-topic,
-          one-specific-task presentations built to perform a focused workflow,
-          such as creating a relocation package or preparing a listing
-          presentation.
+          The second type is the pocket presentation or Quick Build. These are
+          one-topic, one-specific-task presentations built to perform a focused
+          workflow, such as creating a relocation package, preparing a listing
+          presentation, or demonstrating a repeatable process for a conference
+          audience.
         </p>
       </div>
       <div class="event-stack" aria-label="Upcoming events">
@@ -138,7 +138,7 @@ const schema = [
                 <div class="event-card-action">
                   {event.registrationUrl ? (
                     <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
-                      Register for webinar
+                      {event.registrationLabel ?? 'Register for webinar'}
                     </a>
                   ) : (
                     <span class="event-status">
