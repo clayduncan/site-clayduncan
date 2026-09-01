@@ -80,6 +80,13 @@ const navItems = [
     isActive: currentPath.startsWith('/join-us/'),
   },
 ];
+const primaryNavItems = navItems.filter((item) =>
+  ['Mortgage', 'AI Training', 'Join Us'].includes(item.label),
+);
+const exploreNavItems = navItems.filter((item) =>
+  ['Events', 'Reviews', 'Blog', 'About'].includes(item.label),
+);
+const exploreIsActive = exploreNavItems.some((item) => item.isActive);
 ---
 
 <!doctype html>
@@ -156,21 +163,23 @@ const navItems = [
     <header class="site-header" aria-label="Site header">
       <div class="site-header-inner">
         <a class="site-logo" href="/" aria-label="Clay Duncan home">
-          <img src="/favicon.svg" width="40" height="40" alt="" aria-hidden="true" />
+          <img
+            src="/brand-assets/duncan-d-mark.svg"
+            width="64"
+            height="64"
+            alt=""
+            aria-hidden="true"
+          />
           <span>
             <strong>Clay Duncan</strong>
             <small>{site.tagline}</small>
           </span>
         </a>
-        <div class="team-brand" aria-label="Team Duncan powered by Princeton Mortgage">
-          <strong>TEAM DUNCAN</strong>
-          <small>Powered by Princeton Mortgage</small>
-        </div>
         <nav class="site-nav" aria-label="Primary navigation">
           {
-            navItems.map((item) => (
+            primaryNavItems.map((item) => (
               <a
-                class:list={{ 'nav-active': item.isActive }}
+                class:list={{ 'nav-active': item.isActive, 'nav-cta': item.label === 'Join Us' }}
                 href={item.href}
                 aria-current={item.isActive ? 'page' : undefined}
               >
@@ -178,6 +187,38 @@ const navItems = [
               </a>
             ))
           }
+          <details class="nav-explore">
+            <summary class:list={{ 'nav-active': exploreIsActive }}>Explore</summary>
+            <div class="nav-explore-menu">
+              {
+                exploreNavItems.map((item) => (
+                  <a
+                    class:list={{ 'nav-active': item.isActive }}
+                    href={item.href}
+                    aria-current={item.isActive ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                ))
+              }
+            </div>
+          </details>
+          <details class="nav-mobile">
+            <summary>Menu</summary>
+            <div class="nav-mobile-menu">
+              {
+                navItems.map((item) => (
+                  <a
+                    class:list={{ 'nav-active': item.isActive }}
+                    href={item.href}
+                    aria-current={item.isActive ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                ))
+              }
+            </div>
+          </details>
         </nav>
       </div>
     </header>
@@ -188,6 +229,7 @@ const navItems = [
       <div class="site-footer-inner">
         <div class="footer-contact">
           <h2>Clay Duncan</h2>
+          <p class="footer-team-brand">Team Duncan · Powered by Princeton Mortgage</p>
           <p>{compliance.individualNmls.title}</p>
           <p>
             <a href={compliance.individualNmls.url} rel="noopener noreferrer" target="_blank">
