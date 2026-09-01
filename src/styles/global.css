@@ -2011,6 +2011,251 @@ main {
   }
 }
 
+/* Team Duncan card and heading system. These higher-specificity rules prevent
+   legacy page styles from reintroducing charcoal serif headings or soft cards. */
+:root {
+  --font-heading: 'Knockout', 'Knockout 49 A', 'Knockout 49 B', 'Arial Narrow',
+    'Helvetica Neue Condensed', Inter, sans-serif;
+}
+
+h1,
+h2,
+h3,
+dt,
+blockquote,
+.rating-summary strong,
+.media-callout strong,
+.va-visual-card strong,
+.local-context-panel strong,
+.hero-path-grid strong {
+  color: var(--color-navy);
+  font-family: var(--font-heading);
+}
+
+.content-page h1,
+.article-header h1,
+.article-body h2,
+.article-body h3,
+.answer-panel h2,
+.section-heading h2,
+.split-section h2,
+.proof-layout h2,
+.cta-band h2,
+.topic-grid h3,
+.checklist-card h3,
+.event-card h3,
+.blog-featured-card h3,
+.blog-empty-state h3,
+.blog-card h3,
+.faq-list h3,
+.review-card h3,
+.proof-strip dt,
+.hero-path-grid strong,
+.va-visual-card strong,
+.media-callout strong {
+  color: var(--color-navy);
+}
+
+.contact-panel,
+.quote-panel {
+  background: var(--color-navy);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.feature-card,
+.review-card,
+.event-card,
+.blog-card,
+.blog-featured-card,
+.blog-empty-state,
+.faq-list article,
+.checklist-card,
+.local-context-panel article,
+.topic-grid article,
+.section-band-light .timeline-grid article,
+.section-band-light .princeton-role-grid article,
+.proof-strip div,
+.hero-path-grid a,
+.event-host-panel aside,
+.source-panel,
+.data-table-wrap {
+  border: 1px solid var(--color-mist);
+  border-radius: 0;
+  background: var(--color-white);
+  box-shadow: none;
+}
+
+.feature-grid,
+.feature-grid-compact,
+.feature-grid-four,
+.feature-grid-five,
+.feature-grid-six,
+.blog-grid,
+.event-grid,
+.reviews-grid {
+  gap: 0;
+}
+
+.feature-card,
+.review-card,
+.event-card,
+.blog-card,
+.faq-list article,
+.checklist-card,
+.topic-grid article,
+.section-band-light .timeline-grid article,
+.section-band-light .princeton-role-grid article {
+  padding: clamp(1.35rem, 3vw, 1.7rem);
+}
+
+.feature-card span,
+.event-card > p:first-child,
+.event-card-title p,
+.event-status,
+.blog-card > p:first-child,
+.timeline-grid span,
+.princeton-role-grid span,
+.checklist-card > span,
+.local-context-panel span,
+.review-card__header span {
+  color: var(--color-lime);
+  font-size: 0.875rem;
+  font-weight: 850;
+}
+
+.feature-card h3,
+.event-card h3,
+.blog-card h3,
+.faq-list h3,
+.checklist-card h3,
+.topic-grid h3,
+.section-band-light .timeline-grid h3,
+.section-band-light .princeton-role-grid h3,
+.review-card h3,
+.local-context-panel strong {
+  margin-top: 0.75rem;
+  color: var(--color-navy);
+  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.feature-card p,
+.event-card > p:not(:first-child),
+.event-card-summary p,
+.blog-card p:not(:first-child),
+.faq-list p,
+.checklist-card p,
+.topic-grid p,
+.section-band-light .timeline-grid p,
+.section-band-light .princeton-role-grid p,
+.review-card blockquote,
+.local-context-panel p {
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.local-context-panel article {
+  border-left: 1px solid var(--color-mist);
+  color: var(--color-ink);
+}
+
+.local-context-panel a {
+  color: var(--color-navy);
+}
+
+.proof-strip div,
+.hero-path-grid a {
+  border-top: 3px solid var(--color-lime);
+}
+
+.proof-strip dt,
+.hero-path-grid strong {
+  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+}
+
+.rating-summary,
+.va-visual-card,
+.media-callout {
+  border: 1px solid var(--color-mist);
+  border-left: 4px solid var(--color-lime);
+  border-radius: 0;
+  background: var(--color-white);
+  color: var(--color-ink);
+  box-shadow: none;
+}
+
+.rating-summary strong,
+.rating-summary p,
+.va-visual-card strong,
+.media-callout strong {
+  color: var(--color-navy);
+}
+
+.rating-summary span,
+.va-visual-card span,
+.media-callout span {
+  color: var(--color-navy);
+}
+
+.section-band-dark h2,
+.section-band-dark h3,
+.section-band-dark .timeline-grid h3,
+.section-band-dark .princeton-role-grid h3,
+.section-band-dark .dark-signal-grid h3,
+.contact-panel h2,
+.contact-panel h3,
+.quote-panel blockquote,
+.site-footer h2 {
+  color: var(--color-white);
+}
+
+.section-band-dark .feature-card,
+.section-band-dark .timeline-grid article,
+.section-band-dark .princeton-role-grid article,
+.dark-signal-grid article {
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 0;
+  background: rgb(255 255 255 / 6%);
+  box-shadow: none;
+}
+
+.section-band-dark .feature-card h3,
+.section-band-dark .timeline-grid h3,
+.section-band-dark .princeton-role-grid h3,
+.dark-signal-grid h3 {
+  color: var(--color-white);
+}
+
+.section-band-dark .feature-card p,
+.section-band-dark .timeline-grid p,
+.section-band-dark .princeton-role-grid p,
+.dark-signal-grid p {
+  color: var(--color-sky);
+}
+
+.article-featured-image,
+.article-figure img {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 720px) {
+  .feature-grid,
+  .feature-grid-compact,
+  .feature-grid-four,
+  .feature-grid-five,
+  .feature-grid-six,
+  .blog-grid,
+  .event-grid,
+  .reviews-grid {
+    gap: 1px;
+  }
+}
+
 /* Princeton visual system — adapted from the Team Duncan production design. */
 :root {
   --color-navy: #2b398c;
