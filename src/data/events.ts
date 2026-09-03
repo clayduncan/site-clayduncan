@@ -168,7 +168,7 @@ export const events: EventItem[] = [
     location: 'TwinsREALTY',
     format: 'in-person',
     audience: 'REALTORS®',
-    status: 'upcoming',
+    status: 'past',
     summary:
       'A hands-on setup session to get you up and running on ClayTools.ai, the hub of AI-powered tools for listing agents.',
     takeaways: [
@@ -178,7 +178,6 @@ export const events: EventItem[] = [
     ],
     supportingCopy:
       'Agents will leave with their account fully configured and ready to use on their next listing.',
-    registrationText: 'Registration full',
   },
   {
     title: 'VAREP National Convention: Managing AI Like You Manage People',
