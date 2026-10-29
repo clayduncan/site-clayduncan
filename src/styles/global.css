@@ -291,10 +291,26 @@ main {
   line-height: 1.1;
 }
 
-.footer-copyright {
+.footer-bottom {
   grid-column: 1 / -1;
   border-top: 0.5px solid color-mix(in srgb, var(--color-navy), transparent 82%);
   padding-top: 1rem;
+  display: grid;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.footer-office .social-links {
+  margin-top: 0.75rem;
+  gap: 0.5rem 0.75rem;
+}
+
+.footer-office .social-links a {
+  font-size: 0.8rem;
+}
+
+.footer-team-brand {
+  font-weight: 400;
 }
 
 .hero-actions {
@@ -2533,7 +2549,7 @@ blockquote,
   padding-block: clamp(2.5rem, 5vw, 4rem);
 }
 
-.footer-copyright {
+.footer-bottom {
   border-top-color: rgb(255 255 255 / 18%);
 }
 
