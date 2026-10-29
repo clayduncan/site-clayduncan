@@ -311,6 +311,7 @@ main {
 
 .footer-team-brand {
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .hero-actions {
@@ -2539,7 +2540,7 @@ blockquote,
 }
 
 .section-band-dark .eyebrow,
-.footer-team-brand {
+.site-footer h2 {
   color: var(--color-lime) !important;
 }
 
