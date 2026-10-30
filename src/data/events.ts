@@ -216,9 +216,9 @@ export const events: EventItem[] = [
   },
   {
     title: 'The Age of Intelligence',
-    date: '2026-11-04',
-    startDateTime: '2026-11-04T11:00:00-06:00',
-    endDateTime: '2026-11-04T12:30:00-06:00',
+    date: '2026-11-18',
+    startDateTime: '2026-11-18T11:00:00-06:00',
+    endDateTime: '2026-11-18T12:30:00-06:00',
     displayTime: '11:00 AM to 12:30 PM CT',
     location:
       'BHHS Rise Real Estate, 3603 South Memorial Parkway, Huntsville, AL 35801',
