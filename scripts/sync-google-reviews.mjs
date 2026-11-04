@@ -16,12 +16,12 @@ if (typeof data.rating !== 'number' || !Number.isInteger(data.count) || !Array.i
   throw new Error('JSON must have numeric rating, integer count, reviews[]');
 
 let src = fs.readFileSync(file, 'utf8');
-const norm = (s) => String(s).toLowerCase().replace(/\s+/g, ' ').trim();
+const norm = (s) => String(s).toLowerCase().replace(/\s+-\s+.*$/, '').replace(/\s+/g, ' ').trim();
 const existing = [...src.matchAll(/author:\s*'((?:[^'\\]|\\.)*)'[\s\S]*?date:\s*'([^']*)'/g)]
   .map((m) => ({ author: norm(m[1].replace(/\\'/g, "'")), month: m[2].slice(0, 7) }));
 const ids = new Set([...src.matchAll(/id:\s*'([^']*)'/g)].map((m) => m[1]));
 const isDup = (r) => (r.id && ids.has(r.id)) ||
-  existing.some((e) => e.author === norm(r.author) && e.month === String(r.date).slice(0, 7));
+  existing.some((e) => e.author === norm(r.author)); // Google allows one review per person; relative dates are approximate
 
 const q = (s) => JSON.stringify(String(s)).replace(/'/g, "\\'").replace(/^"|"$/g, "'").replace(/\\"/g, '"');
 const added = data.reviews
