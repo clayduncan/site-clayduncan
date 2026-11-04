@@ -121,7 +121,7 @@ Clay Duncan is a Huntsville, Alabama mortgage loan originator with Team Duncan, 
   ${site.branch.city}, ${site.branch.state} ${site.branch.postalCode}
   Branch NMLS #${site.branch.nmls}
 - Google Business Profile: https://www.google.com/maps?cid=9332843875946390997
-- Google Reviews: ${aggregateRating.reviewCount} five-star reviews
+- Google Reviews: ${aggregateRating.ratingValue.toFixed(1)}-star average from ${aggregateRating.reviewCount} reviews
 - LinkedIn: https://www.linkedin.com/in/theclayduncan
 - YouTube: https://www.youtube.com/@TheClayDuncan
 - Instagram: https://www.instagram.com/theclayduncan/

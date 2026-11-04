@@ -1,4 +1,5 @@
 export interface Review {
+  id?: string;
   author: string;
   rating: 1 | 2 | 3 | 4 | 5;
   date: string;
@@ -14,7 +15,7 @@ export interface AggregateRating {
   source: string;
 }
 
-// Update reviewCount manually as new reviews accumulate on Google Business Profile. Last verified: 2026-10-30
+// Single source for every review count/star rating on the site (home, about, reviews, JSON-LD, llms.txt). Updated weekly by scripts/sync-google-reviews.mjs. Last verified: 2026-10-30
 export const aggregateRating: AggregateRating = {
   ratingValue: 5.0,
   reviewCount: 35,
